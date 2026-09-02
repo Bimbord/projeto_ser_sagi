@@ -1,0 +1,24 @@
+# Credenciais e segredos — nunca subir para o repositório
+cloudflare_tokens.txt
+*.env
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+secrets*.txt
+tokens*.txt
+
+# Dados de scraping do Instagram (arquivos locais de coleta)
+instagram-scrap/
+
+# Arquivos temporários e de sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+*.log
+
+# Cache e artefatos de build Python
+__pycache__/
+*.pyc

@@ -1,0 +1,28 @@
+#E0C960 (original)
+#f4b400 (alternativa)
+
+
+- Página: INICIO
+1- reajustar o logotipo que fica acima do hero para ser dimunuido conforme o tamanho da tela. ele está fixo.
+2- descer para fora do hero o elementos (conheça nossos projetos, apoie essa ideia, projeto principal, saúde, esporte)
+3- tornar cards clicáveis e lincar os referidos cards com os cards da pagina de ações.
+* 194 pacientes atendidos no consultório odontológico X Consultório Odontológico (açoes)
+* 118 inscritos no estúdio de musculação X Estúdio de Musculação
+* 230+ crianças na faixa de atendimento em Sagi e Pituba X Ações Solidárias
+4- 
+_______*****__________
+
+- Página NOSSAS AÇÕES (etapas finalizadas)
+1- Tornar cards clicáveis
+2- criar paginas para cada card
+3- ao clicar nos cards será redirecionado para a pagina referida.  
+
+_____________*****____________
+
+- Página ARCEVO
+1- Tornar cards clicáveis
+2- criar paginas para cada card
+3- ao clicar nos cards será redirecionado para a pagina referida. 
+
+
+ 

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f5c73" />
+  <title>Acervo | Instituto S.E.R. Sagi</title>
+  <meta name="description" content="Fotos e vídeos das atividades do Instituto S.E.R. Sagi: esporte, saúde, educação, cultura e preservação ambiental em Praia do Sagi, Baía Formosa/RN." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{ocean:'#0f5c73',oceanDeep:'#083b4c',sand:'#f5efe3',sun:'#f4b400',coral:'#e77b5f',leaf:'#2e7d4f',mist:'#e7f4f7'},fontFamily:{sans:['Inter','sans-serif']},boxShadow:{soft:'0 20px 60px rgba(8, 59, 76, 0.12)'}}}};</script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="font-sans text-slate-800">
+  <a href="#conteudo-principal" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:bg-white focus:text-ocean focus:px-4 focus:py-2 focus:rounded-md focus:shadow">Pular para o conteúdo</a>
+  <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
+      <a href="index.html" class="flex items-center" aria-label="Instituto S.E.R. Sagi - página inicial">
+        <img src="img/logo.png" alt="Instituto S.E.R. Sagi" class="h-16 w-auto object-contain">
+      </a>
+      <button id="menu-toggle" class="inline-flex items-center rounded-lg border border-slate-300 px-3 py-2 text-ocean lg:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu"><i class="fa-solid fa-bars"></i></button>
+      <nav class="hidden items-center gap-6 lg:flex" aria-label="Menu principal"><a href="index.html" data-page-link class="text-sm font-medium hover:text-ocean">Início</a><a href="quem-somos.html" data-page-link class="text-sm font-medium hover:text-ocean">Quem Somos</a><a href="acoes.html" data-page-link class="text-sm font-medium hover:text-ocean">Nossas Ações</a><a href="acervo.html" data-page-link class="text-sm font-medium hover:text-ocean">Acervo</a><a href="como-ajudar.html" data-page-link class="text-sm font-medium hover:text-ocean">Como Ajudar</a><a href="lei-incentivo.html" data-page-link class="text-sm font-medium hover:text-ocean">Lei de Incentivo</a><a href="transparencia.html" data-page-link class="text-sm font-medium hover:text-ocean">Transparência</a><a href="contato.html" data-page-link class="text-sm font-medium hover:text-ocean">Contato</a></nav>
+      <div class="hidden items-center gap-3 lg:flex"><a href="lei-incentivo.html" class="cta-lift rounded-full border border-ocean px-4 py-2 text-sm font-semibold text-ocean transition hover:bg-ocean hover:text-white">Seja Parceiro</a><a href="como-ajudar.html#doacao" class="cta-lift rounded-full bg-sun px-4 py-2 text-sm font-semibold text-oceanDeep transition hover:brightness-95">Doe Agora</a></div>
+    </div>
+    <div id="mobile-menu" class="hidden border-t border-slate-200 bg-white lg:hidden"><nav class="mx-auto flex max-w-7xl flex-col px-4 py-4" aria-label="Menu mobile"><a href="index.html" data-page-link class="py-2 text-sm font-medium">Início</a><a href="quem-somos.html" data-page-link class="py-2 text-sm font-medium">Quem Somos</a><a href="acoes.html" data-page-link class="py-2 text-sm font-medium">Nossas Ações</a><a href="acervo.html" data-page-link class="py-2 text-sm font-medium">Acervo</a><a href="como-ajudar.html" data-page-link class="py-2 text-sm font-medium">Como Ajudar</a><a href="lei-incentivo.html" data-page-link class="py-2 text-sm font-medium">Lei de Incentivo</a><a href="transparencia.html" data-page-link class="py-2 text-sm font-medium">Transparência</a><a href="contato.html" data-page-link class="py-2 text-sm font-medium">Contato</a></nav></div>
+  </header>
+  <main id="conteudo-principal">
+    <section class="page-banner text-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 lg:px-8 lg:py-20">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-sun">Acervo</p>
+        <h2 class="mt-4 max-w-4xl text-4xl font-extrabold leading-tight sm:text-5xl">Nossos momentos em fotos e vídeos</h2>
+        <p class="mt-6 max-w-3xl text-lg text-white/85">Registros das atividades, eventos e conquistas do Instituto S.E.R. Sagi — cada imagem conta um pouco da transformação que acontece na comunidade.</p>
+      </div>
+    </section>
+    <section class="mx-auto max-w-7xl px-4 py-16 lg:px-8">
+      <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-ocean">Acervo</p>
+          <h2 class="section-title text-3xl font-extrabold text-oceanDeep">Galeria de atividades</h2>
+        </div>
+        <p class="max-w-2xl text-slate-600">Explore por categoria: esporte, saúde, educação, cultura, preservação ambiental e eventos comunitários.</p>
+      </div>
+      <div id="archive-filters" class="mt-8 flex flex-wrap gap-3" aria-label="Filtros por categoria">
+        <button type="button" data-filter="todos" class="archive-filter rounded-full bg-ocean px-5 py-2 text-sm font-semibold text-white transition hover:brightness-95">Todos</button>
+        <button type="button" data-filter="Esporte" class="archive-filter rounded-full border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-600 transition hover:border-ocean hover:text-ocean">Esporte</button>
+        <button type="button" data-filter="Saúde" class="archive-filter rounded-full border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-600 transition hover:border-ocean hover:text-ocean">Saúde</button>
+        <button type="button" data-filter="Educação" class="archive-filter rounded-full border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-600 transition hover:border-ocean hover:text-ocean">Educação</button>
+        <button type="button" data-filter="Cultura" class="archive-filter rounded-full border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-600 transition hover:border-ocean hover:text-ocean">Cultura</button>
+        <button type="button" data-filter="Preservação" class="archive-filter rounded-full border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-600 transition hover:border-ocean hover:text-ocean">Preservação</button>
+        <button type="button" data-filter="Eventos" class="archive-filter rounded-full border border-slate-300 bg-white px-5 py-2 text-sm font-semibold text-slate-600 transition hover:border-ocean hover:text-ocean">Eventos</button>
+      </div>
+      <div data-render="archive" class="mt-10">
+        <div class="mb-8 flex flex-col items-center justify-center rounded-3xl border border-dashed border-slate-300 bg-white px-8 py-8 text-center shadow-soft">
+          <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-mist text-ocean"><i class="fa-solid fa-photo-film text-xl"></i></div>
+          <h3 class="mt-4 text-lg font-bold text-oceanDeep">Nosso acervo está sendo organizado</h3>
+          <p class="mt-2 max-w-xl text-sm leading-7 text-slate-600">As imagens abaixo são ilustrativas. As fotos e vídeos reais das nossas atividades serão publicados aqui em breve. Acompanhe no Instagram <a href="https://instagram.com/s.e.r_sagi" target="_blank" rel="noopener" class="font-semibold text-ocean underline">@s.e.r_sagi</a>.</p>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <a href="acervo-esporte.html" class="block rounded-3xl bg-white p-6 shadow-soft transition hover:-translate-y-1 hover:ring-2 hover:ring-ocean/30">
+            <div class="relative -mx-1 overflow-hidden rounded-2xl"><img src="https://loremflickr.com/800/500/sport,soccer,training?lock=741" alt="Imagem ilustrativa de atividades esportivas" class="h-40 w-full object-cover" loading="lazy" /></div>
+            <span class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-sand px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real"><i class="fa-solid fa-wand-magic-sparkles text-[9px]"></i>Imagem ilustrativa</span>
+            <i class="fa-solid fa-futbol mt-3 block text-2xl text-ocean"></i>
+            <h3 class="mt-4 text-xl font-bold text-oceanDeep">Atividades esportivas</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Jiu-jitsu, futevôlei, vôlei e natação para crianças e jovens.</p>
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ocean">Ver galeria <i class="fa-solid fa-arrow-right text-xs"></i></span></a>
+          <a href="acervo-saude.html" class="block rounded-3xl bg-white p-6 shadow-soft transition hover:-translate-y-1 hover:ring-2 hover:ring-ocean/30">
+            <div class="relative -mx-1 overflow-hidden rounded-2xl"><img src="https://loremflickr.com/800/500/dentist,health,clinic?lock=742" alt="Imagem ilustrativa de saúde e atendimento" class="h-40 w-full object-cover" loading="lazy" /></div>
+            <span class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-sand px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real"><i class="fa-solid fa-wand-magic-sparkles text-[9px]"></i>Imagem ilustrativa</span>
+            <i class="fa-solid fa-heart-pulse mt-3 block text-2xl text-ocean"></i>
+            <h3 class="mt-4 text-xl font-bold text-oceanDeep">Saúde e bem-estar</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Consultório odontológico e promoção de saúde para a comunidade.</p>
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ocean">Ver galeria <i class="fa-solid fa-arrow-right text-xs"></i></span></a>
+          <a href="acervo-educacao.html" class="block rounded-3xl bg-white p-6 shadow-soft transition hover:-translate-y-1 hover:ring-2 hover:ring-ocean/30">
+            <div class="relative -mx-1 overflow-hidden rounded-2xl"><img src="https://loremflickr.com/800/500/education,kids,school?lock=743" alt="Imagem ilustrativa de atividades educativas" class="h-40 w-full object-cover" loading="lazy" /></div>
+            <span class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-sand px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real"><i class="fa-solid fa-wand-magic-sparkles text-[9px]"></i>Imagem ilustrativa</span>
+            <i class="fa-solid fa-book-open mt-3 block text-2xl text-ocean"></i>
+            <h3 class="mt-4 text-xl font-bold text-oceanDeep">Atividades educativas</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Idiomas, informática e sustentabilidade para crianças.</p>
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ocean">Ver galeria <i class="fa-solid fa-arrow-right text-xs"></i></span></a>
+          <a href="acervo-cultura.html" class="block rounded-3xl bg-white p-6 shadow-soft transition hover:-translate-y-1 hover:ring-2 hover:ring-ocean/30">
+            <div class="relative -mx-1 overflow-hidden rounded-2xl"><img src="https://loremflickr.com/800/500/culture,music,community?lock=744" alt="Imagem ilustrativa de cultura e comunidade" class="h-40 w-full object-cover" loading="lazy" /></div>
+            <span class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-sand px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real"><i class="fa-solid fa-wand-magic-sparkles text-[9px]"></i>Imagem ilustrativa</span>
+            <i class="fa-solid fa-masks-theater mt-3 block text-2xl text-ocean"></i>
+            <h3 class="mt-4 text-xl font-bold text-oceanDeep">Cultura e comunidade</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Origens indígenas, convivência comunitária e ações solidárias.</p>
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ocean">Ver galeria <i class="fa-solid fa-arrow-right text-xs"></i></span></a>
+          <a href="acervo-preservacao.html" class="block rounded-3xl bg-white p-6 shadow-soft transition hover:-translate-y-1 hover:ring-2 hover:ring-ocean/30">
+            <div class="relative -mx-1 overflow-hidden rounded-2xl"><img src="https://loremflickr.com/800/500/turtle,nature,sea?lock=745" alt="Imagem ilustrativa de preservação ambiental" class="h-40 w-full object-cover" loading="lazy" /></div>
+            <span class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-sand px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real"><i class="fa-solid fa-wand-magic-sparkles text-[9px]"></i>Imagem ilustrativa</span>
+            <i class="fa-solid fa-leaf mt-3 block text-2xl text-ocean"></i>
+            <h3 class="mt-4 text-xl font-bold text-oceanDeep">Preservação ambiental</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Proteção de tartarugas e educação socioambiental na praia.</p>
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ocean">Ver galeria <i class="fa-solid fa-arrow-right text-xs"></i></span></a>
+          <a href="acervo-eventos.html" class="block rounded-3xl bg-white p-6 shadow-soft transition hover:-translate-y-1 hover:ring-2 hover:ring-ocean/30">
+            <div class="relative -mx-1 overflow-hidden rounded-2xl"><img src="https://loremflickr.com/800/500/party,event,celebration?lock=746" alt="Imagem ilustrativa de eventos comunitários" class="h-40 w-full object-cover" loading="lazy" /></div>
+            <span class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-sand px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real"><i class="fa-solid fa-wand-magic-sparkles text-[9px]"></i>Imagem ilustrativa</span>
+            <i class="fa-solid fa-calendar-days mt-3 block text-2xl text-ocean"></i>
+            <h3 class="mt-4 text-xl font-bold text-oceanDeep">Eventos comunitários</h3>
+            <p class="mt-3 text-sm leading-7 text-slate-600">Campanhas, celebrações e encontros que unem a comunidade.</p>
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ocean">Ver galeria <i class="fa-solid fa-arrow-right text-xs"></i></span></a>
+        </div>
+      </div>
+    </section>
+    <section class="bg-mist/70 py-16">
+      <div class="mx-auto max-w-7xl px-4 lg:px-8">
+        <div class="grid gap-8 lg:grid-cols-[1fr_1fr]">
+          <article class="rounded-[2rem] bg-white p-8 shadow-soft">
+            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-ocean">Participe</p>
+            <h2 class="section-title text-3xl font-extrabold text-oceanDeep">Tem registros dos nossos eventos?</h2>
+            <p class="mt-6 leading-8 text-slate-600">Fotos e vídeos feitos por voluntários, famílias e parceiros durante as atividades ajudam a contar a nossa história. Envie seus registros e eles poderão entrar no acervo oficial (sempre com autorização de uso de imagem).</p>
+            <a href="contato.html" class="cta-lift mt-8 inline-flex rounded-full bg-ocean px-6 py-3 font-semibold text-white transition hover:brightness-95">Enviar registros</a>
+          </article>
+          <article class="rounded-[2rem] bg-oceanDeep p-8 text-white shadow-soft">
+            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-sun">Proteção à infância</p>
+            <h2 class="section-title text-3xl font-extrabold">Imagens com responsabilidade</h2>
+            <p class="mt-6 leading-8 text-white/85">O Instituto zela pela proteção de crianças e adolescentes. Todas as imagens publicadas passam por autorização dos responsáveis, seguindo o Estatuto da Criança e do Adolescente (ECA) e a Lei Geral de Proteção de Dados (LGPD).</p>
+            <div class="mt-8 rounded-2xl border border-white/15 bg-white/10 p-5"><p class="text-sm text-white/85">Dúvidas sobre o uso de imagens? Fale com a equipe pela página <a href="contato.html" class="font-semibold text-sun underline">Contato</a>.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="bg-slate-950 text-white"><div class="mx-auto max-w-7xl px-4 py-10 lg:px-8"><div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"><p class="text-sm text-white/75">Instituto S.E.R. Sagi • Praia do Sagi, Baía Formosa/RN</p><a href="contato.html" class="text-sm font-semibold text-sun">Fale com a equipe</a></div></div></footer>
+  <script src="js/main.js"></script>
+</body>
+</html>

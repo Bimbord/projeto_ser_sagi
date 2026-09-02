@@ -1,0 +1,202 @@
+# -*- coding: utf-8 -*-
+"""Gera as 6 páginas de categoria do Acervo + torna os cards clicáveis."""
+import os
+
+BASE = r"D:/BBDPRINT - BACKUP/BBDPRINT/App BBDPRiNT/PROJETOS/Projetos Code/Projeto SER Sagi/projeto_SER_Sagi - Hermes"
+
+HEADER = '''  <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
+      <a href="index.html" class="flex items-center" aria-label="Instituto S.E.R. Sagi - página inicial">
+        <img src="img/logo.png" alt="Instituto S.E.R. Sagi" class="h-16 w-auto object-contain">
+      </a>
+      <button id="menu-toggle" class="inline-flex items-center rounded-lg border border-slate-300 px-3 py-2 text-ocean lg:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu"><i class="fa-solid fa-bars"></i></button>
+      <nav class="hidden items-center gap-6 lg:flex" aria-label="Menu principal"><a href="index.html" data-page-link class="text-sm font-medium hover:text-ocean">Início</a><a href="quem-somos.html" data-page-link class="text-sm font-medium hover:text-ocean">Quem Somos</a><a href="acoes.html" data-page-link class="text-sm font-medium hover:text-ocean">Nossas Ações</a><a href="acervo.html" data-page-link class="text-sm font-medium hover:text-ocean">Acervo</a><a href="como-ajudar.html" data-page-link class="text-sm font-medium hover:text-ocean">Como Ajudar</a><a href="lei-incentivo.html" data-page-link class="text-sm font-medium hover:text-ocean">Lei de Incentivo</a><a href="transparencia.html" data-page-link class="text-sm font-medium hover:text-ocean">Transparência</a><a href="contato.html" data-page-link class="text-sm font-medium hover:text-ocean">Contato</a></nav>
+      <div class="hidden items-center gap-3 lg:flex"><a href="lei-incentivo.html" class="cta-lift rounded-full border border-ocean px-4 py-2 text-sm font-semibold text-ocean transition hover:bg-ocean hover:text-white">Seja Parceiro</a><a href="como-ajudar.html#doacao" class="cta-lift rounded-full bg-sun px-4 py-2 text-sm font-semibold text-oceanDeep transition hover:brightness-95">Doe Agora</a></div>
+    </div>
+    <div id="mobile-menu" class="hidden border-t border-slate-200 bg-white lg:hidden"><nav class="mx-auto flex max-w-7xl flex-col px-4 py-4" aria-label="Menu mobile"><a href="index.html" data-page-link class="py-2 text-sm font-medium">Início</a><a href="quem-somos.html" data-page-link class="py-2 text-sm font-medium">Quem Somos</a><a href="acoes.html" data-page-link class="py-2 text-sm font-medium">Nossas Ações</a><a href="acervo.html" data-page-link class="py-2 text-sm font-medium">Acervo</a><a href="como-ajudar.html" data-page-link class="py-2 text-sm font-medium">Como Ajudar</a><a href="lei-incentivo.html" data-page-link class="py-2 text-sm font-medium">Lei de Incentivo</a><a href="transparencia.html" data-page-link class="py-2 text-sm font-medium">Transparência</a><a href="contato.html" data-page-link class="py-2 text-sm font-medium">Contato</a></nav></div>
+  </header>'''
+
+FOOTER = '''  <footer class="bg-slate-950 text-white"><div class="mx-auto max-w-7xl px-4 py-10 lg:px-8"><div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"><p class="text-sm text-white/75">Instituto S.E.R. Sagi • Praia do Sagi, Baía Formosa/RN</p><a href="contato.html" class="text-sm font-semibold text-sun">Fale com a equipe</a></div></div></footer>'''
+
+# Cada categoria: slug, titulo, icone, img (hero), intro, descricao, galeria (6 imgs)
+CATS = [
+    {
+        "slug": "acervo-esporte", "titulo": "Esporte", "icone": "fa-futbol",
+        "img": "sport,soccer,training?lock=741",
+        "intro": "Momentos de jiu-jitsu, futevôlei, vôlei, musculação e natação.",
+        "descricao": "Registros das atividades esportivas que transformam vidas na comunidade: aulas de jiu-jitsu, partidas de futevôlei e vôlei na arena, treinos de musculação e momentos de lazer ao ar livre.",
+        "galeria": ["sport,soccer,training?lock=801", "judo,martial,arts?lock=802", "beach,volleyball?lock=803", "gym,fitness,weights?lock=804", "swimming,pool,kids?lock=805", "running,athletics,track?lock=806"],
+    },
+    {
+        "slug": "acervo-saude", "titulo": "Saúde", "icone": "fa-heart-pulse",
+        "img": "dentist,health,clinic?lock=742",
+        "intro": "Atendimentos no consultório odontológico e ações de bem-estar.",
+        "descricao": "Imagens dos atendimentos odontológicos e das ações de promoção de saúde e bem-estar realizadas no Instituto, com foco em prevenção e cuidado com a comunidade.",
+        "galeria": ["dentist,clinic,tooth?lock=811", "doctor,health,checkup?lock=812", "healthcare,nurse,care?lock=813", "smile,teeth,dental?lock=814", "wellness,healthy,lifestyle?lock=815", "hospital,medicine,clinic?lock=816"],
+    },
+    {
+        "slug": "acervo-educacao", "titulo": "Educação", "icone": "fa-book-open",
+        "img": "education,kids,school?lock=743",
+        "intro": "Aulas de idiomas, informática e sustentabilidade.",
+        "descricao": "Registros das atividades educativas: aulas de inglês e espanhol, oficinas de informática e projetos de sustentabilidade que ampliam os horizontes das crianças do Sagi.",
+        "galeria": ["education,kids,school?lock=821", "classroom,teacher,learning?lock=822", "computer,technology,kids?lock=823", "books,reading,library?lock=824", "language,english,spanish?lock=825", "sustainability,recycling,kids?lock=826"],
+    },
+    {
+        "slug": "acervo-cultura", "titulo": "Cultura", "icone": "fa-masks-theater",
+        "img": "culture,music,community?lock=744",
+        "intro": "Origens indígenas, convivência comunitária e ações solidárias.",
+        "descricao": "Momentos de valorização das origens indígenas da comunidade, encontros culturais, apresentações e ações que fortalecem os laços de convivência no território.",
+        "galeria": ["culture,music,community?lock=831", "indigenous,tradition,brazil?lock=832", "festival,celebration,dance?lock=833", "art,craft,creative?lock=834", "music,concert,band?lock=835", "community,gathering,people?lock=836"],
+    },
+    {
+        "slug": "acervo-preservacao", "titulo": "Preservação", "icone": "fa-leaf",
+        "img": "turtle,nature,sea?lock=745",
+        "intro": "Proteção das tartarugas marinhas e educação socioambiental.",
+        "descricao": "Imagens das ações de proteção às tartarugas marinhas que desovam na praia do Sagi, e das atividades de educação ambiental com a comunidade.",
+        "galeria": ["turtle,nature,sea?lock=841", "beach,ocean,coast?lock=842", "environment,recycling,green?lock=843", "turtle,hatchling,baby?lock=844", "ocean,waves,nature?lock=845", "mangrove,coast,ecosystem?lock=846"],
+    },
+    {
+        "slug": "acervo-eventos", "titulo": "Eventos", "icone": "fa-calendar-days",
+        "img": "party,event,celebration?lock=746",
+        "intro": "Comemorações, confraternizações e eventos musicais.",
+        "descricao": "Registros das comemorações, confraternizações e eventos musicais que reúnem a comunidade na arena e nos espaços do Instituto ao longo do ano.",
+        "galeria": ["party,event,celebration?lock=851", "birthday,kids,party?lock=852", "concert,music,event?lock=853", "community,event,gathering?lock=854", "festival,food,fun?lock=855", "celebration,confetti,party?lock=856"],
+    },
+]
+
+
+def build_galeria(c, imagens):
+    itens = "".join(
+        f'''<figure class="overflow-hidden rounded-3xl bg-white p-4 shadow-soft">
+          <div class="relative overflow-hidden rounded-2xl"><img src="https://loremflickr.com/800/500/{img}" alt="Imagem ilustrativa de {c['titulo'].lower()}" class="h-48 w-full object-cover" loading="lazy" /></div>
+          <figcaption class="flex items-center justify-between gap-2 p-2 pt-3">
+            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-ocean">{c['titulo']}</span>
+            <span class="inline-flex items-center gap-1 rounded-full bg-sand px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-500"><i class="fa-solid fa-wand-magic-sparkles text-[8px]"></i>Ilustrativo</span>
+          </figcaption>
+        </figure>'''
+        for img in imagens
+    )
+    return itens
+
+
+def build_page(c):
+    galeria = build_galeria(c, c["galeria"])
+    return f'''<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f5c73" />
+  <title>Acervo — {c["titulo"]} | Instituto S.E.R. Sagi</title>
+  <meta name="description" content="{c["intro"]}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={{theme:{{extend:{{colors:{{ocean:'#0f5c73',oceanDeep:'#083b4c',sand:'#f5efe3',sun:'#f4b400',coral:'#e77b5f',leaf:'#2e7d4f',mist:'#e7f4f7'}},fontFamily:{{sans:['Inter','sans-serif']}},boxShadow:{{soft:'0 20px 60px rgba(8, 59, 76, 0.12)'}}}}}}}};</script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="font-sans text-slate-800">
+  <a href="#conteudo-principal" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:bg-white focus:text-ocean focus:px-4 focus:py-2 focus:rounded-md focus:shadow">Pular para o conteúdo</a>
+{HEADER}
+  <main id="conteudo-principal">
+    <section class="page-banner text-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 lg:px-8 lg:py-20">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-sun">Acervo • {c["titulo"]}</p>
+        <h2 class="mt-4 max-w-4xl text-4xl font-extrabold leading-tight sm:text-5xl">Registros de {c["titulo"].lower()}</h2>
+        <p class="mt-6 max-w-3xl text-lg text-white/85">{c["intro"]}</p>
+      </div>
+    </section>
+    <section class="mx-auto max-w-7xl px-4 py-16 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <div class="premium-card rounded-[2rem] bg-white p-6 shadow-soft">
+          <div class="relative -mx-1 overflow-hidden rounded-2xl">
+            <img src="https://loremflickr.com/800/500/{c["img"]}" alt="Imagem ilustrativa — {c["titulo"]}" class="h-64 w-full object-cover" loading="lazy" />
+          </div>
+          <span class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-sand px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real"><i class="fa-solid fa-wand-magic-sparkles text-[9px]"></i>Imagem ilustrativa</span>
+          <div class="mt-5 flex items-center gap-3">
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-ocean/10 text-ocean"><i class="fa-solid {c["icone"]} text-2xl"></i></div>
+            <h3 class="text-2xl font-bold text-oceanDeep">{c["titulo"]}</h3>
+          </div>
+          <p class="mt-5 text-base leading-8 text-slate-600">{c["descricao"]}</p>
+        </div>
+        <div>
+          <div class="rounded-2xl border border-dashed border-slate-300 bg-white p-6 text-center shadow-soft">
+            <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-mist text-ocean"><i class="fa-solid fa-photo-film text-xl"></i></div>
+            <h3 class="mt-4 text-lg font-bold text-oceanDeep">Fotos reais em breve</h3>
+            <p class="mt-2 text-sm leading-7 text-slate-600">As imagens desta categoria são ilustrativas. Os registros reais das nossas atividades serão publicados aqui. Acompanhe no Instagram <a href="https://instagram.com/s.e.r_sagi" target="_blank" rel="noopener" class="font-semibold text-ocean underline">@s.e.r_sagi</a>.</p>
+          </div>
+          <div class="mt-6 rounded-2xl bg-sand p-6 text-sm leading-7 text-slate-700">
+            <p class="font-bold text-oceanDeep">Voltar para o Acervo</p>
+            <p class="mt-2">Explore outras categorias de fotos e vídeos do Instituto.</p>
+            <a href="acervo.html" class="cta-lift mt-4 inline-flex items-center gap-2 rounded-full bg-ocean px-5 py-2.5 text-sm font-semibold text-white transition hover:brightness-95"><i class="fa-solid fa-arrow-left text-xs"></i>Ver acervo completo</a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-14">
+        <div class="flex items-end justify-between gap-4">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-ocean">Galeria</p>
+            <h2 class="section-title text-3xl font-extrabold text-oceanDeep">Momentos de {c["titulo"].lower()}</h2>
+          </div>
+        </div>
+        <div class="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+{galeria}
+        </div>
+      </div>
+    </section>
+    <section class="bg-mist/70 py-16">
+      <div class="mx-auto max-w-7xl px-4 lg:px-8">
+        <div class="rounded-[2rem] bg-oceanDeep p-8 text-center text-white shadow-soft">
+          <h2 class="text-3xl font-extrabold">Tem registros desta categoria?</h2>
+          <p class="mx-auto mt-4 max-w-2xl text-white/85">Fotos e vídeos feitos por voluntários, famílias e parceiros ajudam a contar a nossa história (sempre com autorização de uso de imagem).</p>
+          <div class="mt-8 flex flex-wrap justify-center gap-4">
+            <a href="contato.html" class="cta-lift rounded-full bg-sun px-6 py-3 font-semibold text-oceanDeep">Enviar registros</a>
+            <a href="acervo.html" class="cta-lift rounded-full border border-white/40 px-6 py-3 font-semibold text-white">Ver acervo completo</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+{FOOTER}
+  <script src="js/main.js"></script>
+</body>
+</html>
+'''
+
+
+def main():
+    # 1) Gera as 6 páginas de categoria
+    for c in CATS:
+        path = os.path.join(BASE, c["slug"] + ".html")
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(build_page(c))
+        print(f"  ✅ Criado: {c['slug']}.html")
+
+    # 2) Torna os 6 cards do acervo.html clicáveis
+    fp = os.path.join(BASE, "acervo.html")
+    html = open(fp, encoding="utf-8").read()
+    open_tag = '<article class="rounded-3xl bg-white p-6 shadow-soft">'
+    close_tag = "</article>"
+    out = []
+    pos = 0
+    for c in CATS:
+        oi = html.find(open_tag, pos)
+        if oi == -1:
+            print("  ⚠️ card não encontrado:", c["slug"]); break
+        ci = html.find(close_tag, oi)
+        out.append(html[pos:oi])
+        out.append(f'<a href="{c["slug"]}.html" class="block rounded-3xl bg-white p-6 shadow-soft transition hover:-translate-y-1 hover:ring-2 hover:ring-ocean/30">')
+        out.append(html[oi + len(open_tag):ci])
+        out.append('<span class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ocean">Ver galeria <i class="fa-solid fa-arrow-right text-xs"></i></span>')
+        out.append("</a>")
+        pos = ci + len(close_tag)
+    out.append(html[pos:])
+    with open(fp, "w", encoding="utf-8") as f:
+        f.write("".join(out))
+    print("  ✅ acervo.html: cards tornados clicáveis (com 'Ver galeria')")
+
+
+if __name__ == "__main__":
+    main()

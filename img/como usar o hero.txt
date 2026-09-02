@@ -1,0 +1,3 @@
+Vídeo	img/hero-video.mp4 (opcional: hero-video.webm)
+Imagem única	img/hero-poster.jpg
+Slideshow	img/hero-slides/slide-01.jpg, slide-02.jpg, slide-03.jpg (mínimo 2)

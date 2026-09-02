@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instituto S.E.R. Sagi | Transformação social em Praia do Sagi</title>
+  <meta name="description" content="Instituto S.E.R. Sagi: saúde, esporte, educação, cultura e preservação ambiental transformando vidas em Praia do Sagi, Baía Formosa/RN." />
+  <meta name="keywords" content="Instituto SER Sagi, projeto social Praia do Sagi, ONG Baía Formosa RN, Lei de Incentivo ao Esporte" />
+  <meta name="theme-color" content="#0f5c73" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { ocean: '#0f5c73', oceanDeep: '#083b4c', sand: '#f5efe3', sun: '#f4b400', coral: '#e77b5f', leaf: '#2e7d4f', mist: '#e7f4f7' }, fontFamily: { sans: ['Inter', 'sans-serif'] }, boxShadow: { soft: '0 20px 60px rgba(8, 59, 76, 0.12)' } } } }
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="font-sans text-slate-800">
+  <a href="#conteudo-principal" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:bg-white focus:text-ocean focus:px-4 focus:py-2 focus:rounded-md focus:shadow">Pular para o conteúdo</a>
+  <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
+      <a href="index.html" class="flex items-center" aria-label="Instituto S.E.R. Sagi - página inicial">
+        <img src="img/logo.png" alt="Instituto S.E.R. Sagi" class="h-16 w-auto object-contain">
+      </a>
+  
+      <button id="menu-toggle" class="inline-flex items-center rounded-lg border border-slate-300 px-3 py-2 text-ocean lg:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu"><i class="fa-solid fa-bars"></i></button>
+      <nav class="hidden items-center gap-6 lg:flex" aria-label="Menu principal"><a href="index.html" data-page-link class="text-sm font-medium hover:text-ocean">Início</a><a href="quem-somos.html" data-page-link class="text-sm font-medium hover:text-ocean">Quem Somos</a><a href="acoes.html" data-page-link class="text-sm font-medium hover:text-ocean">Nossas Ações</a><a href="acervo.html" data-page-link class="text-sm font-medium hover:text-ocean">Acervo</a><a href="como-ajudar.html" data-page-link class="text-sm font-medium hover:text-ocean">Como Ajudar</a><a href="lei-incentivo.html" data-page-link class="text-sm font-medium hover:text-ocean">Lei de Incentivo</a><a href="transparencia.html" data-page-link class="text-sm font-medium hover:text-ocean">Transparência</a><a href="contato.html" data-page-link class="text-sm font-medium hover:text-ocean">Contato</a></nav>
+      <div class="hidden items-center gap-3 lg:flex"><a href="lei-incentivo.html" class="cta-lift rounded-full border border-ocean px-4 py-2 text-sm font-semibold text-ocean transition hover:bg-ocean hover:text-white">Seja Parceiro</a><a href="como-ajudar.html#doacao" class="cta-lift rounded-full bg-sun px-4 py-2 text-sm font-semibold text-oceanDeep transition hover:brightness-95">Doe Agora</a></div>
+    </div>
+    <div id="mobile-menu" class="hidden border-t border-slate-200 bg-white lg:hidden"><nav class="mx-auto flex max-w-7xl flex-col px-4 py-4" aria-label="Menu mobile"><a href="index.html" data-page-link class="py-2 text-sm font-medium">Início</a><a href="quem-somos.html" data-page-link class="py-2 text-sm font-medium">Quem Somos</a><a href="acoes.html" data-page-link class="py-2 text-sm font-medium">Nossas Ações</a><a href="acervo.html" data-page-link class="py-2 text-sm font-medium">Acervo</a><a href="como-ajudar.html" data-page-link class="py-2 text-sm font-medium">Como Ajudar</a><a href="lei-incentivo.html" data-page-link class="py-2 text-sm font-medium">Lei de Incentivo</a><a href="transparencia.html" data-page-link class="py-2 text-sm font-medium">Transparência</a><a href="contato.html" data-page-link class="py-2 text-sm font-medium">Contato</a></nav></div>
+  </header>
+  <main id="conteudo-principal">
+    <section class="hero-pattern premium-outline relative flex min-h-screen flex-col overflow-hidden bg-gradient-to-br from-oceanDeep via-ocean to-leaf text-white">
+      <!-- CAMADA 1 · MÍDIA (renderizada por js/hero.js) -->
+      <div id="hero-media" class="absolute inset-0 z-0" aria-hidden="true"></div>
+
+      <!-- CAMADA 2 · SCRIM DIAGONAL (substitui o gradiente colorido) -->
+      <div class="home-hero__scrim absolute inset-0 z-[1] pointer-events-none"></div>
+      <div class="glow-orb left-[-60px] top-10 h-56 w-56 bg-white/20 z-[1]"></div>
+      <div class="glow-orb right-[-40px] top-16 h-64 w-64 bg-sun/25 z-[1]"></div>
+      <div class="glow-orb bottom-0 left-1/3 h-52 w-52 bg-coral/20 z-[1]"></div>
+
+      <!-- CAMADA LOGO · logotipo sobreposto ao hero, à direita (somente telas grandes) -->
+      <img src="img/logo2-hero.png" alt="" aria-hidden="true"
+           class="pointer-events-none select-none absolute right-[5%] top-[25%] z-[15] hidden h-auto w-[40%] max-w-full drop-shadow-lg lg:block">
+
+      <!-- CAMADA 1.1 · CONTROLES DO SLIDESHOW (irmão do overlay, acima dele) -->
+      <div id="hero-controls" class="absolute inset-0 z-20 pointer-events-none"></div>
+
+      <!-- CAMADA 3 · CONTEÚDO -->
+      <div class="relative z-10 flex-1 content-center mx-auto grid max-w-7xl gap-12 px-4 pt-6 pb-28 lg:grid-cols-[1.08fr_0.92fr] lg:px-8 lg:pt-12 lg:pb-40">
+        <div class="relative z-10 flex flex-col justify-center">
+          <span class="home-badge inline-flex w-fit items-center gap-2 rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] backdrop-blur">
+            <svg width="12" height="15" viewBox="0 0 12 15" fill="none" aria-hidden="true">
+              <path d="M6 0C2.7 0 0 2.7 0 6c0 4.2 6 9 6 9s6-4.8 6-9c0-3.3-2.7-6-6-6Zm0 8.2A2.2 2.2 0 1 1 6 3.8a2.2 2.2 0 0 1 0 4.4Z" fill="currentColor"/>
+            </svg>
+            Praia do Sagi • Baía Formosa/RN
+          </span>
+
+          <p class="home-eyebrow mt-4 text-sm font-semibold uppercase tracking-[0.35em] text-sun">Instituto</p>
+
+          <h1 class="mt-4 max-w-4xl text-5xl font-extrabold leading-[1.05] sm:text-6xl lg:text-8xl">
+            <span class="text-[#E0C960]">S. E. R.</span> Sagi
+            <span class="home-hero__tagline mt-2 block text-xl font-medium tracking-normal text-white/90 sm:mt-4 sm:text-3xl"><span class="text-[#E0C960]">S</span>abedoria, <span class="text-[#E0C960]">E</span>sforço e <span class="text-[#E0C960]">R</span>esultado.</span>
+          </h1>
+
+          <p class="mt-6 max-w-xl text-lg leading-8 text-white/95">Uma organização social criada com raízes no território para promover desenvolvimento humano por meio da saúde, do esporte, da educação, da cultura e da preservação ambiental.</p>
+
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="acoes.html" class="btn btn--primary">Conheça Nossos Projetos</a>
+            <a href="como-ajudar.html" class="btn btn--outline-light">Apoie</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="home-stats home-section bg-white" aria-labelledby="stats-title">
+      <div class="mx-auto max-w-7xl px-4 lg:px-8">
+        <div class="home-stats__head">
+          <div>
+            <p class="home-eyebrow text-sm font-semibold uppercase tracking-[0.25em] text-ocean">Impacto em números</p>
+            <h2 id="stats-title" class="section-title text-3xl font-extrabold text-oceanDeep">Resultados que geram confiança</h2>
+          </div>
+          <p class="max-w-3xl text-slate-600">Números reais do nosso trabalho na comunidade — transparência é a base da relação com famílias, parceiros e apoiadores.</p>
+        </div>
+
+        <dl class="home-stats__grid">
+          <div class="home-stat">
+            <dt class="home-stat__label">Projeto principal</dt>
+            <dd class="home-stat__value">120</dd>
+            <p class="home-stat__desc">crianças na Jóia da Coroa</p>
+          </div>
+          <div class="home-stat">
+            <dt class="home-stat__label">Saúde</dt>
+            <dd class="home-stat__value">1.149<span>+</span></dd>
+            <p class="home-stat__desc">procedimentos odontológicos realizados</p>
+          </div>
+          <div class="home-stat">
+            <dt class="home-stat__label">Consultório</dt>
+            <dd class="home-stat__value">194</dd>
+            <p class="home-stat__desc">pacientes atendidos</p>
+          </div>
+          <div class="home-stat">
+            <dt class="home-stat__label">Esporte</dt>
+            <dd class="home-stat__value">230<span>+</span></dd>
+            <p class="home-stat__desc">crianças em Sagi e Pituba</p>
+          </div>
+          <div class="home-stat">
+            <dt class="home-stat__label">Jiu-jitsu</dt>
+            <dd class="home-stat__value">49</dd>
+            <p class="home-stat__desc">alunos atendidos</p>
+          </div>
+          <div class="home-stat">
+            <dt class="home-stat__label">Musculação</dt>
+            <dd class="home-stat__value">118</dd>
+            <p class="home-stat__desc">inscritos no estúdio</p>
+          </div>
+        </dl>
+
+        <p class="home-stats__note">Dados consolidados internamente pelo Instituto S.E.R. Sagi.</p>
+      </div>
+    </section>
+    
+    <section class="home-section home-section--alt"><div class="mx-auto max-w-7xl px-4 lg:px-8"><div class="max-w-3xl"><p class="text-sm font-semibold uppercase tracking-[0.25em] text-ocean">Nossos pilares</p><h2 class="section-title text-3xl font-extrabold text-oceanDeep">Uma atuação integrada e comunitária</h2></div><div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-5"><article class="home-card home-pillar"><span class="home-pillar__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 12.6 12 20l-7.5-7.4A5 5 0 1 1 12 6.3a5 5 0 1 1 7.5 6.3Z" /><path d="M6.5 12h3l1.5-3 2.5 5 1.5-2h2.5" /></svg></span><h3 class="home-card__title">Saúde</h3><p class="home-card__text">Consultório odontológico e promoção de bem-estar.</p></article><article class="home-card home-pillar"><span class="home-pillar__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M17 5H7v7a5 5 0 0 0 10 0V5Z" /><path d="M17 6h3a2 2 0 0 1-2 2h-1M7 6H4a2 2 0 0 0 2 2h1" /></svg></span><h3 class="home-card__title">Esporte</h3><p class="home-card__text">Jiu-jitsu, futevôlei, vôlei, musculação e natação.</p></article><article class="home-card home-pillar"><span class="home-pillar__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10.5 5 8 4.5 4 4.5V18c4 0 6.5.5 8 2 1.5-1.5 4-2 8-2V4.5c-4 0-6.5.5-8 2Z" /><path d="M12 6.5V20" /></svg></span><h3 class="home-card__title">Educação</h3><p class="home-card__text">Idiomas, informática e sustentabilidade para crianças.</p></article><article class="home-card home-pillar"><span class="home-pillar__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5" /><path d="M3 20a6 6 0 0 1 12 0" /><circle cx="17" cy="8" r="2.5" /><path d="M17 14a5 5 0 0 1 4 5" /></svg></span><h3 class="home-card__title">Cultura</h3><p class="home-card__text">Origens indígenas, convivência comunitária e ações solidárias.</p></article><article class="home-card home-pillar"><span class="home-pillar__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3C7 3 4 7 4 12a8 8 0 0 0 8 8c5 0 8-4 8-9 0-5-3-8-8-8Z" /><path d="M12 3c-2 4-2 7 0 9 2 2 5 2 8 0" /></svg></span><h3 class="home-card__title">Preservação</h3><p class="home-card__text">Proteção de tartarugas e educação socioambiental.</p></article></div><div class="mt-10 flex flex-wrap gap-4"><a href="acoes.html" class="btn btn--primary">Ver ações detalhadas</a><a href="quem-somos.html" class="btn btn--outline">Conhecer a história</a></div></div></section>
+    <section class="home-section bg-white"><div class="mx-auto max-w-7xl px-4 lg:px-8"><div class="grid gap-8 lg:grid-cols-[1fr_1fr]"><article class="home-card"><div class="relative -mx-1 overflow-hidden rounded-2xl"><img src="https://loremflickr.com/800/500/children,kids,playing?lock=710" alt="Imagem ilustrativa de crianças em atividades" class="h-40 w-full object-cover" loading="lazy" /></div><span class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-sand px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real"><i class="fa-solid fa-wand-magic-sparkles text-[9px]"></i>Imagem ilustrativa</span><p class="text-sm font-semibold uppercase tracking-[0.25em] text-ocean">Projeto principal</p><h2 class="section-title text-3xl font-extrabold text-oceanDeep">A Jóia da Coroa</h2><p class="mt-6 leading-8 text-slate-600">Atendimento a 120 crianças de 5 a 13 anos com atividades esportivas e educacionais para fortalecer disciplina, oportunidades e futuro.</p><div class="mt-8 grid gap-4 sm:grid-cols-2"><div class="rounded-2xl bg-mist p-5"><h3 class="font-bold text-oceanDeep">Esporte</h3><p class="mt-2 text-sm leading-7 text-slate-700">Jiu-jitsu, futevôlei, vôlei, natação e dança.</p></div><div class="rounded-2xl bg-mist p-5"><h3 class="font-bold text-oceanDeep">Educação</h3><p class="mt-2 text-sm leading-7 text-slate-700">Inglês, espanhol, informática e sustentabilidade.</p></div></div></article><article class="home-card home-card--dark text-white"><p class="text-sm font-semibold uppercase tracking-[0.25em] text-sun">Captação estratégica</p><h2 class="section-title text-3xl font-extrabold">Lei de Incentivo ao Esporte</h2><p class="mt-6 leading-8 text-white/90">Uma página especial foi criada para apoiar a conversa com empresas, contadores e investidores sociais interessados em incentivo fiscal.</p><div class="mt-8 grid gap-4 sm:grid-cols-2"><div class="rounded-2xl border border-white/15 bg-white/10 p-5"><h3 class="font-bold">Empresas</h3><p class="mt-2 text-sm text-white/85">Destinação incentivada com alto potencial de reputação social.</p></div><div class="rounded-2xl border border-white/15 bg-white/10 p-5"><h3 class="font-bold">Pessoas físicas</h3><p class="mt-2 text-sm text-white/85">Apoio à transformação social com benefício fiscal previsto em lei.</p></div></div><a href="lei-incentivo.html" class="btn btn--primary mt-8">Acessar página especial</a></article></div></section>
+    <section class="home-section home-section--alt"><div class="mx-auto max-w-7xl px-4 lg:px-8"><div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between"><div><p class="text-sm font-semibold uppercase tracking-[0.25em] text-ocean">Destaques do mês</p><h2 class="section-title text-3xl font-extrabold text-oceanDeep">Momentos que marcaram o mês</h2></div><a href="acervo.html" class="btn btn--text">Ver acervo completo →</a></div><div data-render="highlights" class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3"></div></div></section>
+    <section class="home-section bg-white"><div class="mx-auto max-w-7xl px-4 lg:px-8"><div class="max-w-3xl"><p class="text-sm font-semibold uppercase tracking-[0.25em] text-ocean">Como ajudar</p><h2 class="section-title text-3xl font-extrabold text-oceanDeep">Faça parte dessa transformação</h2><p class="mt-6 leading-8 text-slate-600">Existem várias formas de apoiar o Instituto — cada contribuição amplia o alcance das nossas ações com as crianças e famílias do Sagi.</p></div><div class="mt-10 grid gap-6 md:grid-cols-3"><article class="home-card text-center"><div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-sun/15 text-sun"><i class="fa-solid fa-hand-holding-heart text-2xl"></i></div><h3 class="mt-4 text-lg font-bold text-oceanDeep">Doe</h3><p class="mt-3 text-sm leading-7 text-slate-600">Contribuições via PIX ou doação recorrente ajudam a manter as atividades do dia a dia.</p><a href="como-ajudar.html#doacao" class="btn btn--primary mt-5">Fazer doação</a></article><article class="home-card text-center"><div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-ocean/10 text-ocean"><i class="fa-solid fa-hands-helping text-2xl"></i></div><h3 class="mt-4 text-lg font-bold text-oceanDeep">Seja voluntário</h3><p class="mt-3 text-sm leading-7 text-slate-600">Doe seu tempo e talento: esporte, educação, saúde e eventos comunitários.</p><a href="como-ajudar.html" class="btn btn--outline mt-5">Ser voluntário</a></article><article class="home-card text-center"><div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-leaf/10 text-leaf"><i class="fa-solid fa-handshake text-2xl"></i></div><h3 class="mt-4 text-lg font-bold text-oceanDeep">Seja parceiro</h3><p class="mt-3 text-sm leading-7 text-slate-600">Empresas podem apoiar via Lei de Incentivo ao Esporte e responsabilidade social.</p><a href="lei-incentivo.html" class="btn btn--outline mt-5">Ser parceiro</a></article></div></div></section>
+    <section class="home-section home-section--alt"><div class="mx-auto max-w-7xl px-4 lg:px-8"><div class="max-w-3xl"><p class="text-sm font-semibold uppercase tracking-[0.25em] text-ocean">Depoimentos</p><h2 class="section-title text-3xl font-extrabold text-oceanDeep">Histórias que aproximam famílias, crianças e parceiros</h2><div class="mt-4 flex items-center gap-2"><span class="inline-flex items-center gap-1.5 rounded-full bg-sun/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-oceanDeep" title="Conteúdo demonstrativo — será substituído por conteúdo real"><i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>Conteúdo ilustrativo</span></div><p class="mt-4 leading-8 text-slate-600">Depoimentos reais de mães, pais, crianças e parceiros serão publicados com autorização. As histórias abaixo ilustram o tom da nossa comunicação.</p></div><div data-render="testimonials" class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3"></div></div></section>
+    <section class="home-section bg-white"><div class="mx-auto max-w-7xl px-4 lg:px-8"><div class="max-w-3xl"><p class="text-sm font-semibold uppercase tracking-[0.25em] text-ocean">Parceiros</p><h2 class="section-title text-3xl font-extrabold text-oceanDeep">Marcas e instituições que acreditam na transformação social</h2><div class="mt-4 flex items-center gap-2"><span class="inline-flex items-center gap-1.5 rounded-full bg-sun/20 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-oceanDeep" title="Conteúdo demonstrativo — será substituído por conteúdo real"><i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>Conteúdo ilustrativo</span></div><p class="mt-4 leading-8 text-slate-600">Os nomes abaixo são ilustrativos. As logomarcas reais de parceiros e apoiadores serão publicadas mediante autorização.</p></div><div data-render="partners" class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4"></div></div></section>
+    <section class="home-section home-section--alt"><div class="mx-auto max-w-7xl px-4 lg:px-8"><article class="max-w-3xl"><p class="text-sm font-semibold uppercase tracking-[0.25em] text-ocean">Chamada para ação</p><h2 class="section-title text-3xl font-extrabold text-oceanDeep">Ajude a ampliar o impacto do Instituto S.E.R. Sagi</h2><p class="mt-6 max-w-2xl leading-8 text-slate-600">Empresas, voluntários, doadores e apoiadores podem fazer parte dessa transformação. O site já está preparado para receber e organizar contatos de interesse.</p><div class="mt-8 flex flex-wrap gap-4"><a href="como-ajudar.html" class="btn btn--primary">Ver formas de ajudar</a><a href="contato.html" class="btn btn--outline">Falar com a equipe</a></div></article></div></section>
+  </main>
+  <footer class="bg-slate-950 text-white"><div class="mx-auto grid max-w-7xl gap-10 px-4 py-14 lg:grid-cols-[1.1fr_0.9fr_1fr] lg:px-8"><section><p class="text-sm font-semibold uppercase tracking-[0.25em] text-sun">Contato</p><h2 class="mt-3 text-3xl font-extrabold">Instituto S.E.R. Sagi</h2><p class="mt-4 max-w-2xl text-sm leading-7 text-white/75">Uma presença digital criada para transmitir credibilidade institucional, proximidade comunitária e potencial de parceria.</p></section><section class="grid gap-4 sm:grid-cols-2"><div class="rounded-2xl border border-white/10 bg-white/5 p-5"><h3 class="font-bold">Contatos principais</h3><ul class="mt-3 space-y-2 text-sm text-white/80"><li>Marco Antônio Gomes Nogueira: (84) 98655-3747</li><li>Jares Cardoso Ponciano: (84) 98805-5036</li><li>E-mail: sersagi2025@gmail.com</li></ul></div><div class="rounded-2xl border border-white/10 bg-white/5 p-5"><h3 class="font-bold">Endereço e redes</h3><ul class="mt-3 space-y-2 text-sm text-white/80"><li>Praia do Sagi, 121 - Sagi, Baía Formosa/RN</li><li>Instagram: @s.e.r_sagi</li><li><a href="contato.html" class="underline">Página de contato</a></li></ul></div></section><section><h3 class="font-bold">Receba novidades</h3><form class="mt-3" data-form-type="newsletter" aria-label="Formulário de newsletter"><input type="hidden" name="nome" value="" /><div class="flex gap-2"><label class="sr-only" for="newsletter-email">E-mail</label><input id="newsletter-email" name="email" type="email" required class="min-w-0 flex-1 rounded-full border border-white/20 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/50" placeholder="Seu e-mail" /><button type="submit" class="btn btn--primary">Cadastrar</button></div><input type="hidden" name="perfil" value="Apoiador" /><label class="mt-3 flex items-start gap-2 text-xs text-white/70"><input name="aceite_comunicacao" type="checkbox" class="mt-0.5" /><span>Autorizo o recebimento de comunicações do Instituto S.E.R. Sagi.</span></label><div class="form-feedback hidden mt-3 rounded-xl border px-4 py-3 text-sm"></div></form></section></div></footer>
+  <script src="js/main.js"></script>
+  <script src="js/hero.js"></script>
+</body>
+</html>
