@@ -28,19 +28,44 @@
 
 ---
 
-## 📄 Estrutura atual do site (20 páginas)
+## 📄 Estrutura atual do site (27 páginas)
+
+### 🌳 Hierarquia de navegação
+```
+Home (index.html)
+├── Saúde        → consultorio-odontologico.html
+├── Esporte      → esporte.html  (HUB)
+│      ├── Jiu-Jitsu   → escola-jiu-jitsu.html
+│      ├── Vôlei       → volei.html
+│      ├── Futevôlei   → futevolei.html
+│      ├── Musculação  → estudio-musculacao.html
+│      ├── Natação     → natacao.html
+│      └── Dança       → danca.html
+├── Educação     → educacao.html
+├── Cultura      → cultura.html
+└── Preservação  → preservacao-ambiental.html
+```
+
+### 📋 Lista de arquivos
 
 | Arquivo | Página |
 |---|---|
 | `index.html` | Início (home) |
 | `quem-somos.html` | Quem Somos |
 | `acoes.html` | Nossas Ações (6 cards → páginas individuais) |
+| `esporte.html` | **HUB Esporte** (6 modalidades) |
 | `consultorio-odontologico.html` | Ação: Consultório Odontológico |
-| `estudio-musculacao.html` | Ação: Estúdio de Musculação |
-| `escola-jiu-jitsu.html` | Ação: Escola de Jiu-Jitsu |
+| `estudio-musculacao.html` | Esporte: Musculação |
+| `escola-jiu-jitsu.html` | Esporte: Jiu-Jitsu |
+| `volei.html` | Esporte: Vôlei |
+| `futevolei.html` | Esporte: Futevôlei |
+| `natacao.html` | Esporte: Natação |
+| `danca.html` | Esporte: Dança |
 | `arena-futevolei-volei.html` | Ação: Arena de Futevôlei e Vôlei |
+| `educacao.html` | Educação |
+| `cultura.html` | Cultura |
 | `acoes-solidarias.html` | Ação: Ações Solidárias |
-| `preservacao-ambiental.html` | Ação: Preservação Ambiental |
+| `preservacao-ambiental.html` | Preservação |
 | `acervo.html` | Acervo (6 cards de categoria) |
 | `acervo-esporte.html` | Acervo: Esporte |
 | `acervo-saude.html` | Acervo: Saúde |
@@ -60,6 +85,44 @@
 ---
 
 ## 📋 Histórico de ajustes
+
+### 11/09/2026 (sessão 2) — Hierarquia de navegação: pilar → página → sub-página
+
+**Pedido:** os cards da home precisam levar para páginas próprias, com sub-cards quando houver submodalidades.
+
+**Criadas 7 páginas novas:**
+
+| Página nova | O que é |
+|---|---|
+| `esporte.html` | **Hub Esporte** — banner + 6 cards de modalidade |
+| `volei.html` | Modalidade: Vôlei |
+| `futevolei.html` | Modalidade: Futevôlei |
+| `natacao.html` | Modalidade: Natação |
+| `danca.html` | Modalidade: Dança |
+| `educacao.html` | Página de Educação (idiomas, informática, sustentabilidade) |
+| `cultura.html` | Página de Cultura (origens indígenas, convivência, ações solidárias) |
+
+**Cards da home (pilares) — destinos atualizados:**
+
+| Card | Antes | Agora |
+|---|---|---|
+| Saúde | `consultorio-odontologico.html` | *(sem mudança)* |
+| Esporte | `acoes.html` | **`esporte.html`** |
+| Educação | `acoes.html` | **`educacao.html`** |
+| Cultura | `acoes-solidarias.html` | **`cultura.html`** |
+| Preservação | `preservacao-ambiental.html` | *(sem mudança)* |
+
+**Hub Esporte — 6 cards de modalidade** (todos com página própria):
+`escola-jiu-jitsu.html` · `volei.html` · `futevolei.html` · `estudio-musculacao.html` · `natacao.html` · `danca.html`
+
+**Arquivos alterados:** `index.html` (destinos), `js/main.js` (lista `acoesSub` ampliada para o menu destacar "Nossas Ações" nas novas páginas).
+
+**Verificação:** 27/27 páginas HTTP 200 · 5 pilares OK · 6 modalidades OK · **zero links quebrados**.
+
+> 💡 **Observação:** a página antiga `arena-futevolei-volei.html` continua existindo (fala da arena como espaço).
+> Ela **não** está no hub Esporte — se quiser aproveitá-la ou retirá-la, é só falar.
+
+---
 
 ### 11/09/2026 — Sessão: correções, recuperação e navegação
 
