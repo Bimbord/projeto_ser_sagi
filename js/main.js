@@ -28,7 +28,9 @@ function setupActiveLinks() {
   else if (acervoSub.includes(current)) target = 'acervo.html';
   document.querySelectorAll('[data-page-link]').forEach((link) => {
     const href = link.getAttribute('href');
-    if (href === target) link.classList.add('active');
+    // o link do Início aponta para a raiz ("./") para a URL não mostrar "index.html"
+    const destino = href === './' ? 'index.html' : href;
+    if (destino === target) link.classList.add('active');
   });
 }
 

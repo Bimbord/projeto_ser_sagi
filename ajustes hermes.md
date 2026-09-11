@@ -86,6 +86,24 @@ Home (index.html)
 
 ## 📋 Histórico de ajustes
 
+### 11/09/2026 (sessão 3) — URL do Início sem "index.html"
+
+**Problema:** ao clicar em "Início" no menu, a barra de endereços mostrava `.../index.html`.
+
+**Solução:** todos os links do menu/logo que apontavam para `index.html` passaram a apontar para a **raiz da pasta** (`./`). O servidor entrega o `index.html` automaticamente, e a URL fica limpa:
+- Antes: `http://127.0.0.1:5501/index.html` ❌
+- Agora: `http://127.0.0.1:5501/` ✅ *(e no site publicado: `bimbord.github.io/projeto_ser_sagi/`)*
+
+**Escopo:** **83 links ajustados em 27 páginas** (logo + menu desktop + menu mobile + botões "voltar para o Início").
+
+**Arquivos alterados:**
+- Todos os `*.html` (27 arquivos) — `href="index.html"` → `href="./"`
+- `js/main.js` — `setupActiveLinks()` agora entende o `./` como "index.html" (senão o menu não destacaria "Início" na home)
+
+> ⚠️ **Atenção para quem editar:** se criar páginas novas, o link do Início deve ser `href="./"` (não `index.html`), e o link precisa continuar tendo o atributo `data-page-link` para o destaque do menu funcionar.
+
+---
+
 ### 11/09/2026 (sessão 2) — Hierarquia de navegação: pilar → página → sub-página
 
 **Pedido:** os cards da home precisam levar para páginas próprias, com sub-cards quando houver submodalidades.
