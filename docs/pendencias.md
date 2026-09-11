@@ -2,6 +2,22 @@
 
 > Lista viva de pendências do projeto. Atualizar conforme avançar.
 
+## ⚡ COMEÇAR POR AQUI (resumo rápido)
+
+**O site está no ar e funcional.** O que falta é conteúdo real e acabamento:
+
+| # | O que | Esforço | Depende de |
+|---|---|---|---|
+| 2 | **Fotos reais** nas atividades e no Acervo | médio | autorização de imagem dos responsáveis |
+| 2b | Exportar o **Instagram** para popular o acervo | médio | exportação manual de dados do Instagram |
+| 3 | **Domínio próprio** (institutosersagi.org.br) | baixo | compra no registro.br |
+| 4 | Definir **fluxo de alimentação** (manutenção pós-entrega) | médio | decisão do Bimbord/cliente |
+
+**Ferramenta pronta para alimentar:** `python scripts/publicar.py` (sobe pro R2 + grava no banco)
+**Guia:** `docs/fluxo-importacao-midias.md`
+
+---
+
 ## Pendências ativas (lembrar nas próximas sessões)
 
 ### 1. Banco + tabela `arquivo` no Supabase (banco do site) — ✅ FEITO (31/08)
@@ -33,6 +49,16 @@
 - `institutosersagi.org.br` (ou `.com.br`) via registro.br — ~R$ 40/ano
 - E-mail institucional: Zoho Mail (grátis, até 5 caixas) ou via hospedagem
 - Ver detalhes em `docs/estrategia-tecnica.md`
+
+### 4. Alimentação contínua / manutenção pós-entrega
+- O cliente já sinalizou que deve ficar com **manutenção mensal** — pensar no fluxo desde já
+- **Decisão pendente:** como o conteúdo entra no site?
+  - **A) Registrador manual** (`scripts/publicar.py`) — já pronto, funciona hoje
+  - **B) Fluxo via WhatsApp** — a ONG manda fotos, agente/script cataloga em lote
+  - **C) Painel self-service** — a ONG loga e sobe sozinha (mais desenvolvimento)
+  - *Recomendação: começar no A, evoluir para B e depois C conforme o volume*
+- **Definir por escrito o escopo do contrato**: o que está incluso (X atualizações/mês, backups, suporte) — evita virar trabalho infinito
+- Documentar tudo como **case de portfólio**: "site + gestão de conteúdo para ONG"
 
 ## 🚨 Incidente e backup (11/09/2026)
 
