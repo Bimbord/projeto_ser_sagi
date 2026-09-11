@@ -23,9 +23,12 @@ function setupActiveLinks() {
   const acoesSub = ['consultorio-odontologico.html', 'estudio-musculacao.html', 'escola-jiu-jitsu.html', 'arena-futevolei-volei.html', 'acoes-solidarias.html', 'preservacao-ambiental.html', 'esporte.html', 'educacao.html', 'cultura.html', 'volei.html', 'futevolei.html', 'natacao.html', 'danca.html'];
   // Sub-páginas de "Acervo" (páginas por categoria)
   const acervoSub = ['acervo-esporte.html', 'acervo-saude.html', 'acervo-educacao.html', 'acervo-cultura.html', 'acervo-preservacao.html', 'acervo-eventos.html'];
+  // Sub-páginas de "Quem Somos" (instalações)
+  const quemSomosSub = ['instalacoes.html'];
   let target = current;
   if (acoesSub.includes(current)) target = 'acoes.html';
   else if (acervoSub.includes(current)) target = 'acervo.html';
+  else if (quemSomosSub.includes(current)) target = 'quem-somos.html';
   document.querySelectorAll('[data-page-link]').forEach((link) => {
     const href = link.getAttribute('href');
     // o link do Início aponta para a raiz ("./") para a URL não mostrar "index.html"

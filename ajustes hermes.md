@@ -28,7 +28,7 @@
 
 ---
 
-## 📄 Estrutura atual do site (27 páginas)
+## 📄 Estrutura atual do site (28 páginas)
 
 ### 🌳 Hierarquia de navegação
 ```
@@ -36,14 +36,21 @@ Home (index.html)
 ├── Saúde        → consultorio-odontologico.html
 ├── Esporte      → esporte.html  (HUB)
 │      ├── Jiu-Jitsu   → escola-jiu-jitsu.html
-│      ├── Vôlei       → volei.html
-│      ├── Futevôlei   → futevolei.html
+│      ├── Vôlei       → volei.html      ─┐ link cruzado
+│      ├── Futevôlei   → futevolei.html  ─┘ para a Arena
 │      ├── Musculação  → estudio-musculacao.html
 │      ├── Natação     → natacao.html
 │      └── Dança       → danca.html
 ├── Educação     → educacao.html
 ├── Cultura      → cultura.html
 └── Preservação  → preservacao-ambiental.html
+
+Quem Somos (quem-somos.html)
+└── Seção "Nossas instalações" → instalacoes.html (HUB)
+       ├── Arena de Futevôlei e Vôlei → arena-futevolei-volei.html
+       ├── Consultório Odontológico   → consultorio-odontologico.html
+       ├── Estúdio de Musculação      → estudio-musculacao.html
+       └── Tatame (Jiu-Jitsu)         → escola-jiu-jitsu.html
 ```
 
 ### 📋 Lista de arquivos
@@ -51,7 +58,8 @@ Home (index.html)
 | Arquivo | Página |
 |---|---|
 | `index.html` | Início (home) |
-| `quem-somos.html` | Quem Somos |
+| `quem-somos.html` | Quem Somos (inclui a seção "Nossas instalações") |
+| `instalacoes.html` | **HUB Instalações** (4 espaços) |
 | `acoes.html` | Nossas Ações (6 cards → páginas individuais) |
 | `esporte.html` | **HUB Esporte** (6 modalidades) |
 | `consultorio-odontologico.html` | Ação: Consultório Odontológico |
@@ -85,6 +93,27 @@ Home (index.html)
 ---
 
 ## 📋 Histórico de ajustes
+
+### 11/09/2026 (sessão 4) — Instalações (hub + seção no Quem Somos + links cruzados)
+
+**Decisão de arquitetura:** a "Arena de Futevôlei e Vôlei" não deveria virar sub-card de uma modalidade só (duplicaria texto). Optou-se por **Opção A + link cruzado**:
+- Hub próprio de **Instalações** (mostra a estrutura para parceiros/Lei de Incentivo)
+- **Link cruzado** das modalidades para onde acontecem (sem duplicar conteúdo)
+
+**Criado:** `instalacoes.html` — hub com 4 cards (apontam para páginas que **já existiam**):
+`arena-futevolei-volei.html` · `consultorio-odontologico.html` · `estudio-musculacao.html` · `escola-jiu-jitsu.html`
+
+**Seção nova no `quem-somos.html`:** "Nossas instalações" (entre "Todos somos Sagi" e "Fundadores") — 4 cards compactos (só ícone + texto, sem imagem para não duplicar o visual) + botão para `instalacoes.html`.
+
+**Link cruzado adicionado em:** `volei.html` e `futevolei.html` → caixa **"Onde acontece: Arena de Futevôlei e Vôlei"** com link para a página da arena.
+
+**`js/main.js`:** nova lista `quemSomosSub = ['instalacoes.html']` — o menu destaca **"Quem Somos"** quando se está na página de Instalações (e a lógica virou `else if` para não haver conflito entre listas).
+
+**Verificação:** 28/28 páginas HTTP 200 · 4 cards do hub OK · seção presente · links cruzados OK · **zero links quebrados**.
+
+> 📌 **Onde fica o acesso:** a Instalações **não** está no menu principal (para não inchar). O caminho é **Quem Somos → seção "Nossas instalações"** e o link cruzado nas modalidades.
+
+---
 
 ### 11/09/2026 (sessão 3) — URL do Início sem "index.html"
 

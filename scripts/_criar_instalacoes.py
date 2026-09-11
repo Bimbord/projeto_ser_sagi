@@ -1,17 +1,42 @@
-<!DOCTYPE html>
+# -*- coding: utf-8 -*-
+"""Cria instalacoes.html (hub das instalações) — cards apontam para páginas que já existem."""
+import os
+
+BASE = r"C:/Projetos Code/Projeto SER Sagi/projeto_SER_Sagi - Hermes"
+
+INSTALACOES = [
+    {"slug": "arena-futevolei-volei", "titulo": "Arena de Futevôlei e Vôlei", "icone": "fa-volleyball",
+     "img": "beach,volleyball,court?lock=1401",
+     "texto": "Espaço esportivo na areia, usado para treinos, jogos, comemorações e eventos comunitários."},
+    {"slug": "consultorio-odontologico", "titulo": "Consultório Odontológico", "icone": "fa-tooth",
+     "img": "dentist,clinic,office?lock=1402",
+     "texto": "Sala equipada para atendimento odontológico de crianças, jovens e adultos da comunidade."},
+    {"slug": "estudio-musculacao", "titulo": "Estúdio de Musculação", "icone": "fa-dumbbell",
+     "img": "gym,fitness,equipment?lock=1403",
+     "texto": "Espaço com equipamentos para treino orientado, aberto a moradores e residentes do Sagi."},
+    {"slug": "escola-jiu-jitsu", "titulo": "Tatame — Escola de Jiu-Jitsu", "icone": "fa-medal",
+     "img": "martial,arts,dojo?lock=1404",
+     "texto": "Área de tatame onde acontecem as aulas de jiu-jitsu e a formação esportiva das crianças."},
+]
+
+BADGE = ('<span class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-sand px-2.5 py-1 text-[10px] '
+         'font-semibold uppercase tracking-[0.15em] text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real">'
+         '<i class="fa-solid fa-wand-magic-sparkles text-[9px]"></i>Imagem ilustrativa</span>')
+
+HEAD = '''<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0f5c73" />
-  <title>Vôlei | Instituto S.E.R. Sagi</title>
-  <meta name="description" content="Esporte coletivo que trabalha equipe, foco e coordenação." />
+  <title>Instalações | Instituto S.E.R. Sagi</title>
+  <meta name="description" content="Conheça as instalações do Instituto S.E.R. Sagi: arena, consultório odontológico, estúdio de musculação e tatame de jiu-jitsu em Praia do Sagi, Baía Formosa/RN." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config={theme:{extend:{colors:{ocean:'#0f5c73',oceanDeep:'#083b4c',sand:'#f5efe3',sun:'#f4b400',coral:'#e77b5f',leaf:'#2e7d4f',mist:'#e7f4f7'},fontFamily:{sans:['Inter','sans-serif']},boxShadow:{soft:'0 20px 60px rgba(8, 59, 76, 0.12)'}}}};</script>
+  <script>tailwind.config={theme:{extend:{colors:{ocean:'#0f5c73',oceanDeep:'#083b4c',sand:'#f5efe3',sun:'#f4b400',coral:'#e77b5f',leaf:'#2e7d4f',mist:'#e7f4f7'},fontFamily:{sans:['Inter','sans-serif']},boxShadow:{soft:'0 20px 60px rgba(8, 59, 76, 0.12)'}}}}}};</script>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body class="font-sans text-slate-800">
@@ -30,59 +55,31 @@
   <main id="conteudo-principal">
     <section class="page-banner text-white">
       <div class="mx-auto max-w-7xl px-4 py-16 lg:px-8 lg:py-20">
-        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-sun">Esporte &bull; Nossas Ações</p>
-        <h2 class="mt-4 max-w-4xl text-4xl font-extrabold leading-tight sm:text-5xl">Vôlei</h2>
-        <p class="mt-6 max-w-3xl text-lg text-white/85">Esporte coletivo que trabalha equipe, foco e coordenação.</p>
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-sun">Estrutura</p>
+        <h2 class="mt-4 max-w-4xl text-4xl font-extrabold leading-tight sm:text-5xl">Nossas instalações</h2>
+        <p class="mt-6 max-w-3xl text-lg text-white/85">Espaços próprios que sustentam as atividades do Instituto no dia a dia — do atendimento odontológico ao esporte praticado na areia.</p>
       </div>
     </section>
     <section class="mx-auto max-w-7xl px-4 py-16 lg:px-8">
-      <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-        <div class="premium-card rounded-[2rem] bg-white p-6 shadow-soft">
-          <div class="relative -mx-1 overflow-hidden rounded-2xl">
-            <img src="https://loremflickr.com/800/500/volleyball,sport,beach?lock=1102" alt="Imagem ilustrativa — Vôlei" class="h-64 w-full object-cover" loading="lazy" />
-          </div>
-          <span class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-sand px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real"><i class="fa-solid fa-wand-magic-sparkles text-[9px]"></i>Imagem ilustrativa</span>
-          <div class="mt-5 flex items-center gap-3">
-            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-ocean/10 text-ocean"><i class="fa-solid fa-volleyball text-2xl"></i></div>
-            <h3 class="text-2xl font-bold text-oceanDeep">Vôlei</h3>
-          </div>
-          <p class="mt-5 text-base leading-8 text-slate-600">As atividades de vôlei acontecem na arena e na praia do Sagi, reunindo crianças, jovens e adultos em torno do esporte coletivo. Além da parte física, a modalidade desenvolve cooperação, respeito às regras e espírito de equipe.</p>
-        </div>
-        <div>
-          <div class="rounded-2xl bg-white p-6 shadow-soft"><h3 class="font-bold text-oceanDeep">O que oferecemos</h3><ul class="mt-4 space-y-3 text-sm text-slate-700">
-                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check mt-1 text-ocean"></i><span>Fundamentos e táticas</span></li>
-                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check mt-1 text-ocean"></i><span>Jogos e amistosos</span></li>
-                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check mt-1 text-ocean"></i><span>Integração entre as turmas</span></li>
-                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check mt-1 text-ocean"></i><span>Prática esportiva regular</span></li>
-          </ul></div>
-          <div class="mt-6 rounded-2xl bg-white p-6 shadow-soft">
-            <div class="flex items-center gap-3">
-              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-mist text-ocean"><i class="fa-solid fa-location-dot text-lg"></i></span>
-              <div>
-                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-ocean">Onde acontece</p>
-                <p class="font-bold text-oceanDeep">Arena de Futevôlei e Vôlei</p>
-              </div>
-            </div>
-            <p class="mt-3 text-sm leading-7 text-slate-600">As partidas e treinos acontecem na nossa arena na areia — um espaço usado também para eventos e comemorações da comunidade.</p>
-            <a href="arena-futevolei-volei.html" class="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-ocean">Conhecer a Arena <i class="fa-solid fa-arrow-right text-xs"></i></a>
-          </div>
-          <div class="mt-6 rounded-2xl bg-sand p-6 text-sm leading-7 text-slate-700">
-            <p class="font-bold text-oceanDeep">Voltar para Esporte</p>
-            <p class="mt-2">Veja o conjunto completo de frentes de atuação do Instituto.</p>
-            <a href="esporte.html" class="cta-lift mt-4 inline-flex items-center gap-2 rounded-full bg-ocean px-5 py-2.5 text-sm font-semibold text-white transition hover:brightness-95"><i class="fa-solid fa-arrow-left text-xs"></i>Voltar para Esporte</a>
-          </div>
-        </div>
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-ocean">O que temos</p>
+        <h3 class="section-title text-3xl font-extrabold text-oceanDeep">Estrutura a serviço da comunidade</h3>
+        <p class="mt-4 text-slate-600">Cada espaço tem sua própria página com mais detalhes. Toque em um para conhecer.</p>
       </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+'''
+
+FOOT = '''      </div>
     </section>
     <section class="bg-mist/70 py-16">
       <div class="mx-auto max-w-7xl px-4 lg:px-8">
         <div class="rounded-[2rem] bg-oceanDeep p-8 text-center text-white shadow-soft">
-          <h2 class="text-3xl font-extrabold">Quer apoiar esta frente?</h2>
-          <p class="mx-auto mt-4 max-w-2xl text-white/85">Empresas, voluntários e doadores podem contribuir para o fortalecimento desta atividade na comunidade do Sagi.</p>
+          <h2 class="text-3xl font-extrabold">Quer apoiar a nossa estrutura?</h2>
+          <p class="mx-auto mt-4 max-w-2xl text-white/85">Manter e ampliar esses espaços depende de parcerias, doações e do apoio de empresas através da Lei de Incentivo ao Esporte.</p>
           <div class="mt-8 flex flex-wrap justify-center gap-4">
             <a href="como-ajudar.html" class="cta-lift rounded-full bg-sun px-6 py-3 font-semibold text-oceanDeep">Como ajudar</a>
             <a href="lei-incentivo.html" class="cta-lift rounded-full border border-white/40 px-6 py-3 font-semibold text-white">Lei de Incentivo</a>
-            <a href="acoes.html" class="cta-lift rounded-full border border-white/40 px-6 py-3 font-semibold text-white">Voltar</a>
+            <a href="quem-somos.html" class="cta-lift rounded-full border border-white/40 px-6 py-3 font-semibold text-white">Quem Somos</a>
           </div>
         </div>
       </div>
@@ -92,3 +89,24 @@
   <script src="js/main.js"></script>
 </body>
 </html>
+'''
+
+
+def card(i):
+    return (
+        f'        <a href="{i["slug"]}.html" class="block h-full rounded-3xl bg-white p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(8,59,76,0.18)] hover:ring-2 hover:ring-ocean/30">\n'
+        f'          <div class="relative -mx-1 overflow-hidden rounded-2xl"><img src="https://loremflickr.com/800/500/{i["img"]}" alt="Imagem ilustrativa — {i["titulo"]}" class="h-44 w-full object-cover" loading="lazy" /></div>\n'
+        f'          {BADGE}\n'
+        f'          <i class="fa-solid {i["icone"]} mt-3 block text-2xl text-ocean"></i>\n'
+        f'          <h3 class="mt-4 text-xl font-bold text-oceanDeep">{i["titulo"]}</h3>\n'
+        f'          <p class="mt-3 text-sm leading-7 text-slate-600">{i["texto"]}</p>\n'
+        f'          <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-ocean">Ver detalhes <i class="fa-solid fa-arrow-right text-xs"></i></span>\n'
+        f'        </a>'
+    )
+
+
+conteudo = HEAD + "\n".join(card(i) for i in INSTALACOES) + "\n" + FOOT
+p = os.path.join(BASE, "instalacoes.html")
+open(p, "w", encoding="utf-8", newline="\n").write(conteudo)
+print("criado: instalacoes.html")
+print("cards:", ", ".join(i["titulo"] for i in INSTALACOES))
