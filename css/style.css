@@ -389,3 +389,29 @@ body {
   .archive-grid { grid-template-columns: 1fr; }
 }
 
+/* ============================================================
+   PILARES DA HOME COMO LINK (Saúde, Esporte, Educação, Cultura, Preservação)
+   Cada card leva para a página de ação correspondente.
+   ============================================================ */
+a.home-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+a.home-card:focus-visible {
+  outline: 3px solid var(--sun);
+  outline-offset: 3px;
+}
+.home-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  margin-top: .9rem;
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--ocean);
+  transition: gap .2s ease;
+}
+a.home-card:hover .home-card__cta { gap: .65rem; }
+
+
