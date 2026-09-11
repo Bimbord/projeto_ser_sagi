@@ -370,3 +370,22 @@ body {
    Fundo alternado (areia) para seções .home-section
    ============================================================ */
 .home-section--alt { background: var(--sand); }
+
+/* ============================================================
+   GRADE DO ACERVO COM DADOS REAIS (renderizada via JS)
+   Usa CSS puro (não Tailwind) porque o Tailwind Play CDN não
+   gera classes de forma confiável para conteúdo injetado por
+   JavaScript — o que fazia os cards ficarem em coluna única.
+   ============================================================ */
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+@media (max-width: 1023px) {
+  .archive-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 767px) {
+  .archive-grid { grid-template-columns: 1fr; }
+}
+

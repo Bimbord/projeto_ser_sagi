@@ -327,7 +327,7 @@ function renderArchive(items) {
     // Sem dados reais: mantém os cards ilustrativos estáticos já presentes no HTML
     return;
   }
-  container.innerHTML = `<div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">` + items.map(archiveItemMarkup).join('') + `</div>`;
+  container.innerHTML = `<div class="archive-grid">` + items.map(archiveItemMarkup).join('') + `</div>`;
 }
 
 function renderHighlights(items) {
