@@ -94,6 +94,22 @@ Quem Somos (quem-somos.html)
 
 ## 📋 Histórico de ajustes
 
+### 11/09/2026 (sessão 5) — Correção: Valores e Objetivo apareciam como um card só
+
+**Problema:** na página **Quem Somos**, os cards **"Valores"** e **"Objetivo"** apareciam grudados.
+**Causa (bug de HTML):** o `<article>` de "Valores" **nunca foi fechado** — o de "Objetivo" ficou **aninhado dentro** dele. Resultado: a grade (`xl:grid-cols-4`) tinha apenas **3 filhos** em vez de 4.
+
+**Solução:** bloco reescrito com **4 `<article>` irmãos**:
+`Missão` · `Visão` · `Valores` · `Objetivo`
+
+**Arquivo:** `quem-somos.html`
+
+**Verificação:** balanceamento de tags OK (`article` 7/7 · `div` 31/31 · `section` 5/5 · `a` 25/25) · 4 cards confirmados · nenhum aninhamento · página HTTP 200.
+
+> 💡 **Lição para o Kilo Code / futuras edições:** ao usar grades (`grid`), cada card precisa dos seus **próprios `<article>`…`</article>`** fechados. Um fechamento faltando faz dois cards virarem um (e o grid perde uma coluna).
+
+---
+
 ### 11/09/2026 (sessão 4) — Instalações (hub + seção no Quem Somos + links cruzados)
 
 **Decisão de arquitetura:** a "Arena de Futevôlei e Vôlei" não deveria virar sub-card de uma modalidade só (duplicaria texto). Optou-se por **Opção A + link cruzado**:
