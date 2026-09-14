@@ -121,6 +121,8 @@ Quem Somos (quem-somos.html)
 
 **Verificação:** 28/28 páginas com copyright e newsletter · tags balanceadas · páginas HTTP 200.
 
+> 🟢 **Ajuste posterior (mesmo dia):** o fundo do rodapé era `bg-slate-950` (quase preto). A pedido, trocado para **`bg-leaf`** (o verde `#2e7d4f` do degradê do hero) — texto branco e detalhes mantidos.
+
 ---
 
 ### 11/09/2026 (sessão 5) — Correção: Valores e Objetivo apareciam como um card só
