@@ -94,6 +94,35 @@ Quem Somos (quem-somos.html)
 
 ## 📋 Histórico de ajustes
 
+### 12/09/2026 (sessão 6) — Rodapé unificado e profissional (todas as páginas)
+
+**Pedido:** criar o rodapé das páginas (baseado em referências de outros sites), usando **nossos dados** e **nossa estrutura de páginas**.
+
+**Resultado:** rodapé novo aplicado nas **28 páginas**, com 4 colunas + barra de copyright:
+
+| Coluna | Conteúdo |
+|---|---|
+| **Marca** | Nome + tagline "Sabedoria · Esforço · Resultado" + descrição + ícones de **Instagram** e **WhatsApp** + formulário de **newsletter** |
+| **Navegação** | Início, Quem Somos, Nossas Ações, Esporte, Acervo, Como Ajudar |
+| **Institucional** | Lei de Incentivo, Transparência, Instalações, Contato |
+| **Contato** | 📍 Praia do Sagi, Baía Formosa/RN · 📸 @s.e.r_sagi · ✉️ sersagi2025@gmail.com · 📞 (84) 98655-3747 |
+
+**Dados usados (oficiais):**
+- Endereço: Praia do Sagi, Baía Formosa/RN
+- Instagram: `@s.e.r_sagi` · WhatsApp: (84) 98655-3747 (link `wa.me/5584986553747`)
+- E-mail: `sersagi2025@gmail.com`
+
+**Detalhes técnicos:**
+- O rodapé usa **texto** (não o logo em imagem) — o logo é escuro e não ficaria legível no fundo escuro do rodapé.
+- O formulário de newsletter reusa o `data-form-type="newsletter"` → grava na tabela `newsletter` do Supabase (funciona em qualquer página).
+- O link "Início" usa `href="./"` (consistente com a sessão 3).
+
+**Arquivos:** `_rodape.py` (gerador) aplicado em todos os `*.html` (28 arquivos).
+
+**Verificação:** 28/28 páginas com copyright e newsletter · tags balanceadas · páginas HTTP 200.
+
+---
+
 ### 11/09/2026 (sessão 5) — Correção: Valores e Objetivo apareciam como um card só
 
 **Problema:** na página **Quem Somos**, os cards **"Valores"** e **"Objetivo"** apareciam grudados.
