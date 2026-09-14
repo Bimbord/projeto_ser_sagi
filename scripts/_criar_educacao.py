@@ -1,0 +1,266 @@
+# -*- coding: utf-8 -*-
+"""
+Cria o hub de Educação (educacao.html) no mesmo estilo do Esporte,
+com 4 cards que levam a páginas próprias.
+Cria também as 4 páginas de disciplina.
+"""
+import os
+
+BASE = r"C:/Projetos Code/Projeto SER Sagi/projeto_SER_Sagi - Hermes"
+
+HEAD = '''<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f5c73" />
+  <title>{titulo} | Instituto S.E.R. Sagi</title>
+  <meta name="description" content="{descricao}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={{theme:{{extend:{{colors:{{ocean:'#0f5c73',oceanDeep:'#083b4c',sand:'#f5efe3',sun:'#f4b400',coral:'#e77b5f',leaf:'#2e7d4f',mist:'#e7f4f7'}},fontFamily:{{sans:['Inter','sans-serif']}},boxShadow:{{soft:'0 20px 60px rgba(8, 59, 76, 0.12)'}}}}}}}};</script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="font-sans text-slate-800">
+  <a href="#conteudo-principal" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:bg-white focus:text-ocean focus:px-4 focus:py-2 focus:rounded-md focus:shadow">Pular para o conteúdo</a>
+  <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/90 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 lg:px-8">
+      <a href="./" class="flex items-center" aria-label="Instituto S.E.R. Sagi — página inicial">
+        <img src="img/logo.png" alt="Instituto S.E.R. Sagi" class="h-16 w-auto object-contain">
+      </a>
+      <button id="menu-toggle" class="inline-flex items-center rounded-lg border border-slate-300 px-3 py-2 text-ocean lg:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu"><i class="fa-solid fa-bars"></i></button>
+      <nav class="hidden items-center gap-6 lg:flex" aria-label="Menu principal"><a href="./" data-page-link class="text-sm font-medium hover:text-ocean">Início</a><a href="quem-somos.html" data-page-link class="text-sm font-medium hover:text-ocean">Quem Somos</a><a href="acoes.html" data-page-link class="text-sm font-medium hover:text-ocean">Nossas Ações</a><a href="acervo.html" data-page-link class="text-sm font-medium hover:text-ocean">Acervo</a><a href="como-ajudar.html" data-page-link class="text-sm font-medium hover:text-ocean">Como Ajudar</a><a href="lei-incentivo.html" data-page-link class="text-sm font-medium hover:text-ocean">Lei de Incentivo</a><a href="transparencia.html" data-page-link class="text-sm font-medium hover:text-ocean">Transparência</a><a href="contato.html" data-page-link class="text-sm font-medium hover:text-ocean">Contato</a></nav>
+      <div class="hidden items-center gap-3 lg:flex"><a href="lei-incentivo.html" class="cta-lift rounded-full border border-ocean px-4 py-2 text-sm font-semibold text-ocean transition hover:bg-ocean hover:text-white">Seja Parceiro</a><a href="como-ajudar.html#doacao" class="cta-lift rounded-full bg-sun px-4 py-2 text-sm font-semibold text-oceanDeep transition hover:brightness-95">Doe Agora</a></div>
+    </div>
+    <div id="mobile-menu" class="hidden border-t border-slate-200 bg-white lg:hidden"><nav class="mx-auto flex max-w-7xl flex-col px-4 py-4" aria-label="Menu mobile"><a href="./" data-page-link class="py-2 text-sm font-medium">Início</a><a href="quem-somos.html" data-page-link class="py-2 text-sm font-medium">Quem Somos</a><a href="acoes.html" data-page-link class="py-2 text-sm font-medium">Nossas Ações</a><a href="acervo.html" data-page-link class="py-2 text-sm font-medium">Acervo</a><a href="como-ajudar.html" data-page-link class="py-2 text-sm font-medium">Como Ajudar</a><a href="lei-incentivo.html" data-page-link class="py-2 text-sm font-medium">Lei de Incentivo</a><a href="transparencia.html" data-page-link class="py-2 text-sm font-medium">Transparência</a><a href="contato.html" data-page-link class="py-2 text-sm font-medium">Contato</a></nav></div>
+  </header>'''
+
+FOOT = '''  <footer class="bg-oceanDeep text-white">
+    <div class="mx-auto max-w-7xl px-4 py-14 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[1.5fr_0.7fr_0.8fr_1fr]">
+        <section>
+          <a href="./" class="text-2xl font-extrabold text-white">Instituto S.E.R. Sagi</a>
+          <p class="mt-1 text-xs font-semibold uppercase tracking-[0.25em] text-sun">Sabedoria &bull; Esforço &bull; Resultado</p>
+          <p class="mt-4 max-w-sm text-sm leading-7 text-white/70">Transformação social em Praia do Sagi</p>
+          <div class="mt-5 flex gap-3">
+            <a href="https://instagram.com/s.e.r_sagi" target="_blank" rel="noopener" aria-label="Instagram do Instituto S.E.R. Sagi" class="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80 transition hover:bg-white/10 hover:text-white"><i class="fa-brands fa-instagram text-lg"></i></a>
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook do Instituto S.E.R. Sagi" class="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80 transition hover:bg-white/10 hover:text-white"><i class="fa-brands fa-facebook-f text-lg"></i></a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube do Instituto S.E.R. Sagi" class="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80 transition hover:bg-white/10 hover:text-white"><i class="fa-brands fa-youtube text-lg"></i></a>
+            <a href="https://wa.me/5584986553747" target="_blank" rel="noopener" aria-label="WhatsApp do Instituto S.E.R. Sagi" class="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80 transition hover:bg-white/10 hover:text-white"><i class="fa-brands fa-whatsapp text-lg"></i></a>
+          </div>
+          <form class="mt-6 max-w-sm" data-form-type="newsletter" aria-label="Formulário de newsletter do rodapé">
+            <p class="text-sm font-semibold text-white/90">Receba novidades do Instituto</p>
+            <div class="mt-2 flex gap-2">
+              <input type="email" name="email" required placeholder="Seu e-mail" class="min-w-0 flex-1 rounded-full border border-white/20 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/50">
+              <button type="submit" class="rounded-full bg-sun px-4 py-2.5 text-sm font-semibold text-oceanDeep transition hover:brightness-95">Cadastrar</button>
+            </div>
+            <label class="mt-2 flex items-start gap-2 text-xs text-white/60"><input type="checkbox" name="aceite_comunicacao" class="mt-0.5"><span>Autorizo o recebimento de comunicações do Instituto S.E.R. Sagi.</span></label>
+            <div class="form-feedback hidden mt-3 rounded-xl border px-4 py-3 text-sm"></div>
+          </form>
+        </section>
+        <section>
+          <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-sun">Navegação</h3>
+          <ul class="mt-4 space-y-3 text-sm">
+            <li><a href="./" class="text-white/70 transition hover:text-white">Início</a></li>
+            <li><a href="quem-somos.html" class="text-white/70 transition hover:text-white">Quem Somos</a></li>
+            <li><a href="acoes.html" class="text-white/70 transition hover:text-white">Nossas Ações</a></li>
+            <li><a href="esporte.html" class="text-white/70 transition hover:text-white">Esporte</a></li>
+            <li><a href="acervo.html" class="text-white/70 transition hover:text-white">Acervo</a></li>
+            <li><a href="como-ajudar.html" class="text-white/70 transition hover:text-white">Como Ajudar</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-sun">Institucional</h3>
+          <ul class="mt-4 space-y-3 text-sm">
+            <li><a href="lei-incentivo.html" class="text-white/70 transition hover:text-white">Lei de Incentivo</a></li>
+            <li><a href="transparencia.html" class="text-white/70 transition hover:text-white">Transparência</a></li>
+            <li><a href="instalacoes.html" class="text-white/70 transition hover:text-white">Instalações</a></li>
+            <li><a href="contato.html" class="text-white/70 transition hover:text-white">Contato</a></li>
+          </ul>
+        </section>
+        <section>
+          <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-sun">Contato</h3>
+          <ul class="mt-4 space-y-3 text-sm text-white/70">
+            <li class="flex items-start gap-3"><i class="fa-solid fa-location-dot mt-1 text-sun"></i><a href="https://www.google.com/maps/search/?api=1&query=Praia+do+Sagi%2C+Ba%C3%ADa+Formosa%2C+RN" target="_blank" rel="noopener" class="hover:text-white">Praia do Sagi, Baía Formosa/RN</a></li>
+            <li class="flex items-start gap-3"><i class="fa-brands fa-instagram mt-1 text-sun"></i><a href="https://instagram.com/s.e.r_sagi" target="_blank" rel="noopener" class="hover:text-white">@s.e.r_sagi</a></li>
+            <li class="flex items-start gap-3"><i class="fa-solid fa-envelope mt-1 text-sun"></i><a href="https://mail.google.com/mail/?view=cm&fs=1&to=sersagi2025@gmail.com" target="_blank" rel="noopener" class="hover:text-white">sersagi2025@gmail.com</a></li>
+            <li class="flex items-start gap-3"><i class="fa-solid fa-phone mt-1 text-sun"></i><a href="tel:+5584986553747" class="hover:text-white">(84) 98655-3747</a></li>
+          </ul>
+        </section>
+      </div>
+      <div class="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <p class="text-xs text-white/50">&copy; 2026 Instituto S.E.R. Sagi — Todos os direitos reservados.</p>
+        <p class="text-xs text-white/50">Desenvolvido por: <a href="mailto:lthomassilver@gmail.com" class="hover:text-white">lthomassilver@gmail.com</a></p>
+      </div>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>
+'''
+
+BADGE = ('<span class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-sand px-2.5 py-1 text-[10px] '
+         'font-semibold uppercase tracking-[0.15em] text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real">'
+         '<i class="fa-solid fa-wand-magic-sparkles text-[9px]"></i>Imagem ilustrativa</span>')
+
+CTA = '''    <section class="bg-mist/70 py-16">
+      <div class="mx-auto max-w-7xl px-4 lg:px-8">
+        <div class="rounded-[2rem] bg-oceanDeep p-8 text-center text-white shadow-soft">
+          <h2 class="text-3xl font-extrabold">Quer apoiar esta frente?</h2>
+          <p class="mx-auto mt-4 max-w-2xl text-white/85">{texto}</p>
+          <div class="mt-8 flex flex-wrap justify-center gap-4">
+            <a href="como-ajudar.html" class="cta-lift rounded-full bg-sun px-6 py-3 font-semibold text-oceanDeep">Como ajudar</a>
+            <a href="lei-incentivo.html" class="cta-lift rounded-full border border-white/40 px-6 py-3 font-semibold text-white">Lei de Incentivo</a>
+            <a href="{voltar}" class="cta-lift rounded-full border border-white/40 px-6 py-3 font-semibold text-white">Voltar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>'''
+
+DISCIPLINAS = [
+    {"slug": "ingles", "titulo": "Inglês", "icone": "fa-language",
+     "img": "english,language,class?lock=1501",
+     "texto": "Idioma que abre portas para o mundo e para novas oportunidades."},
+    {"slug": "espanhol", "titulo": "Espanhol", "icone": "fa-globe",
+     "img": "spanish,language,class?lock=1502",
+     "texto": "Conexão com a América Latina e com novas culturas."},
+    {"slug": "informatica", "titulo": "Informática", "icone": "fa-computer",
+     "img": "computer,technology,class?lock=1503",
+     "texto": "Inclusão digital e tecnologia para o dia a dia e o futuro."},
+    {"slug": "sustentabilidade", "titulo": "Sustentabilidade e Meio Ambiente", "icone": "fa-leaf",
+     "img": "sustainability,environment,recycling?lock=1504",
+     "texto": "Educação ambiental para cuidar da natureza e do território."},
+]
+
+CONTEUDO = [
+    {
+        "slug": "ingles", "titulo": "Inglês", "icone": "fa-language", "kicker": "Educação",
+        "img": "english,language,class?lock=1501",
+        "intro": "Inglês para crianças e adolescentes: uma porta para novas oportunidades.",
+        "desc": "As aulas de inglês ampliam o repertório das crianças e adolescentes do Sagi, preparando-os para oportunidades de estudo e trabalho. O aprendizado é leve, com conversação, leitura e atividades lúdicas.",
+        "oferece": ["Conversação e vocabulário", "Leitura e escrita", "Atividades lúdicas", "Preparação para o futuro"],
+        "voltar": "educacao.html", "voltar_txt": "Voltar para Educação",
+    },
+    {
+        "slug": "espanhol", "titulo": "Espanhol", "icone": "fa-globe", "kicker": "Educação",
+        "img": "spanish,language,class?lock=1502",
+        "intro": "Espanhol para se conectar com a América Latina.",
+        "desc": "O espanhol aproxima as crianças e adolescentes do Sagi da cultura latino-americana, ampliando o horizonte de comunicação, estudo e intercâmbio.",
+        "oferece": ["Conversação e vocabulário", "Cultura hispânica", "Leitura e escrita", "Intercâmbio cultural"],
+        "voltar": "educacao.html", "voltar_txt": "Voltar para Educação",
+    },
+    {
+        "slug": "informatica", "titulo": "Informática", "icone": "fa-computer", "kicker": "Educação",
+        "img": "computer,technology,class?lock=1503",
+        "intro": "Informática e tecnologia: inclusão digital para o futuro.",
+        "desc": "As aulas de informática colocam a tecnologia a serviço da comunidade, ensinando desde o uso do computador até ferramentas do dia a dia e o uso seguro da internet.",
+        "oferece": ["Noções de computação", "Pacote Office", "Uso seguro da internet", "Tecnologia no dia a dia"],
+        "voltar": "educacao.html", "voltar_txt": "Voltar para Educação",
+    },
+    {
+        "slug": "sustentabilidade", "titulo": "Sustentabilidade e Meio Ambiente", "icone": "fa-leaf", "kicker": "Educação",
+        "img": "sustainability,environment,recycling?lock=1504",
+        "intro": "Educação ambiental: cuidar da natureza começa na comunidade.",
+        "desc": "A educação para a sustentabilidade ensina as crianças a cuidarem do território — da praia à vegetação — com reciclagem, reuso e o respeito pela natureza que sustenta a vida no Sagi.",
+        "oferece": ["Educação ambiental", "Reciclagem e reuso", "Cuidado com a praia e o mar", "Convivência com a natureza"],
+        "voltar": "educacao.html", "voltar_txt": "Voltar para Educação",
+    },
+]
+
+
+def pagina_conteudo(p):
+    oferece = "\n".join(
+        f'                <li class="flex items-start gap-3"><i class="fa-solid fa-circle-check mt-1 text-ocean"></i><span>{i}</span></li>'
+        for i in p["oferece"]
+    )
+    return f'''{HEAD.format(titulo=p["titulo"], descricao=p["intro"])}
+  <main id="conteudo-principal">
+    <section class="page-banner text-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 lg:px-8 lg:py-20">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-sun">{p["kicker"]} &bull; Nossas Ações</p>
+        <h2 class="mt-4 max-w-4xl text-4xl font-extrabold leading-tight sm:text-5xl">{p["titulo"]}</h2>
+        <p class="mt-6 max-w-3xl text-lg text-white/85">{p["intro"]}</p>
+      </div>
+    </section>
+    <section class="mx-auto max-w-7xl px-4 py-16 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+        <div class="premium-card rounded-[2rem] bg-white p-6 shadow-soft">
+          <div class="relative -mx-1 overflow-hidden rounded-2xl">
+            <img src="https://loremflickr.com/800/500/{p["img"]}" alt="Imagem ilustrativa — {p["titulo"]}" class="h-64 w-full object-cover" loading="lazy" />
+          </div>
+          {BADGE}
+          <div class="mt-5 flex items-center gap-3">
+            <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-ocean/10 text-ocean"><i class="fa-solid {p["icone"]} text-2xl"></i></div>
+            <h3 class="text-2xl font-bold text-oceanDeep">{p["titulo"]}</h3>
+          </div>
+          <p class="mt-5 text-base leading-8 text-slate-600">{p["desc"]}</p>
+        </div>
+        <div>
+          <div class="rounded-2xl bg-white p-6 shadow-soft"><h3 class="font-bold text-oceanDeep">O que oferecemos</h3><ul class="mt-4 space-y-3 text-sm text-slate-700">
+{oferece}
+          </ul></div>
+          <div class="mt-6 rounded-2xl bg-sand p-6 text-sm leading-7 text-slate-700">
+            <p class="font-bold text-oceanDeep">{p["voltar_txt"]}</p>
+            <p class="mt-2">Veja as demais disciplinas de educação do Instituto.</p>
+            <a href="{p["voltar"]}" class="cta-lift mt-4 inline-flex items-center gap-2 rounded-full bg-ocean px-5 py-2.5 text-sm font-semibold text-white transition hover:brightness-95"><i class="fa-solid fa-arrow-left text-xs"></i>{p["voltar_txt"]}</a>
+          </div>
+        </div>
+      </div>
+    </section>
+{CTA.format(texto="Empresas, voluntários e doadores podem contribuir para a educação das crianças e adolescentes do Sagi.", voltar="educacao.html")}
+{FOOT}'''
+
+
+def pagina_educacao():
+    cards = []
+    for d in DISCIPLINAS:
+        cards.append(
+            f'          <a href="{d["slug"]}.html" class="block h-full rounded-3xl bg-white p-6 shadow-soft transition hover:-translate-y-1 hover:shadow-[0_24px_80px_rgba(8,59,76,0.18)] hover:ring-2 hover:ring-ocean/30">\n'
+            f'            <div class="relative -mx-1 overflow-hidden rounded-2xl"><img src="https://loremflickr.com/800/500/{d["img"]}" alt="Imagem ilustrativa — {d["titulo"]}" class="h-40 w-full object-cover" loading="lazy" /></div>\n'
+            f'            {BADGE}\n'
+            f'            <i class="fa-solid {d["icone"]} mt-3 block text-2xl text-ocean"></i>\n'
+            f'            <h3 class="mt-4 text-xl font-bold text-oceanDeep">{d["titulo"]}</h3>\n'
+            f'            <p class="mt-3 text-sm leading-7 text-slate-600">{d["texto"]}</p>\n'
+            f'            <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-ocean">Saiba mais <i class="fa-solid fa-arrow-right text-xs"></i></span>\n'
+            f'          </a>'
+        )
+    return f'''{HEAD.format(titulo="Educação", descricao="Idiomas, informática e sustentabilidade: educação que abre portas e prepara crianças e adolescentes do Sagi para o futuro.")}
+  <main id="conteudo-principal">
+    <section class="page-banner text-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 lg:px-8 lg:py-20">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-sun">Educação &bull; Nossas Ações</p>
+        <h2 class="mt-4 max-w-4xl text-4xl font-extrabold leading-tight sm:text-5xl">Educação</h2>
+        <p class="mt-6 max-w-3xl text-lg text-white/85">Idiomas, informática e sustentabilidade: a educação amplia os horizontes das crianças e adolescentes do Sagi e abre portas para o futuro.</p>
+      </div>
+    </section>
+    <section class="mx-auto max-w-7xl px-4 py-16 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-ocean">Disciplinas</p>
+        <h3 class="section-title text-3xl font-extrabold text-oceanDeep">O que oferecemos em educação</h3>
+        <p class="mt-4 text-slate-600">Cada disciplina tem sua própria página com mais detalhes. Toque em uma para saber mais.</p>
+      </div>
+      <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+{chr(10).join(cards)}
+      </div>
+    </section>
+{CTA.format(texto="Empresas, voluntários e doadores podem contribuir para a educação das crianças e adolescentes do Sagi.", voltar="acoes.html")}
+{FOOT}'''
+
+
+def main():
+    p = os.path.join(BASE, "educacao.html")
+    open(p, "w", encoding="utf-8", newline="\n").write(pagina_educacao())
+    print("  reescrito: educacao.html (hub com 4 cards)")
+
+    for item in CONTEUDO:
+        p = os.path.join(BASE, f'{item["slug"]}.html')
+        open(p, "w", encoding="utf-8", newline="\n").write(pagina_conteudo(item))
+        print(f'  criado: {item["slug"]}.html')
+
+
+if __name__ == "__main__":
+    main()

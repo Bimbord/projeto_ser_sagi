@@ -289,3 +289,20 @@ Os 5 cards da seção **"Nossos pilares"** deixaram de ser estáticos e passaram
 5. **Galeria nas outras 5 páginas de ações** (só o Consultório tem hoje)
 
 *(Detalhes e dependências em `docs/pendencias.md`.)*
+
+---
+
+## 🟢 Sessão 7 — rodapé + hub de Educação (14/09/2026)
+
+### Rodapé (finalizado)
+- **Cor de fundo:** `bg-slate-950` → testado `bg-leaf` (não aprovado) → **`bg-oceanDeep`** (azul-petróleo escuro, igual às CTAs). Aplicado nas 28 páginas.
+- **Contato clicável:** endereço → Google Maps · e-mail → Gmail (`mail.google.com/mail/?view=cm`) · telefone → `tel:+5584986553747`.
+- **Descrição encurtada** para "Transformação social em Praia do Sagi".
+- **Redes:** Instagram · Facebook (`facebook.com` provisório) · YouTube (`youtube.com` provisório) · WhatsApp. ⏳ *Aguardando URLs definitivas de Facebook/YouTube do cliente.*
+- **Crédito:** "Desenvolvido por: lthomassilver@gmail.com" (mailto). Removida a frase "Uma causa em prol da infância e da comunidade do Sagi."
+
+### Educação (hub novo)
+- `educacao.html` reescrita como **hub** (estilo do Esporte) com **4 cards**: Inglês, Espanhol, Informática, Sustentabilidade e Meio Ambiente.
+- **4 sub-páginas criadas:** `ingles.html`, `espanhol.html`, `informatica.html`, `sustentabilidade.html` (cada uma com banner + descrição + "O que oferecemos" + CTA).
+- `js/main.js`: as 4 novas páginas adicionadas a `acoesSub` (destaque no menu "Nossas Ações").
+- Cards em **HTML estático** (convenção — Tailwind CDN não gera grade via JS).
