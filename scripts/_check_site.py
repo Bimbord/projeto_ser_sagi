@@ -52,7 +52,7 @@ print(f"  4) acervo.html: {len(links_acervo)} cards-categoria -> {sorted(set(lin
 
 # 5) cards das ações
 t = open(os.path.join(BASE, "acoes.html"), encoding="utf-8").read()
-links_acoes = re.findall(r'href="([a-z-]+\.html)" class="block h-full rounded-3xl', t)
+links_acoes = re.findall(r'<a href="([a-z-]+\.html)" class="block rounded-3xl bg-white', t)
 print(f"  5) acoes.html: {len(links_acoes)} cards-ação -> {links_acoes}")
 
 # 6) main.js no Supabase?
