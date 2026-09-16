@@ -44,8 +44,35 @@ G:\Meu Drive\Instituto SER Sagi - Midias\
 ### Compartilhamento
 
 - Conta de destino: **sersagi2025@gmail.com** (conta da ONG)
-- Permissão: **Editor** (decisão do Bimbord — a ONG pode subir, mover e apagar)
+- **Tipo de conta do dono:** Gmail comum (Google One 5 TB) → **não tem "Drives compartilhados"** (recurso exclusivo de Workspace). A pasta fica dentro do Meu Drive do Bimbord.
+- Permissão: **Editor** (escolha inicial do Bimbord, avaliando mudança para o meio-termo abaixo)
 - A pasta é criada no **Meu Drive do Bimbord** (não no backup `BBDPRINT - BACKUP`), então a ONG a encontra em **Compartilhados comigo**.
+
+#### ✅ Mitos e fatos sobre "subir de nível" (verificado 16/09)
+
+**A ONG não consegue ver o resto do Drive do Bimbord.** O compartilhamento no Google Drive é **por item**: a permissão não sobe para a pasta pai.
+
+- Ao abrir, ela vê `Compartilhados comigo > Instituto SER Sagi - Midias`. Clicando em "Compartilhados comigo", ela cai no **próprio Drive**, vazio de conteúdo do Bimbord.
+- Links de pastas não compartilhadas retornam **"Solicitar acesso"** (chega e-mail de pedido).
+- A pasta foi criada **direto na raiz do Meu Drive** (ao lado dos `.lnk` de backup) e a raiz não é compartilhável → **zero herança de permissão**.
+- ⚠️ A única forma de vazar acesso para cima é criar a pasta **dentro** de uma pasta já compartilhada. Não é o caso aqui — e não deve ser feito em nenhuma reorganização futura.
+
+#### Meio-termo recomendado (mais travado sem quebrar o fluxo)
+
+Não existe no Google um nível "só visualizar + poder subir". Os níveis são Leitor, Comentador e Editor. A configuração mais travada que ainda permite envio:
+
+| Item | Permissão da ONG |
+|---|---|
+| `Instituto SER Sagi - Midias` (raiz) | **Leitor** |
+| `Imagens` | **Editor** |
+| `Videos` | **Editor** |
+| `Documentos` | **Editor** |
+
+Efeito: ela não renomeia/apaga a estrutura nem o `LEIA-ME`, mas sobe mídia normalmente. Permissões se somam por item, então **dentro** das 3 subpastas ela ainda pode apagar arquivo — só não mexe na "carcaça".
+
+#### 🚨 Limite que não tem solução no plano atual
+
+Editor pode apagar mídia já publicada, e o Drive não versiona o que já saiu. **O backup real do que foi publicado é o R2** (Cloudflare). Não tratar o Drive como acervo definitivo.
 
 ### ⚠️ Riscos conhecidos deste desenho
 
