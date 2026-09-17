@@ -607,8 +607,12 @@ a.home-card:hover .home-card__cta { gap: .65rem; }
 .breadcrumb a:hover { color: #fff; text-decoration: underline; }
 .breadcrumb [aria-current="page"] { color: #fff; font-weight: 600; }
 
-/* Fora do hero (fundo claro) — faixa acima do conteudo */
-.breadcrumb--claro { margin-bottom: 0; }
+/* Fora do hero (fundo claro) — faixa com divisoria, acima do conteudo */
+.breadcrumb--claro {
+  margin-bottom: 0;
+  padding-block: 1.1rem;
+  border-bottom: 1px solid rgba(15, 92, 115, 0.10);
+}
 .breadcrumb--claro a { color: var(--ocean); }
 .breadcrumb--claro a:hover { color: var(--ocean-deep); }
 .breadcrumb--claro li + li::before { color: rgba(15, 92, 115, 0.45); }
