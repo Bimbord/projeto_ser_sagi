@@ -469,3 +469,110 @@ a.home-card:hover .home-card__cta { gap: .65rem; }
   color: #475569;
   font-size: .9rem;
 }
+
+/* --- Banner mais alto (melhor para fotos) --- */
+.banner-alto {
+  display: flex;
+  align-items: center;
+  min-height: clamp(380px, 46vh, 560px);
+}
+
+/* --- Carrossel com setas nas extremidades --- */
+.carrossel-wrap { position: relative; }
+.carrossel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 92, 115, 0.25);
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ocean);
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  transition: background .25s ease, color .25s ease;
+}
+.carrossel-arrow:hover { background: var(--ocean); color: #fff; }
+.carrossel-arrow--prev { left: -0.75rem; }
+.carrossel-arrow--next { right: -0.75rem; }
+@media (max-width: 639px) {
+  .carrossel-arrow { width: 2.5rem; height: 2.5rem; }
+  .carrossel-arrow--prev { left: 0.15rem; }
+  .carrossel-arrow--next { right: 0.15rem; }
+}
+
+/* --- Galeria clicavel --- */
+.secao-figura {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+}
+.secao-figura img { transition: transform .3s ease; }
+.secao-figura:hover img { transform: scale(1.04); }
+
+/* --- Lightbox (foto ampliada + setas) --- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(4, 28, 37, 0.94);
+}
+.lightbox[hidden] { display: none; }
+.lightbox__img {
+  max-width: min(92vw, 1100px);
+  max-height: 84vh;
+  border-radius: var(--radius-md);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.5);
+}
+.lightbox__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.lightbox__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 1.35rem;
+  cursor: pointer;
+}
+.lightbox__arrow:hover, .lightbox__close:hover { background: rgba(255, 255, 255, 0.26); }
+.lightbox__arrow--prev { left: 1rem; }
+.lightbox__arrow--next { right: 1rem; }
+.lightbox__contador {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.85rem;
+}

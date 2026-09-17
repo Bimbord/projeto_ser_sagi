@@ -400,16 +400,107 @@ async function fetchSecao(categoria, secao) {
 }
 
 function markupCarrossel(itens) {
-  return `<div class="carrossel">` + itens.map((i) => `
-    <figure class="carrossel__item">
-      <img src="${i.imagem_url}" alt="${i.titulo || ''}" loading="lazy" />
-      ${i.titulo ? `<figcaption class="carrossel__caption">${i.titulo}</figcaption>` : ''}
-    </figure>`).join('') + `</div>`;
+  return `
+  <div class="carrossel-wrap">
+    <button type="button" class="carrossel-arrow carrossel-arrow--prev" data-carrossel-prev aria-label="Imagem anterior"><i class="fa-solid fa-chevron-left"></i></button>
+    <div class="carrossel">
+      ${itens.map((i) => `
+      <figure class="carrossel__item">
+        <img src="${i.imagem_url}" alt="${i.titulo || ''}" loading="lazy" />
+        ${i.titulo ? `<figcaption class="carrossel__caption">${i.titulo}</figcaption>` : ''}
+      </figure>`).join('')}
+    </div>
+    <button type="button" class="carrossel-arrow carrossel-arrow--next" data-carrossel-next aria-label="Proxima imagem"><i class="fa-solid fa-chevron-right"></i></button>
+  </div>`;
+}
+
+function ligarSetasCarrossel(el) {
+  const faixa = el.querySelector('.carrossel');
+  if (!faixa) return;
+  const passo = () => {
+    const item = faixa.querySelector('.carrossel__item');
+    return item ? item.getBoundingClientRect().width + 16 : Math.round(faixa.clientWidth * 0.8);
+  };
+  const prev = el.querySelector('[data-carrossel-prev]');
+  const next = el.querySelector('[data-carrossel-next]');
+  if (prev) prev.addEventListener('click', () => faixa.scrollBy({ left: -passo(), behavior: 'smooth' }));
+  if (next) next.addEventListener('click', () => faixa.scrollBy({ left: passo(), behavior: 'smooth' }));
 }
 
 function markupGrade(itens) {
-  return `<div class="secao-grid">` + itens.map((i) => `
-    <figure><img src="${i.imagem_url}" alt="${i.titulo || ''}" loading="lazy" /></figure>`).join('') + `</div>`;
+  return `<div class="secao-grid">` + itens.map((i, n) => `
+    <button type="button" class="secao-figura" data-lb="${n}" aria-label="Ampliar imagem">
+      <img src="${i.imagem_url}" alt="${i.titulo || ''}" loading="lazy" />
+    </button>`).join('') + `</div>`;
+}
+
+// ---- Lightbox da galeria (ampliar + setas) ----
+let lbItens = [];
+let lbIndice = 0;
+
+function garantirLightbox() {
+  let lb = document.getElementById('lightbox');
+  if (lb) return lb;
+  lb = document.createElement('div');
+  lb.id = 'lightbox';
+  lb.className = 'lightbox';
+  lb.hidden = true;
+  lb.setAttribute('role', 'dialog');
+  lb.setAttribute('aria-modal', 'true');
+  lb.innerHTML = `
+    <button type="button" class="lightbox__close" data-lb-close aria-label="Fechar">&times;</button>
+    <button type="button" class="lightbox__arrow lightbox__arrow--prev" data-lb-prev aria-label="Imagem anterior"><i class="fa-solid fa-chevron-left"></i></button>
+    <img class="lightbox__img" alt="" />
+    <button type="button" class="lightbox__arrow lightbox__arrow--next" data-lb-next aria-label="Proxima imagem"><i class="fa-solid fa-chevron-right"></i></button>
+    <p class="lightbox__contador"></p>`;
+  document.body.appendChild(lb);
+  lb.querySelector('[data-lb-close]').addEventListener('click', fecharLightbox);
+  lb.querySelector('[data-lb-prev]').addEventListener('click', () => navegarLightbox(-1));
+  lb.querySelector('[data-lb-next]').addEventListener('click', () => navegarLightbox(1));
+  lb.addEventListener('click', (e) => { if (e.target === lb) fecharLightbox(); });
+  document.addEventListener('keydown', (e) => {
+    if (lb.hidden) return;
+    if (e.key === 'Escape') fecharLightbox();
+    else if (e.key === 'ArrowLeft') navegarLightbox(-1);
+    else if (e.key === 'ArrowRight') navegarLightbox(1);
+  });
+  return lb;
+}
+
+function mostrarLightbox() {
+  const itens = lbItens.filter((i) => i.imagem_url);
+  if (!itens.length) return;
+  lbItens = itens;
+  lbIndice = ((lbIndice % itens.length) + itens.length) % itens.length;
+  const lb = garantirLightbox();
+  const img = lb.querySelector('.lightbox__img');
+  img.src = itens[lbIndice].imagem_url;
+  img.alt = itens[lbIndice].titulo || '';
+  const cont = lb.querySelector('.lightbox__contador');
+  if (cont) cont.textContent = `${lbIndice + 1} / ${itens.length}` + (itens[lbIndice].titulo ? ` — ${itens[lbIndice].titulo}` : '');
+  lb.hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+
+function fecharLightbox() {
+  const lb = document.getElementById('lightbox');
+  if (lb) lb.hidden = true;
+  document.body.style.overflow = '';
+}
+
+function navegarLightbox(passo) {
+  lbIndice += passo;
+  mostrarLightbox();
+}
+
+function ligarGaleria(el, itens) {
+  el.querySelectorAll('[data-lb]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      lbItens = itens;
+      lbIndice = parseInt(btn.getAttribute('data-lb'), 10) || 0;
+      mostrarLightbox();
+    });
+  });
 }
 
 async function loadSecoes() {
@@ -424,9 +515,13 @@ async function loadSecoes() {
         el.innerHTML = `<p class="secao-vazio">Nenhuma imagem publicada nesta secao ainda.</p>`;
         continue;
       }
-      el.innerHTML = secao.toLowerCase().includes('carrossel')
-        ? markupCarrossel(itens)
-        : markupGrade(itens);
+      if (secao.toLowerCase().includes('carrossel')) {
+        el.innerHTML = markupCarrossel(itens);
+        ligarSetasCarrossel(el);
+      } else {
+        el.innerHTML = markupGrade(itens);
+        ligarGaleria(el, itens);
+      }
     } catch (error) {
       el.innerHTML = `<p class="secao-vazio">Nao foi possivel carregar as imagens desta secao.</p>`;
     }
