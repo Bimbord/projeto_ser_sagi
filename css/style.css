@@ -414,4 +414,17 @@ a.home-card:focus-visible {
 }
 a.home-card:hover .home-card__cta { gap: .65rem; }
 
-
+/* ============================================================
+   BANNER INTERNO COM IMAGEM + SCRIM
+   Mesmo efeito do hero da home: imagem de fundo coberta por um
+   véu escuro diagonal, mantendo o texto legível à esquerda.
+   Degradação graciosa: se a imagem não carregar, o gradiente
+   do .page-banner aparece por baixo.
+   ============================================================ */
+.banner-scrim {
+  background: linear-gradient(112deg,
+    rgba(8, 59, 76, 0.92) 0%,
+    rgba(8, 59, 76, 0.66) 40%,
+    rgba(8, 59, 76, 0.30) 72%,
+    rgba(8, 59, 76, 0.16) 100%);
+}

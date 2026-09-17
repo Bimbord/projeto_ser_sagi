@@ -28,8 +28,13 @@
     <div id="mobile-menu" class="hidden border-t border-slate-200 bg-white lg:hidden"><nav class="mx-auto flex max-w-7xl flex-col px-4 py-4" aria-label="Menu mobile"><a href="./" data-page-link class="py-2 text-sm font-medium">Início</a><a href="quem-somos.html" data-page-link class="py-2 text-sm font-medium">Quem Somos</a><a href="acoes.html" data-page-link class="py-2 text-sm font-medium">Nossas Ações</a><a href="acervo.html" data-page-link class="py-2 text-sm font-medium">Acervo</a><a href="como-ajudar.html" data-page-link class="py-2 text-sm font-medium">Como Ajudar</a><a href="lei-incentivo.html" data-page-link class="py-2 text-sm font-medium">Lei de Incentivo</a><a href="transparencia.html" data-page-link class="py-2 text-sm font-medium">Transparência</a><a href="contato.html" data-page-link class="py-2 text-sm font-medium">Contato</a></nav></div>
   </header>
   <main id="conteudo-principal">
-    <section class="page-banner text-white">
-      <div class="mx-auto max-w-7xl px-4 py-16 lg:px-8 lg:py-20">
+    <section class="page-banner text-white relative overflow-hidden">
+      <!-- CAMADA 1 · IMAGEM de fundo (ilustrativa — trocar por foto real em img/banners/) -->
+      <img src="https://loremflickr.com/1600/600/dentist,health,care?lock=201" alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover">
+      <!-- CAMADA 2 · SCRIM (véu diagonal — mesmo efeito do hero da home) -->
+      <div class="banner-scrim absolute inset-0"></div>
+      <!-- CAMADA 3 · CONTEÚDO (por cima) -->
+      <div class="relative z-10 mx-auto max-w-7xl px-4 py-16 lg:px-8 lg:py-20">
         <p class="text-sm font-semibold uppercase tracking-[0.25em] text-sun">Saúde • Nossas Ações</p>
         <h2 class="mt-4 max-w-4xl text-4xl font-extrabold leading-tight sm:text-5xl">Consultório Odontológico</h2>
         <p class="mt-6 max-w-3xl text-lg text-white/85">Cuidado com a saúde bucal da comunidade: prevenção, tratamento e autoestima.</p>
@@ -144,7 +149,7 @@
         <section>
           <h3 class="text-sm font-semibold uppercase tracking-[0.2em] text-sun">Frentes de Atuação</h3>
           <ul class="mt-4 space-y-3 text-sm">
-            <li><a href="consultorio-odontologico.html" class="text-white/70 transition hover:text-white">Saúde</a></li>
+            <li><a href="saude.html" class="text-white/70 transition hover:text-white">Saúde</a></li>
             <li><a href="educacao.html" class="text-white/70 transition hover:text-white">Educação</a></li>
             <li><a href="esporte.html" class="text-white/70 transition hover:text-white">Esporte</a></li>
             <li><a href="acoes-solidarias.html" class="text-white/70 transition hover:text-white">Ações Solidárias</a></li>

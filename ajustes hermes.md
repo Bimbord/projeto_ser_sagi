@@ -309,6 +309,21 @@ Os 5 cards da seção **"Nossos pilares"** deixaram de ser estáticos e passaram
 
 ---
 
+## 🟢 Sessão 9 — página de Saúde + banner com imagem (17/09/2026)
+
+### Renomeação
+- `consultorio-odontologico.html` → **`saude.html`**. O nome "Saúde" fica **só no link/URL** — o conteúdo (título, H2, cards) segue "Consultório Odontológico".
+- **36 links** atualizados em 32 páginas + `js/main.js`. Rename feito com `git mv` (preserva histórico).
+- **Motivo:** "Consultório Odontológico" é apenas uma área da saúde — outras virão depois.
+
+### Banner interno com imagem (novo padrão)
+- Nova classe **`.banner-scrim`** em `css/style.css` — degradê diagonal `112deg` (escuro à esquerda → transparente à direita), mesmo efeito do hero da home.
+- Estrutura do banner em **3 camadas**: `<img>` de fundo → `.banner-scrim` → conteúdo em `relative z-10`.
+- **Aplicado somente na `saude.html`** (teste). Aprovado pelo Bimbord — replicar nas demais páginas internas quando quiser.
+- Degradação graciosa: se a imagem não carregar, o gradiente do `.page-banner` aparece por baixo.
+
+---
+
 ## 🟢 Sessão 8 — Servidor de Mídias + ajuste na home (16/09/2026)
 
 ### Ajuste de texto (home)
