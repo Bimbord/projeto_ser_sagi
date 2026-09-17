@@ -1,0 +1,7 @@
+PAGINA HOME
+CARDS DE NUMEROS
+
+PÁGINA SAUDE
+1- alterar nome da pagina
+2- criar config no hero para imagem
+3- criar um carrossel horizontal. (finalidade: colocar imagens de procedimentos realizados "pessoas" felizes com o resultado".

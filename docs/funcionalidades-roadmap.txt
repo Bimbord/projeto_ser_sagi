@@ -1,0 +1,16 @@
+Funcionalidade
+* Páginas a serem inseridas
+- (ARCEVO ou MIDIA, NOTICIAS, INSCRIÇÕES, APOIADORES, DEPOIMENTOS)
+
+* Numero de tefone comercial para integração com redes social 
+(email, whatsapp, instagram, facebook, twitter, youtube, tiktok)
+
+
+ARCEVO (arquivos)
+objetivos:
+- armazenar os regristro de fotos e videos dos momentos e atividades relacionados ao projeto.
+- alguns desses dados ficarão temporariamente na pagina principal ou até em outras partes do site como destaques do mês ou algo parecido.
+
+NOTICIAS (arquivos)
+objetivos:
+- manter interação e registros de atividades do Projeto, como: reuniões, palestras, participações em eventos, realizações de eventos 
