@@ -47,6 +47,16 @@
 - Flags: `--descricao "texto"`, `--destaque` (home), `--data YYYY-MM-DD` (padrão: hoje)
 - Vídeos (.mp4/.mov) vão pra `videos/` com `video_url`; fotos pra `fotos/` com `imagem_url`
 
+### Servidor de Mídias (entrada automatizada) — scripts/servidor_midias.py
+- Ponte **Google Drive → R2 + Supabase**: a ONG sobe material numa pasta compartilhada, o Bimbord aprova movendo para a pasta espelho por categoria, e o script publica.
+- Modos: `--status` (o que chegou) · `--dry-run` (simula) · `--publicar` (sobe e registra)
+- Deduplicação por **hash SHA-256** num manifesto guardado no Drive (`_publicados\publicados.json`)
+- Fluxo completo, estrutura de pastas e limites: **`docs/servidor-midias.md`**
+
+### ⚠️ Apagar ou editar registro na tabela `arquivo`
+- A **anon key NÃO tem permissão** de `UPDATE`/`DELETE` — a API responde 200/204 **sem alterar nada** (falha silenciosa, já nos morderam em teste).
+- Para apagar/editar: **Table Editor** do Supabase (Table Editor → arquivo) ou a **service_role** em `C:/Users/PRE-IMPRESSOR/R2/supabase.txt` (⚠️ nunca commitar nem colar em mensagem).
+
 ### Manutenção do bucket (modos do upload_r2.py)
 ```bash
 python scripts/upload_r2.py --list                  # lista objetos

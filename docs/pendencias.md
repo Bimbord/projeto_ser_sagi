@@ -11,7 +11,7 @@
 | 2 | **Fotos reais** nas atividades e no Acervo | médio | autorização de imagem dos responsáveis |
 | 2b | Exportar o **Instagram** para popular o acervo | médio | exportação manual de dados do Instagram |
 | 3 | **Domínio próprio** (institutosersagi.org.br) | baixo | compra no registro.br |
-| 4 | Definir **fluxo de alimentação** (manutenção pós-entrega) | médio | decisão do Bimbord/cliente |
+| 4 | ~~Definir **fluxo de alimentação**~~ ✅ **FEITO (16/09)** — Drive compartilhado + `scripts/servidor_midias.py` | — | — |
 
 **Ferramenta pronta para alimentar:** `python scripts/publicar.py` (sobe pro R2 + grava no banco)
 **Guia:** `docs/fluxo-importacao-midias.md`
@@ -50,9 +50,11 @@
 - E-mail institucional: Zoho Mail (grátis, até 5 caixas) ou via hospedagem
 - Ver detalhes em `docs/estrategia-tecnica.md`
 
-### 4. Alimentação contínua / manutenção pós-entrega
-- O cliente já sinalizou que deve ficar com **manutenção mensal** — pensar no fluxo desde já
-- **Decisão pendente:** como o conteúdo entra no site?
+### 4. Alimentação contínua / manutenção pós-entrega — 🔵 FLUXO DEFINIDO (16/09)
+- ✅ **Decidido e implementado:** a ONG sobe as mídias numa **pasta compartilhada no Google Drive** do Bimbord; ele aprova movendo para a pasta espelho por categoria; o script **`scripts/servidor_midias.py`** sobe pro R2 e registra no Supabase.
+- ✅ Guia completo: **`docs/servidor-midias.md`**
+- O cliente já sinalizou que deve ficar com **manutenção mensal**
+- **Ainda pendente:**
   - **A) Registrador manual** (`scripts/publicar.py`) — já pronto, funciona hoje
   - **B) Fluxo via WhatsApp** — a ONG manda fotos, agente/script cataloga em lote
   - **C) Painel self-service** — a ONG loga e sobe sozinha (mais desenvolvimento)

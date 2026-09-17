@@ -306,3 +306,27 @@ Os 5 cards da seção **"Nossos pilares"** deixaram de ser estáticos e passaram
 - **4 sub-páginas criadas:** `ingles.html`, `espanhol.html`, `informatica.html`, `sustentabilidade.html` (cada uma com banner + descrição + "O que oferecemos" + CTA).
 - `js/main.js`: as 4 novas páginas adicionadas a `acoesSub` (destaque no menu "Nossas Ações").
 - Cards em **HTML estático** (convenção — Tailwind CDN não gera grade via JS).
+
+---
+
+## 🟢 Sessão 8 — Servidor de Mídias + ajuste na home (16/09/2026)
+
+### Ajuste de texto (home)
+- Botões do hero em `index.html`: "Conheça Nossos Projetos" → **"Conheça Nossas Ações"** · "Apoie" → **"Apoie Esse Projeto"**
+
+### Servidor de Mídias (resolve o item 4 das pendências — fluxo de alimentação)
+- **Fase 1:** pasta compartilhada **`Instituto SER Sagi - Midias`** no Google Drive do Bimbord (`Imagens\` / `Videos\` / `Documentos\` + LEIA-ME para a ONG), compartilhada com a ONG como **Editor**.
+- **Fase 2:** pasta espelho **`Instituto SER Sagi - PARA O SITE`** (uma subpasta por categoria do site; **não** compartilhada) + script **`scripts/servidor_midias.py`** com `--status`, `--dry-run` e `--publicar`.
+- Categoria vem do nome da pasta, título e data vêm do nome do arquivo, controle de duplicidade por hash, manifesto guardado no Drive.
+- Teste real ponta a ponta: publicou, apareceu no R2 e no Supabase, deduplicou — e o teste foi **limpo** (tabela `arquivo` de volta a 0 linhas).
+- Documentação: **`docs/servidor-midias.md`** (novo).
+
+### Correções de ferramenta
+- `scripts/_check_site.py`: o regex do item 5 estava desatualizado e acusava "0 cards" em `acoes.html` (são 6). Corrigido.
+
+### ⚠️ Para lembrar (não repetir o erro)
+- A **anon key do Supabase não apaga nem edita** — `DELETE`/`PATCH` devolvem 200/204 **sem efeito**. Só **service_role** (local) ou **Table Editor** resolvem.
+
+### Arquivos mexidos nesta sessão (para não conflitar com o Kilo Code)
+`index.html` · `scripts/_check_site.py` · `scripts/servidor_midias.py` (novo) · `docs/servidor-midias.md` (novo) · `docs/infraestrutura-midias.md` · `docs/pendencias.md`
+
