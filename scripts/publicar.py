@@ -75,8 +75,12 @@ def content_type_por_ext(ext):
 
 
 def publicar_um(creds, caminho, titulo, categoria_slug, descricao, destaque,
-                data_registro, base=None):
-    """Sobe 1 arquivo pro R2 e registra no Supabase. Retorna (chave, url, id)."""
+                data_registro, base=None, secao=None):
+    """Sobe 1 arquivo pro R2 e registra no Supabase. Retorna (chave, url, id).
+
+    `secao` = subpasta de secao dentro da categoria (ex.: hero, carrossel,
+    galeria, "imagem principal"). Vai para a coluna `secao` da tabela `arquivo`.
+    """
     ext = os.path.splitext(caminho)[1].lower()
     folder = FOLDER_BY_EXT.get(ext)
     if not folder:
@@ -101,6 +105,7 @@ def publicar_um(creds, caminho, titulo, categoria_slug, descricao, destaque,
         "titulo": titulo,
         "tipo": tipo,
         "categoria": categoria,
+        "secao": secao,
         "descricao": descricao,
         "data_registro": data_registro,
         "destaque": destaque,

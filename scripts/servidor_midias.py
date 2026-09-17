@@ -14,10 +14,23 @@ por categoria do site:
         esporte\\  saude\\  educacao\\  cultura\\  preservacao\\  eventos\\
         _publicados\\            (arquivo do que ja subiu)
 
-Este script le o que esta nas pastas de categoria, sobe pro R2, registra no
-Supabase (tabela `arquivo`), move o arquivo para `_publicados\\<categoria>\\`
-e anota tudo no manifesto `_publicados\\publicados.json` (guardado NO DRIVE,
-nao no C: - sobrevive a qualquer problema no PC).
+Dentro de cada categoria existem as PASTAS DE SECAO. O nome da subpasta vira a
+coluna `secao` da tabela `arquivo` (o site usa isso para saber onde cada imagem
+aparece). Exemplo:
+
+    saude\\
+        hero\\               -> imagens do banner
+        carrossel\\          -> imagens do carrossel horizontal
+        galeria\\            -> imagens da galeria
+        imagem principal\\   -> imagem de destaque da pagina
+
+    >>> SO SOBE o que esta dentro de uma pasta de secao.
+    >>> Arquivo solto na raiz da categoria e IGNORADO.
+
+Este script le as secoes, sobe pro R2, registra no Supabase (tabela `arquivo`),
+move o arquivo para `_publicados\\<categoria>\\` e anota tudo no manifesto
+`_publicados\\publicados.json` (guardado NO DRIVE, nao no C: - sobrevive a
+qualquer problema no PC).
 
 USO
 ---
@@ -160,38 +173,61 @@ def mover_para_publicados(caminho, categoria, nome):
 
 
 def varrer(manifesto, categoria_filtro=None, max_mb=MAX_MB_PADRAO):
-    """Varre as pastas de categoria. Retorna (pendentes, ja_publicados, ignorados)."""
+    """Varre as SUBPASTAS DE SECAO dentro de cada categoria.
+
+    Retorna (pendentes, ja_publicados, ignorados).
+    Regra: so entram arquivos DENTRO de uma pasta de secao. Arquivo solto na
+    raiz da categoria vai para `ignorados` (nao sobe).
+    """
     pendentes, ja_publicados, ignorados = [], [], []
     for cat in CATEGORIAS:
         if categoria_filtro and cat != categoria_filtro:
             continue
-        pasta = os.path.join(BASE, cat)
-        if not os.path.isdir(pasta):
+        pasta_cat = os.path.join(BASE, cat)
+        if not os.path.isdir(pasta_cat):
             continue
-        info = ler_info(pasta)
-        for nome in sorted(os.listdir(pasta)):
-            caminho = os.path.join(pasta, nome)
-            if not os.path.isfile(caminho) or nome == INFO_FILENAME:
+        info_cat = ler_info(pasta_cat)
+
+        for entrada in sorted(os.listdir(pasta_cat)):
+            caminho_entrada = os.path.join(pasta_cat, entrada)
+
+            # ---- arquivo solto na raiz da categoria: NAO sobe ----
+            if os.path.isfile(caminho_entrada):
+                if entrada != INFO_FILENAME:
+                    ignorados.append((cat, entrada,
+                                      "solta na raiz - so sobe o que esta em pasta de secao"))
                 continue
-            ext = os.path.splitext(nome)[1].lower()
-            if ext not in EXT_SUPORTADAS:
-                ignorados.append((cat, nome, "extensao nao suportada"))
-                continue
-            if ext == ".pdf":
-                ignorados.append((cat, nome, "PDF nao entra no Acervo (use upload_r2.py)"))
-                continue
-            tamanho = os.path.getsize(caminho)
-            if max_mb and tamanho > max_mb * MB:
-                ignorados.append((cat, nome, f"{tamanho / MB:.0f} MB (acima do --max-mb {max_mb})"))
-                continue
-            h = hash_arquivo(caminho)
-            if h in manifesto["arquivos"]:
-                ja_publicados.append((cat, nome, manifesto["arquivos"][h]))
-            else:
-                pendentes.append({"caminho": caminho, "categoria": cat, "nome": nome,
-                                  "tamanho": tamanho, "hash": h, "ext": ext,
-                                  "tipo": "video" if ext in EXT_VIDEO else "foto",
-                                  "info": info})
+
+            # ---- subpasta = SECAO ----
+            secao = entrada
+            info_secao = ler_info(caminho_entrada)
+            info = info_secao if info_secao else info_cat
+            rotulo = f"{cat}/{secao}"
+
+            for nome in sorted(os.listdir(caminho_entrada)):
+                caminho = os.path.join(caminho_entrada, nome)
+                if not os.path.isfile(caminho) or nome == INFO_FILENAME:
+                    continue
+                ext = os.path.splitext(nome)[1].lower()
+                if ext not in EXT_SUPORTADAS:
+                    ignorados.append((rotulo, nome, "extensao nao suportada"))
+                    continue
+                if ext == ".pdf":
+                    ignorados.append((rotulo, nome, "PDF nao entra no Acervo (use upload_r2.py)"))
+                    continue
+                tamanho = os.path.getsize(caminho)
+                if max_mb and tamanho > max_mb * MB:
+                    ignorados.append((rotulo, nome,
+                                      f"{tamanho / MB:.0f} MB (acima do --max-mb {max_mb})"))
+                    continue
+                h = hash_arquivo(caminho)
+                if h in manifesto["arquivos"]:
+                    ja_publicados.append((rotulo, nome, manifesto["arquivos"][h]))
+                else:
+                    pendentes.append({"caminho": caminho, "categoria": cat, "secao": secao,
+                                      "nome": nome, "tamanho": tamanho, "hash": h, "ext": ext,
+                                      "tipo": "video" if ext in EXT_VIDEO else "foto",
+                                      "info": info})
     return pendentes, ja_publicados, ignorados
 
 
@@ -212,7 +248,7 @@ def modo_status(pendentes, ja_publicados, ignorados):
     if pendentes:
         print(f"\n📥 PARA PUBLICAR ({len(pendentes)} arquivo(s)):")
         for p in pendentes:
-            print(f"   [{p['categoria']:11}] {p['nome']}  ({p['tamanho'] / MB:.1f} MB)")
+            print(f"   [{p['categoria'] + '/' + p['secao']:26}] {p['nome']}  ({p['tamanho'] / MB:.1f} MB)")
         total = sum(p["tamanho"] for p in pendentes)
         print(f"   → total: {total / MB:.1f} MB")
     else:
@@ -256,37 +292,39 @@ def modo_publicar(pendentes, manifesto, creds, autorizado, dry_run=False,
             parou_por_limite = True
             break
 
-        cat, nome = p["categoria"], p["nome"]
-        contador_por_categoria[cat] = contador_por_categoria.get(cat, 0) + 1
+        cat, secao, nome = p["categoria"], p["secao"], p["nome"]
+        chave_cont = f"{cat}/{secao}"
+        contador_por_categoria[chave_cont] = contador_por_categoria.get(chave_cont, 0) + 1
         info = p["info"]
         titulo, data = titulo_e_data(nome)
 
         if info.get("titulo_base"):
-            titulo = f"{info['titulo_base']} — {contador_por_categoria[cat]:02d}"
+            titulo = f"{info['titulo_base']} — {contador_por_categoria[chave_cont]:02d}"
         descricao = info.get("descricao", "")
         destaque = str(info.get("destaque", "")).strip().lower() in ("1", "sim", "true", "s")
 
         if dry_run:
-            print(f"  [simula] [{cat}] {nome} → titulo \"{titulo}\" ({p['tamanho'] / MB:.1f} MB)")
+            print(f"  [simula] [{cat}/{secao}] {nome} → titulo \"{titulo}\" ({p['tamanho'] / MB:.1f} MB)")
             acumulado += p["tamanho"]
             continue
 
         try:
             chave, url, novo_id = publicar_um(creds, p["caminho"], titulo, cat,
                                               descricao, destaque,
-                                              data or datetime.date.today().isoformat())
+                                              data or datetime.date.today().isoformat(),
+                                              secao=secao)
             manifesto["arquivos"][p["hash"]] = {
-                "arquivo": nome, "categoria": cat, "titulo": titulo,
+                "arquivo": nome, "categoria": cat, "secao": secao, "titulo": titulo,
                 "id": novo_id, "url": url, "chave": chave,
                 "tamanho": p["tamanho"], "publicado_em": datetime.date.today().isoformat(),
                 "autorizado": bool(autorizado), "destaque": destaque,
             }
             salvar_manifesto(manifesto)
             mover_para_publicados(p["caminho"], cat, nome)
-            print(f"  ✅ [{cat}] {nome} → id {novo_id} | {url}")
+            print(f"  ✅ [{cat}/{secao}] {nome} → id {novo_id} | {url}")
             ok += 1
         except Exception as e:
-            print(f"  ⚠️  [{cat}] {nome}: {e}")
+            print(f"  ⚠️  [{cat}/{secao}] {nome}: {e}")
             falhas.append(nome)
         acumulado += p["tamanho"]
 
