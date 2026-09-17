@@ -7,7 +7,7 @@ import os, shutil, filecmp
 
 SRC = r"C:/Projetos Code/Projeto SER Sagi/projeto_SER_Sagi - Hermes"
 DST = (r"G:/.shortcut-targets-by-id/18wGiptBKUmAmmkKHgdfu05TU4y_roWC1/BBDPRINT - BACKUP/"
-       r"BBDPRINT/App BBDPRiNT/PROJETOS/Projetos Code/Projeto SER Sagi/projeto_SER_Sagi - Hermes")
+       r"BBDPRINT/App BBDPRiNT/PROJETOS/Projeto SER Sagi/projeto_SER_Sagi - Hermes")
 
 IGNORAR_DIRS = {".git", "__pycache__", "node_modules"}
 

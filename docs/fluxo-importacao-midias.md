@@ -41,7 +41,7 @@
 
 **Jeito interativo (mais fácil):**
 ```bash
-cd "D:/BBDPRINT - BACKUP/BBDPRINT/App BBDPRiNT/PROJETOS/Projetos Code/Projeto SER Sagi/projeto_SER_Sagi - Hermes"
+cd "C:/Projetos Code/Projeto SER Sagi/projeto_SER_Sagi - Hermes"
 python scripts/publicar.py
 ```
 Ele pergunta: caminho do arquivo (dá pra **arrastar o arquivo** pra dentro do terminal), título, categoria.
