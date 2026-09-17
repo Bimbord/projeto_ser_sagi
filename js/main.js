@@ -328,10 +328,14 @@ function archiveItemMarkup(item) {
 function renderArchive(items) {
   const container = document.querySelector('[data-render="archive"]');
   if (!container) return;
+  const secao = document.getElementById('archive-registros');
   if (!items.length) {
-    // Sem dados reais: mantém os cards ilustrativos estáticos já presentes no HTML
+    // Sem registros reais: a seção de fotos publicadas fica oculta.
+    // Os cards de categoria continuam estáticos em data-render="archive-categorias".
+    if (secao) secao.classList.add('hidden');
     return;
   }
+  if (secao) secao.classList.remove('hidden');
   container.innerHTML = `<div class="archive-grid">` + items.map(archiveItemMarkup).join('') + `</div>`;
 }
 

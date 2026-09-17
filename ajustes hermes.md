@@ -321,8 +321,21 @@ Os 5 cards da seção **"Nossos pilares"** deixaram de ser estáticos e passaram
 - Teste real ponta a ponta: publicou, apareceu no R2 e no Supabase, deduplicou — e o teste foi **limpo** (tabela `arquivo` de volta a 0 linhas).
 - Documentação: **`docs/servidor-midias.md`** (novo).
 
-### Correções de ferramenta
-- `scripts/_check_site.py`: o regex do item 5 estava desatualizado e acusava "0 cards" em `acoes.html` (são 6). Corrigido.
+### Fotos reais publicadas no Acervo (3 primeiras)
+- Publicadas pelo novo pipeline: **fachada do Instituto** (Esporte), **consultório odontológico** (Saúde), **placa da Aldeia Sagi Jacu** (Preservação) — ids **8, 9, 10**.
+- Origem: `img/arquivo/` (imagens extraídas do PDF de apresentação). **Otimizadas antes de subir**: a fachada saiu de **6,10 MB para 0,22 MB** (JPEG, 1600px).
+- Títulos e descrições foram refinados direto no banco (a anon key não edita — usada a `service_role` local).
+
+### ⚠️ Correção estrutural no Acervo (bug pego no teste)
+- **Problema:** ao entrar o primeiro registro real, o `renderArchive` substituía **todo** o conteúdo do container — e os **6 cards de categoria** (links para `acervo-*.html`) desapareciam da página. Confirmado no DOM: zero links.
+- **Correção:** os cards de categoria agora vivem em `data-render="archive-categorias"` (o JS não toca) e a grade de registros reais ganhou seção própria (`#archive-registros` + `data-render="archive"`), oculta quando não há fotos. Os filtros foram para junto dos registros.
+- **Regra para futuras edições:** nunca colocar conteúdo estático dentro de um `data-render="..."` que o JS reescreve.
+- Verificado no browser: 6 links de categoria no DOM · 3 fotos reais carregando · filtro "Saúde" reduz para 1 card · `renderArchive([])` esconde a seção.
+
+### Pendente nesta frente
+- Triagem das outras ~62 imagens de `img/arquivo/` (lote misto: foto boa + print de obra/baixa qualidade) antes de qualquer publicação.
+- **Não usar** fotos com pessoa identificável (ex.: o paciente na cadeira odontológica).
+
 
 ### ⚠️ Para lembrar (não repetir o erro)
 - A **anon key do Supabase não apaga nem edita** — `DELETE`/`PATCH` devolvem 200/204 **sem efeito**. Só **service_role** (local) ou **Table Editor** resolvem.

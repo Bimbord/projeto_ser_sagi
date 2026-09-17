@@ -33,10 +33,12 @@
 - ✅ Arquivos de teste (`Regras-001.png`, `teste-upload..png`) removidos
 - ✅ Ferramenta ganhou modos `--list`, `--delete`, `--delete-prefix` (`scripts/upload_r2.py`)
 
-### 2. Fotos reais (com autorização de imagem)
-- Substituir as imagens ilustrativas (badge "Imagem ilustrativa") por fotos reais das atividades
-- **Obrigatório:** autorização de uso de imagem dos responsáveis (crianças/adolescentes — ECA + LGPD)
-- As fotos do PDF de apresentação NÃO servem (prints de baixa qualidade e obras em andamento)
+### 2. Fotos reais (com autorização de imagem) — 🟡 EM ANDAMENTO
+- ✅ **3 fotos reais publicadas** no Acervo (16/09): fachada do Instituto, consultório odontológico e placa da Aldeia Sagi Jacu (ids 8-10) — vindas de `img/arquivo/` (extraídas do PDF) e otimizadas antes de subir.
+- ✅ Estrutura do Acervo corrigida: a grade de registros reais agora convive com os 6 cards de categoria (antes o primeiro dado real apagava os cards).
+- ⏳ **Faltam:** fotos das atividades em si (esporte, educação, cultura, eventos) — dependem de autorização de imagem dos responsáveis (crianças/adolescentes — ECA + LGPD).
+- ⚠️ As 65 imagens de `img/arquivo/` são um **lote misto** (tem foto boa e print ruim/obra em andamento): publicar só depois de curadoria.
+- ❌ **Nunca usar** foto com pessoa identificável (ex.: paciente na cadeira odontológica).
 
 ### 2b. Instagram @s.e.r_sagi — exportação adiada
 - Feed bloqueado sem login (HTTP 429). Fazer **exportação de dados** (Configurações → Baixar suas informações → **JSON**) do perfil `s.e.r_sagi`
