@@ -13,6 +13,18 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config={theme:{extend:{colors:{ocean:'#0f5c73',oceanDeep:'#083b4c',sand:'#f5efe3',sun:'#f4b400',coral:'#e77b5f',leaf:'#2e7d4f',mist:'#e7f4f7'},fontFamily:{sans:['Inter','sans-serif']},boxShadow:{soft:'0 20px 60px rgba(8, 59, 76, 0.12)'}}}};</script>
   <link rel="stylesheet" href="css/style.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://bimbord.github.io/projeto_ser_sagi/" },
+      { "@type": "ListItem", "position": 2, "name": "Nossas Ações", "item": "https://bimbord.github.io/projeto_ser_sagi/acoes.html" },
+      { "@type": "ListItem", "position": 3, "name": "Saúde", "item": "https://bimbord.github.io/projeto_ser_sagi/saude.html" },
+      { "@type": "ListItem", "position": 4, "name": "Consultório Odontológico", "item": "https://bimbord.github.io/projeto_ser_sagi/saude.html" }
+    ]
+  }
+  </script>
 </head>
 <body class="font-sans text-slate-800">
   <a href="#conteudo-principal" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:bg-white focus:text-ocean focus:px-4 focus:py-2 focus:rounded-md focus:shadow">Pular para o conteúdo</a>
@@ -35,6 +47,14 @@
       <div class="banner-scrim absolute inset-0"></div>
       <!-- CAMADA 3 · CONTEÚDO (por cima) -->
       <div class="relative z-10 mx-auto max-w-7xl px-4 py-16 lg:px-8 lg:py-20">
+        <nav class="breadcrumb" aria-label="Você está aqui">
+          <ol>
+            <li><a href="./">Início</a></li>
+            <li><a href="acoes.html">Nossas Ações</a></li>
+            <li><a href="saude.html">Saúde</a></li>
+            <li><span aria-current="page">Consultório Odontológico</span></li>
+          </ol>
+        </nav>
         <p class="text-sm font-semibold uppercase tracking-[0.25em] text-sun">Saúde • Nossas Ações</p>
         <h2 class="mt-4 max-w-4xl text-4xl font-extrabold leading-tight sm:text-5xl">Consultório Odontológico</h2>
         <p class="mt-6 max-w-3xl text-lg text-white/85">Cuidado com a saúde bucal da comunidade: prevenção, tratamento e autoestima.</p>

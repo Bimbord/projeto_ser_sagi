@@ -576,3 +576,38 @@ a.home-card:hover .home-card__cta { gap: .65rem; }
   color: rgba(255, 255, 255, 0.85);
   font-size: 0.85rem;
 }
+
+/* ============================================================
+   BREADCRUMB (caminho de navegacao no topo do hero)
+   ============================================================ */
+.breadcrumb { margin-bottom: 1.25rem; }
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: .8125rem;
+  line-height: 1.4;
+}
+.breadcrumb li { display: inline-flex; align-items: center; gap: .45rem; }
+.breadcrumb li + li::before {
+  content: '›';
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+  line-height: 1;
+}
+.breadcrumb a {
+  color: rgba(255, 255, 255, 0.78);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.breadcrumb a:hover { color: #fff; text-decoration: underline; }
+.breadcrumb [aria-current="page"] { color: #fff; font-weight: 600; }
+
+/* Sobre fundo claro (uso opcional fora do hero) */
+.breadcrumb--claro a { color: var(--ocean); }
+.breadcrumb--claro li + li::before { color: rgba(15, 92, 115, 0.5); }
+.breadcrumb--claro [aria-current="page"] { color: var(--ocean-deep); }
