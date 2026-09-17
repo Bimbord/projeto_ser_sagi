@@ -377,6 +377,76 @@ function renderHighlights(items) {
   `).join('');
 }
 
+// ============================================================
+// SECOES ALIMENTADAS POR PASTA DO DRIVE (categoria + secao)
+// Cada subpasta de secao no Drive vira uma `secao` na tabela
+// `arquivo`. O bloco marcado com [data-secao="x"] e preenchido
+// com as imagens daquela secao; [data-secao-img="x"] recebe a
+// primeira imagem (usado no hero e na imagem principal).
+// ============================================================
+async function fetchSecao(categoria, secao) {
+  const url = `${SUPABASE_URL}/rest/v1/arquivo?select=id,titulo,descricao,imagem_url`
+    + `&categoria=eq.${encodeURIComponent(categoria)}`
+    + `&secao=eq.${encodeURIComponent(secao)}`
+    + `&deleted=eq.false&order=id.asc`;
+  const response = await fetch(url, {
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`
+    }
+  });
+  if (!response.ok) throw new Error(`Erro ao buscar a secao ${secao}`);
+  return response.json();
+}
+
+function markupCarrossel(itens) {
+  return `<div class="carrossel">` + itens.map((i) => `
+    <figure class="carrossel__item">
+      <img src="${i.imagem_url}" alt="${i.titulo || ''}" loading="lazy" />
+      ${i.titulo ? `<figcaption class="carrossel__caption">${i.titulo}</figcaption>` : ''}
+    </figure>`).join('') + `</div>`;
+}
+
+function markupGrade(itens) {
+  return `<div class="secao-grid">` + itens.map((i) => `
+    <figure><img src="${i.imagem_url}" alt="${i.titulo || ''}" loading="lazy" /></figure>`).join('') + `</div>`;
+}
+
+async function loadSecoes() {
+  // Blocos com varias imagens (carrossel / galeria)
+  const blocos = document.querySelectorAll('[data-secao]');
+  for (const el of blocos) {
+    const secao = el.getAttribute('data-secao');
+    const categoria = el.getAttribute('data-categoria') || '';
+    try {
+      const itens = (await fetchSecao(categoria, secao)).filter((i) => i.imagem_url);
+      if (!itens.length) {
+        el.innerHTML = `<p class="secao-vazio">Nenhuma imagem publicada nesta secao ainda.</p>`;
+        continue;
+      }
+      el.innerHTML = secao.toLowerCase().includes('carrossel')
+        ? markupCarrossel(itens)
+        : markupGrade(itens);
+    } catch (error) {
+      el.innerHTML = `<p class="secao-vazio">Nao foi possivel carregar as imagens desta secao.</p>`;
+    }
+  }
+
+  // Imagens unicas (hero / imagem principal)
+  const imagens = document.querySelectorAll('[data-secao-img]');
+  for (const img of imagens) {
+    const secao = img.getAttribute('data-secao-img');
+    const categoria = img.getAttribute('data-categoria') || '';
+    try {
+      const itens = (await fetchSecao(categoria, secao)).filter((i) => i.imagem_url);
+      if (itens.length) {
+        img.src = itens[0].imagem_url;
+        if (itens[0].titulo) img.alt = itens[0].titulo;
+      }
+    } catch (error) { /* mantem a imagem padrao do HTML */ }
+  }
+}
+
 let archiveData = [];
 
 async function loadArchive() {
@@ -418,4 +488,5 @@ document.addEventListener('DOMContentLoaded', () => {
   loadDynamicSections();
   setupArchiveFilters();
   loadArchive();
+  loadSecoes();
 });

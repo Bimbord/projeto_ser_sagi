@@ -166,8 +166,13 @@ def mover_para_publicados(caminho, categoria, nome):
     os.makedirs(destino_dir, exist_ok=True)
     destino = os.path.join(destino_dir, nome)
     if os.path.exists(destino):
+        # Nome ja existe: procura o primeiro sufixo livre (-dup, -dup2, -dup3...)
         raiz, ext = os.path.splitext(nome)
         destino = os.path.join(destino_dir, f"{raiz}-dup{ext}")
+        n = 2
+        while os.path.exists(destino):
+            destino = os.path.join(destino_dir, f"{raiz}-dup{n}{ext}")
+            n += 1
     shutil.move(caminho, destino)
     return destino
 

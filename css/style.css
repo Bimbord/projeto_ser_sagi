@@ -428,3 +428,44 @@ a.home-card:hover .home-card__cta { gap: .65rem; }
     rgba(8, 59, 76, 0.30) 72%,
     rgba(8, 59, 76, 0.16) 100%);
 }
+
+
+/* ============================================================
+   SECOES ALIMENTADAS PELAS PASTAS DO DRIVE (categoria + secao)
+   Renderizadas por js/main.js -> loadSecoes().
+   CSS puro de proposito: o Tailwind Play CDN nao gera classes
+   para conteudo injetado via JavaScript.
+   ============================================================ */
+.carrossel {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: .75rem;
+}
+.carrossel__item {
+  flex: 0 0 auto;
+  width: min(80vw, 24rem);
+  scroll-snap-align: start;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #fff;
+  border: var(--border-card);
+  box-shadow: var(--shadow-card);
+}
+.carrossel__item img { display: block; width: 100%; height: 16rem; object-fit: cover; }
+.carrossel__caption { padding: .85rem 1rem; font-size: .85rem; color: #475569; }
+
+.secao-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+@media (max-width: 1023px) { .secao-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 639px)  { .secao-grid { grid-template-columns: 1fr; } }
+.secao-grid img { display: block; width: 100%; height: 14rem; object-fit: cover; border-radius: var(--radius-md); }
+
+.secao-vazio {
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  background: var(--mist);
+  color: #475569;
+  font-size: .9rem;
+}

@@ -153,3 +153,28 @@ Flags: `--limite-gb N` (padrão 1.0, protege o C:) · `--max-mb N` (padrão 800,
 - Service role do Supabase: `C:/Users/PRE-IMPRESSOR/R2/supabase.txt` — **nunca** vai para o repositório nem para mensagens.
 - O bucket R2 é **público**: não subir documento com dados pessoais.
 
+---
+
+## 🗂️ Pastas de seção (17/09/2026)
+
+Dentro de cada categoria existem **pastas de seção** — o nome da subpasta vira a coluna `secao` na tabela `arquivo`, e o site usa isso para saber onde cada imagem aparece.
+
+```
+PARA O SITE/saude/
+├── hero/               → imagem do banner
+├── carrossel/          → carrossel horizontal da página
+├── galeria/            → grade da galeria
+├── imagem principal/   → imagem do card principal
+├── 001.jpg             → SOLTO: não sobe (ignorado)
+```
+
+**Regras:**
+- ✅ Sobe **somente** o que está **dentro** de uma pasta de seção.
+- 🚫 Arquivo solto na raiz da categoria é **ignorado**.
+- 🔁 O mesmo arquivo em 2 seções = 2 registros (um por seção), e o R2 ganha sufixo `-001`, `-002` no nome para não sobrescrever.
+- 🗄️ O arquivamento em `_publicados/<categoria>/` também usa `-dup`, `-dup2`, `-dup3`… quando o nome repete.
+
+**No site:** o bloco marcado com `data-secao="carrossel" data-categoria="Saúde"` é preenchido por `loadSecoes()` (em `js/main.js`); `data-secao-img="hero"` recebe a primeira imagem da seção.
+
+**SQL da coluna** (já executado): `docs/supabase-add-secao.sql`
+

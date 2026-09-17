@@ -30,7 +30,7 @@
   <main id="conteudo-principal">
     <section class="page-banner text-white relative overflow-hidden">
       <!-- CAMADA 1 · IMAGEM de fundo (ilustrativa — trocar por foto real em img/banners/) -->
-      <img src="https://loremflickr.com/1600/600/dentist,health,care?lock=201" alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover">
+      <img src="https://loremflickr.com/1600/600/dentist,health,care?lock=201" alt="" aria-hidden="true" data-secao-img="hero" data-categoria="Saúde" class="absolute inset-0 h-full w-full object-cover">
       <!-- CAMADA 2 · SCRIM (véu diagonal — mesmo efeito do hero da home) -->
       <div class="banner-scrim absolute inset-0"></div>
       <!-- CAMADA 3 · CONTEÚDO (por cima) -->
@@ -44,7 +44,7 @@
       <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
         <div class="premium-card rounded-[2rem] bg-white p-6 shadow-soft">
           <div class="relative -mx-1 overflow-hidden rounded-2xl">
-            <img src="https://loremflickr.com/800/500/dentist,clinic,tooth?lock=101" alt="Imagem ilustrativa — Consultório Odontológico" class="h-64 w-full object-cover" loading="lazy" />
+            <img src="https://loremflickr.com/800/500/dentist,clinic,tooth?lock=101" alt="Imagem ilustrativa — Consultório Odontológico" data-secao-img="imagem principal" data-categoria="Saúde" class="h-64 w-full object-cover" loading="lazy" />
           </div>
           <span class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-sand px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.15em] text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real"><i class="fa-solid fa-wand-magic-sparkles text-[9px]"></i>Imagem ilustrativa</span>
           <div class="mt-5 flex items-center gap-3">
@@ -67,36 +67,19 @@
     </section>
     <section class="mx-auto max-w-7xl px-4 pb-16 lg:px-8">
       <div class="flex flex-col gap-3">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-ocean">Resultados</p>
+        <h3 class="section-title text-3xl font-extrabold text-oceanDeep">Sorrisos que falam por si</h3>
+        <p class="max-w-3xl text-slate-600">Registros de quem passou pelo nosso consultório. Deslize para o lado para ver mais.</p>
+      </div>
+      <div class="mt-8" data-secao="carrossel" data-categoria="Saúde"></div>
+    </section>
+    <section class="mx-auto max-w-7xl px-4 pb-16 lg:px-8">
+      <div class="flex flex-col gap-3">
         <p class="text-sm font-semibold uppercase tracking-[0.25em] text-ocean">Galeria</p>
         <h3 class="section-title text-3xl font-extrabold text-oceanDeep">O consultório em imagens</h3>
         <p class="max-w-3xl text-slate-600">Registros do atendimento odontológico na comunidade do Sagi. As imagens abaixo são <strong>ilustrativas</strong> e serão substituídas pelos registros reais das atividades.</p>
       </div>
-      <div class="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        <figure class="overflow-hidden rounded-3xl bg-white p-4 shadow-soft">
-          <div class="relative overflow-hidden rounded-2xl"><img src="https://loremflickr.com/800/500/dentist,clinic,dental?lock=901" alt="Imagem ilustrativa — atendimento odontológico" class="h-48 w-full object-cover" loading="lazy" /></div>
-          <figcaption class="p-2 pt-3"><span class="inline-flex items-center gap-1 rounded-full bg-sand px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real"><i class="fa-solid fa-wand-magic-sparkles text-[8px]"></i>Imagem ilustrativa</span><p class="mt-2 text-sm font-semibold text-oceanDeep">Atendimento no consultório</p></figcaption>
-        </figure>
-        <figure class="overflow-hidden rounded-3xl bg-white p-4 shadow-soft">
-          <div class="relative overflow-hidden rounded-2xl"><img src="https://loremflickr.com/800/500/tooth,smile,dental?lock=902" alt="Imagem ilustrativa — sorriso saudável" class="h-48 w-full object-cover" loading="lazy" /></div>
-          <figcaption class="p-2 pt-3"><span class="inline-flex items-center gap-1 rounded-full bg-sand px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real"><i class="fa-solid fa-wand-magic-sparkles text-[8px]"></i>Imagem ilustrativa</span><p class="mt-2 text-sm font-semibold text-oceanDeep">Saúde bucal e autoestima</p></figcaption>
-        </figure>
-        <figure class="overflow-hidden rounded-3xl bg-white p-4 shadow-soft">
-          <div class="relative overflow-hidden rounded-2xl"><img src="https://loremflickr.com/800/500/dentist,patient,care?lock=903" alt="Imagem ilustrativa — cuidado com o paciente" class="h-48 w-full object-cover" loading="lazy" /></div>
-          <figcaption class="p-2 pt-3"><span class="inline-flex items-center gap-1 rounded-full bg-sand px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real"><i class="fa-solid fa-wand-magic-sparkles text-[8px]"></i>Imagem ilustrativa</span><p class="mt-2 text-sm font-semibold text-oceanDeep">Acolhimento e cuidado</p></figcaption>
-        </figure>
-        <figure class="overflow-hidden rounded-3xl bg-white p-4 shadow-soft">
-          <div class="relative overflow-hidden rounded-2xl"><img src="https://loremflickr.com/800/500/dental,hygiene,brush?lock=904" alt="Imagem ilustrativa — prevenção e higiene bucal" class="h-48 w-full object-cover" loading="lazy" /></div>
-          <figcaption class="p-2 pt-3"><span class="inline-flex items-center gap-1 rounded-full bg-sand px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real"><i class="fa-solid fa-wand-magic-sparkles text-[8px]"></i>Imagem ilustrativa</span><p class="mt-2 text-sm font-semibold text-oceanDeep">Prevenção e higiene bucal</p></figcaption>
-        </figure>
-        <figure class="overflow-hidden rounded-3xl bg-white p-4 shadow-soft">
-          <div class="relative overflow-hidden rounded-2xl"><img src="https://loremflickr.com/800/500/clinic,health,checkup?lock=905" alt="Imagem ilustrativa — consulta de rotina" class="h-48 w-full object-cover" loading="lazy" /></div>
-          <figcaption class="p-2 pt-3"><span class="inline-flex items-center gap-1 rounded-full bg-sand px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real"><i class="fa-solid fa-wand-magic-sparkles text-[8px]"></i>Imagem ilustrativa</span><p class="mt-2 text-sm font-semibold text-oceanDeep">Consultas de rotina</p></figcaption>
-        </figure>
-        <figure class="overflow-hidden rounded-3xl bg-white p-4 shadow-soft">
-          <div class="relative overflow-hidden rounded-2xl"><img src="https://loremflickr.com/800/500/teeth,dental,health?lock=906" alt="Imagem ilustrativa — tratamento concluído" class="h-48 w-full object-cover" loading="lazy" /></div>
-          <figcaption class="p-2 pt-3"><span class="inline-flex items-center gap-1 rounded-full bg-sand px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-500" title="Conteúdo ilustrativo — será substituído por imagem real"><i class="fa-solid fa-wand-magic-sparkles text-[8px]"></i>Imagem ilustrativa</span><p class="mt-2 text-sm font-semibold text-oceanDeep">Tratamentos e próteses</p></figcaption>
-        </figure>
-      </div>
+      <div class="mt-8" data-secao="galeria" data-categoria="Saúde"></div>
       <a href="acervo-saude.html" class="cta-lift mt-8 inline-flex items-center gap-2 rounded-full border border-ocean px-5 py-2.5 text-sm font-semibold text-ocean transition hover:bg-ocean hover:text-white"><i class="fa-solid fa-images text-xs"></i>Ver o acervo completo de Saúde</a>
     </section>
     <section class="bg-mist/70 py-16">
