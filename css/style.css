@@ -840,3 +840,36 @@ a.home-stat:hover .home-stat__value { color: var(--ocean); }
   font-weight: 700;
   color: var(--ocean-deep);
 }
+
+
+/* ============================================================
+   TOPO em telas médias (1024–1279px)
+   O menu cresceu (dropdowns + Jóia da Coroa) e os botões CTA
+   ficavam escondidos. Aqui tudo compacta um pouco — medido no
+   navegador: em 1024px faltavam ~153px; isto devolve ~200px.
+   ============================================================ */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  nav[aria-label="Menu principal"] { gap: 0.125rem; }
+  .nav-link {
+    padding: 0.4rem 0.45rem;
+    font-size: 0.8125rem;
+    gap: 0.25rem;
+  }
+  .nav-link .fa-chevron-down { font-size: 0.55rem; }
+  header img.topo-logo { height: 3rem; }
+  header .topo-cta a {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.8125rem;
+  }
+}
+
+
+/* ============================================================
+   Textos longos (e-mail, telefone, links) não podem estourar a
+   largura da tela. Medido no navegador: em 1024px o e-mail da
+   coluna Contato do rodapé empurrava a página 38px para o lado.
+   ============================================================ */
+footer a,
+footer li,
+footer p,
+footer span { overflow-wrap: anywhere; }
