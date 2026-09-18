@@ -44,6 +44,9 @@ CATEGORIAS = {
     "eventos": "Eventos",
     "home": "Home",
     "depoimentos": "Depoimentos",
+    "institucional": "Institucional",
+    "acervo": "Acervo",
+    "acoes": "Ações",
 }
 EXT_VIDEO = (".mp4", ".mov", ".webm", ".m4v")
 EXT_SUPORTADAS = set(FOLDER_BY_EXT.keys())

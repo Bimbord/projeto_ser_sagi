@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config={theme:{extend:{colors:{ocean:'#0f5c73',oceanDeep:'#083b4c',sand:'#f5efe3',sun:'#f4b400',coral:'#e77b5f',leaf:'#2e7d4f',mist:'#e7f4f7'},fontFamily:{sans:['Inter','sans-serif']},boxShadow:{soft:'0 20px 60px rgba(8, 59, 76, 0.12)'}}}}}};</script>
-  <link rel="stylesheet" href="css/style.css?v=10" />
+  <link rel="stylesheet" href="css/style.css?v=11" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -39,8 +39,12 @@
     <div id="mobile-menu" class="hidden border-t border-slate-200 bg-white lg:hidden"><nav class="mx-auto flex max-w-7xl flex-col px-4 py-4" aria-label="Menu mobile"><a href="./" data-page-link class="py-2 text-sm font-medium">Início</a><a href="quem-somos.html" data-page-link class="py-2 text-sm font-medium">Quem Somos</a><a href="acoes.html" data-page-link class="py-2 text-sm font-medium">Nossas Ações</a><a href="acervo.html" data-page-link class="py-2 text-sm font-medium">Acervo</a><a href="depoimentos.html" data-page-link class="py-2 text-sm font-medium">Depoimentos</a><a href="como-ajudar.html" data-page-link class="py-2 text-sm font-medium">Como Ajudar</a><a href="lei-incentivo.html" data-page-link class="py-2 text-sm font-medium">Lei de Incentivo</a><a href="transparencia.html" data-page-link class="py-2 text-sm font-medium">Transparência</a><a href="contato.html" data-page-link class="py-2 text-sm font-medium">Contato</a></nav></div>
   </header>
   <main id="conteudo-principal">
-    <section class="page-banner text-white">
-      <div class="mx-auto max-w-7xl px-4 py-16 lg:px-8 lg:py-20">
+    <section class="page-banner text-white relative overflow-hidden banner-alto">
+      <!-- CAMADA 1 · IMAGEM de fundo (ilustrativa — trocar por foto real em institucional/instalacoes/hero/) -->
+      <img src="https://loremflickr.com/1600/600/building,community,center?lock=502" alt="" aria-hidden="true" data-secao-img="hero" data-categoria="Institucional" data-pagina="instalacoes" class="absolute inset-0 h-full w-full object-cover">
+      <!-- CAMADA 2 · SCRIM (véu diagonal, mesmo efeito do hero da home) -->
+      <div class="banner-scrim absolute inset-0"></div>
+      <div class="relative z-10 mx-auto max-w-7xl px-4 py-16 lg:px-8 lg:py-20">
         <p class="text-sm font-semibold uppercase tracking-[0.25em] text-sun">Estrutura</p>
         <h2 class="mt-4 max-w-4xl text-4xl font-extrabold leading-tight sm:text-5xl">Nossas instalações</h2>
         <p class="mt-6 max-w-3xl text-lg text-white/85">Espaços próprios que sustentam as atividades do Instituto no dia a dia — do atendimento odontológico ao esporte praticado na areia.</p>
@@ -179,6 +183,6 @@
       </div>
     </div>
   </footer>
-  <script src="js/main.js?v=10"></script>
+  <script src="js/main.js?v=11"></script>
 </body>
 </html>

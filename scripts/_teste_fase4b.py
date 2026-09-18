@@ -18,7 +18,12 @@ import re
 secoes = []
 for arq in sorted(glob.glob(os.path.join(BASE, "*.html"))):
     txt = open(arq, encoding="utf-8").read()
+    # blocos de seção (carrossel/galeria)
     for m in re.finditer(r'data-secao="([^"]+)" data-categoria="([^"]+)"(?: data-pagina="([^"]+)")?', txt):
+        secao, cat, pag = m.group(1), m.group(2), m.group(3)
+        secoes.append((os.path.basename(arq), cat, f"{pag}/{secao}" if pag else secao))
+    # imagem única (hero / imagem principal)
+    for m in re.finditer(r'data-secao-img="([^"]+)" data-categoria="([^"]+)"(?: data-pagina="([^"]+)")?', txt):
         secao, cat, pag = m.group(1), m.group(2), m.group(3)
         secoes.append((os.path.basename(arq), cat, f"{pag}/{secao}" if pag else secao))
 
