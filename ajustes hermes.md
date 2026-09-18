@@ -324,6 +324,42 @@ Os 5 cards da seção **"Nossos pilares"** deixaram de ser estáticos e passaram
 
 ---
 
+## 🟢 Sessão 10 — Seções do Drive, hierarquia, breadcrumb e cache (17/09/2026)
+
+### 📁 Pastas de seção no Drive (mídia → site automático)
+- Dentro de cada categoria, as **subpastas de seção** viram a coluna `secao` no Supabase: `saude/hero`, `saude/carrossel`, `saude/galeria`, `saude/imagem principal`.
+- **Sobe só o que está dentro de uma pasta de seção**; arquivo solto na raiz da categoria é ignorado.
+- SQL da coluna: `docs/supabase-add-secao.sql` (já executado). Detalhes em `docs/servidor-midias.md`.
+- Publicação é **manual, acionada pelo Bimbord**: `python scripts/servidor_midias.py --publicar --autorizado`.
+- ⚠️ **A legenda = nome do arquivo NO MOMENTO DE PUBLICAR.** Renomear depois (em `_publicados/`) não muda o site.
+
+### 🎨 Página Saúde
+- **Hero mais alto** (`banner-alto`), selo "Imagem ilustrativa" removido do card principal.
+- **Carrossel horizontal** (`.carrossel`, CSS scroll-snap) com **setas** nas extremidades.
+- **Galeria com lightbox**: clicar amplia, com setas, contador e `Esc`.
+- Blocos no HTML: `data-secao="carrossel|galeria"` e `data-secao-img="hero|imagem principal"` — preenchidos por `loadSecoes()` (`js/main.js`).
+
+### 🧭 Breadcrumb
+- Faixa **fora do hero** (`.breadcrumb--claro`), com divisória: `Início › Nossas Ações › Saúde`.
+- Dados estruturados `BreadcrumbList` (schema.org) no `<head>`.
+
+### 🚀 Cache-busting (fim do "não apareceu a alteração")
+- `css/style.css` e `js/*.js` agora carregam com `?v=N`.
+- **Sempre que mexer em CSS/JS:** rodar `python scripts/bump_versao.py` e commitar junto.
+
+### 🗂️ Hierarquia: AÇÕES → CATEGORIA → ÁREA → PÁGINA
+- **`acoes.html`** virou o **mapa completo**: 5 categorias, cada uma com suas áreas **clicáveis** (link direto pra sub-página). Os cards deixaram de ser `<a>` (não pode ter `<a>` dentro de `<a>`) e viraram `<article>`.
+- **Regra do hub:** categoria com **1 área não tem hub** (a página da categoria é a própria página do conteúdo); o hub nasce com **2+ áreas**.
+  - Hoje com hub: **Esporte** (6 áreas) e **Educação** (4).
+  - Sem hub (área única): **Saúde**, **Cultura**, **Preservação**.
+- Home = vitrine (5 cards) · `acoes.html` = mapa · categoria = hub · sub-página = detalhe.
+
+### 🧰 Ferramentas
+- `scripts/bump_versao.py` — versiona CSS/JS (`--mostrar` só lê).
+- `scripts/_checar_links.py` — confere links internos (hoje: **1121 links, 0 quebrados**).
+
+---
+
 ## 🟢 Sessão 8 — Servidor de Mídias + ajuste na home (16/09/2026)
 
 ### Ajuste de texto (home)
