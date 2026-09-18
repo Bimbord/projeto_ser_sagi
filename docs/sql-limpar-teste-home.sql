@@ -1,29 +1,33 @@
 -- ============================================================
--- Limpeza do teste da FASE 5 (17/09/2026)
+-- Limpeza dos testes da FASE 5 (17-18/09/2026)
 -- ============================================================
--- Foram publicadas 3 imagens de TESTE (logos) para validar a
--- ligação das pastas home/hero e home/joia-da-coroa.
--- A anon key NAO consegue atualizar (o RLS bloqueia e o PostgREST
--- devolve 204 mesmo assim) — por isso este SQL.
+-- Foram publicadas imagens de TESTE para validar:
+--   PARTE A → pastas home/hero (ids 30,31) e home/joia-da-coroa (id 32)
+--   PARTE B → pastas home/pilares (id 34), home/numeros (id 33)
+--             e home/como-ajudar (id 35)
 --
--- Rode no Supabase: SQL Editor → New query → Run.
+-- A anon key NAO consegue atualizar nem apagar: o RLS bloqueia e o
+-- PostgREST devolve HTTP 204 mesmo assim (0 linhas afetadas) — por
+-- isso este SQL roda no painel.
+--
+-- Supabase → SQL Editor → New query → Run.
 -- ============================================================
 
--- 1) confere o que sera apagado (deve listar 3 linhas)
-select id, titulo, categoria, secao, imagem_url
+-- 1) CONFERE o que sera marcado (deve listar 6 linhas; a PARTE A ja saiu)
+select id, titulo, categoria, secao, deleted
   from public.arquivo
- where id in (30, 31, 32)
-   and categoria = 'Home';
+ where categoria = 'Home'
+   and id in (30, 31, 32, 33, 34, 35)
+ order by id;
 
 -- 2) marca como excluido (o site filtra deleted = false)
 update public.arquivo
    set deleted = true
- where id in (30, 31, 32)
-   and categoria = 'Home'
-   and secao in ('hero', 'joia-da-coroa');
+ where categoria = 'Home'
+   and id in (30, 31, 32, 33, 34, 35);
 
--- 3) conferencia: deve voltar 0 linha
-select count(*) as restantes
+-- 3) CONFERE: deve voltar 0
+select count(*) as restantes_ativos
   from public.arquivo
  where categoria = 'Home'
    and deleted = false;

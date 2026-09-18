@@ -617,3 +617,30 @@ a.home-card:hover .home-card__cta { gap: .65rem; }
 .breadcrumb--claro a:hover { color: var(--ocean-deep); }
 .breadcrumb--claro li + li::before { color: rgba(15, 92, 115, 0.45); }
 .breadcrumb--claro [aria-current="page"] { color: var(--ocean-deep); font-weight: 600; }
+
+
+/* ============================================================
+   FASE 5 · Fotos dos blocos da home
+   (pastas home/pilares, home/numeros e home/como-ajudar)
+   Sem foto publicada a <img> fica com [hidden] e o card
+   continua exatamente como era antes.
+   ============================================================ */
+.home-foto {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.25rem;
+}
+.home-foto[hidden] { display: none; }
+
+.home-stat__foto {
+  display: block;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  object-fit: cover;
+  margin-bottom: 0.75rem;
+}
+.home-stat__foto[hidden] { display: none; }

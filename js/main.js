@@ -385,6 +385,15 @@ function renderHighlights(items) {
 // com as imagens daquela secao; [data-secao-img="x"] recebe a
 // primeira imagem (usado no hero e na imagem principal).
 // ============================================================
+// Normaliza texto para casar nome de arquivo com chave: minusculo, sem
+// acento, com hifen. "Jiu-jitsu.jpg" (titulo "Jiu Jitsu") -> "jiu-jitsu"
+function normalizarChave(texto) {
+  return (texto || '').toString().toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
 async function fetchSecao(categoria, secao) {
   const url = `${SUPABASE_URL}/rest/v1/arquivo?select=id,titulo,descricao,imagem_url`
     + `&categoria=eq.${encodeURIComponent(categoria)}`
@@ -531,16 +540,23 @@ async function loadSecoes() {
   }
 
   // Imagens unicas (hero / imagem principal)
+  // Com [data-secao-chave], escolhe a foto cujo NOME DE ARQUIVO casa com a
+  // chave (blocos de itens fixos da home: pilares, numeros, como-ajudar).
   const imagens = document.querySelectorAll('[data-secao-img]');
   for (const img of imagens) {
     const pagina = img.getAttribute('data-pagina');
     const secao = pagina ? `${pagina}/${img.getAttribute('data-secao-img')}` : img.getAttribute('data-secao-img');
     const categoria = img.getAttribute('data-categoria') || '';
+    const chaveAlvo = img.getAttribute('data-secao-chave');
     try {
-      const itens = (await fetchSecao(categoria, secao)).filter((i) => i.imagem_url);
+      let itens = (await fetchSecao(categoria, secao)).filter((i) => i.imagem_url);
+      if (chaveAlvo) {
+        itens = itens.filter((i) => normalizarChave(i.titulo) === normalizarChave(chaveAlvo));
+      }
       if (itens.length) {
         img.src = itens[0].imagem_url;
         if (itens[0].titulo) img.alt = itens[0].titulo;
+        img.hidden = false;
       }
     } catch (error) { /* mantem a imagem padrao do HTML */ }
   }
