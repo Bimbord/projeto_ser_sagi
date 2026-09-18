@@ -130,7 +130,8 @@
   }
 
   function renderImage() {
-    return '<img src="' + HERO_CONFIG.poster + '" alt="Instituto S.E.R. Sagi em ação" class="h-full w-full object-contain object-top">';
+    const ajuste = HERO_CONFIG.posterCover ? 'object-cover' : 'object-contain object-top';
+    return '<img src="' + HERO_CONFIG.poster + '" alt="Instituto S.E.R. Sagi em ação" class="h-full w-full ' + ajuste + '">';
   }
 
   function buildSlideControls() {
@@ -282,11 +283,45 @@
     observer.observe(hero);
   }
 
+  // ============================================================
+  // FASE 5 — as fotos do hero vem da pasta `home/hero` do Drive
+  // (publicadas no Supabase). Sem foto publicada, mantem os
+  // arquivos locais de img/hero-slides/.
+  // ============================================================
+  const SUPABASE_URL = 'https://icrasqxbxmqbnelmkrei.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImljcmFzcXhieG1xYm5lbG1rcmVpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgyMDYzOTUsImV4cCI6MjEwMzc4MjM5NX0.u7cWsqTRWIvJJ-jsU7BbcOw1cVI-Su8eJBL_pBaQb_g';
+  const HERO_CATEGORIA = 'Home';
+  const HERO_SECAO = 'hero';
+
+  function buscarSlidesDoDrive() {
+    const url = SUPABASE_URL + '/rest/v1/arquivo?select=titulo,imagem_url'
+      + '&categoria=eq.' + encodeURIComponent(HERO_CATEGORIA)
+      + '&secao=eq.' + encodeURIComponent(HERO_SECAO)
+      + '&deleted=eq.false&order=id.asc';
+
+    return fetch(url, {
+      headers: { apikey: SUPABASE_ANON_KEY, Authorization: 'Bearer ' + SUPABASE_ANON_KEY }
+    })
+      .then(function (r) { return r.ok ? r.json() : []; })
+      .then(function (itens) {
+        const urls = (itens || []).map(function (i) { return i.imagem_url; }).filter(Boolean);
+        if (!urls.length) return;              // nada publicado -> locais
+        if (urls.length >= 2) {
+          HERO_CONFIG.slides = urls;           // 2+ -> slideshow
+        } else {
+          HERO_CONFIG.poster = urls[0];        // 1 -> imagem unica
+          HERO_CONFIG.posterCover = true;
+        }
+      })
+      .catch(function () { /* mantem os arquivos locais */ });
+  }
+
   function init() {
     const host = document.getElementById('hero-media');
     if (!host) return;
 
-    resolveHeroMode().then(function (mode) {
+    // Busca as fotos do Drive antes de decidir o modo do hero
+    buscarSlidesDoDrive().then(resolveHeroMode).then(function (mode) {
       if (mode === 'video' && prefersReducedMotion()) {
         mode = 'image';
       }
