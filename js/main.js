@@ -17,6 +17,44 @@ function setupMobileMenu() {
   });
 }
 
+function setupDropdowns() {
+  const drops = document.querySelectorAll('.nav-drop');
+  if (!drops.length) return;
+  const largura = () => window.matchMedia('(min-width: 1024px)').matches;
+  const fechar = (d) => {
+    d.classList.remove('aberto');
+    const b = d.querySelector('.nav-drop__botao');
+    if (b) b.setAttribute('aria-expanded', 'false');
+  };
+  drops.forEach((d) => {
+    const b = d.querySelector('.nav-drop__botao');
+    if (!b) return;
+    b.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const estava = d.classList.contains('aberto');
+      drops.forEach(fechar);
+      if (!estava) { d.classList.add('aberto'); b.setAttribute('aria-expanded', 'true'); }
+    });
+    d.addEventListener('mouseenter', () => {
+      if (largura()) { d.classList.add('aberto'); b.setAttribute('aria-expanded', 'true'); }
+    });
+    d.addEventListener('mouseleave', () => { if (largura()) fechar(d); });
+  });
+  document.addEventListener('click', (e) => { if (!e.target.closest('.nav-drop')) drops.forEach(fechar); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') drops.forEach(fechar); });
+}
+
+function setupAcordeoes() {
+  document.querySelectorAll('.nav-acc__botao').forEach((b) => {
+    b.addEventListener('click', () => {
+      const acc = b.closest('.nav-acc');
+      const aberto = acc.classList.toggle('aberto');
+      b.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+    });
+  });
+}
+
 function setupActiveLinks() {
   const current = window.location.pathname.split('/').pop() || 'index.html';
   // Sub-páginas de "Nossas Ações" (pages individuais de cada ação)
@@ -34,6 +72,13 @@ function setupActiveLinks() {
     // o link do Início aponta para a raiz ("./") para a URL não mostrar "index.html"
     const destino = href === './' ? 'index.html' : href;
     if (destino === target) link.classList.add('active');
+  });
+  // agrupador (dropdown/acordeão) fica destacado quando um filho está ativo
+  document.querySelectorAll('.nav-drop, .nav-acc').forEach((grupo) => {
+    if (grupo.querySelector('[data-page-link].active')) {
+      const pai = grupo.querySelector('.nav-drop__botao, .nav-acc__botao');
+      if (pai) pai.classList.add('active');
+    }
   });
 }
 
@@ -704,6 +749,8 @@ function setupArchiveFilters() {
 document.addEventListener('DOMContentLoaded', () => {
   setupMobileMenu();
   setupActiveLinks();
+  setupDropdowns();
+  setupAcordeoes();
   setupLeadForms();
   setupContactForms();
   setupNewsletterForms();
