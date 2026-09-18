@@ -38,19 +38,14 @@ import urllib.error
 import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from publicar import SUPABASE_URL, SUPABASE_ANON_KEY  # noqa: E402
-
-HEADERS = {
-    "apikey": SUPABASE_ANON_KEY,
-    "Authorization": f"Bearer {SUPABASE_ANON_KEY}",
-    "Content-Type": "application/json",
-}
+from publicar import SUPABASE_URL  # noqa: E402
+from supabase_admin import admin_disponivel, admin_headers, INSTRUCOES, SERVICE_KEY  # noqa: E402
 
 
 def inserir(tabela, dados):
     req = urllib.request.Request(f"{SUPABASE_URL}/rest/v1/{tabela}", method="POST",
                                  data=json.dumps(dados, ensure_ascii=False).encode("utf-8"))
-    for k, v in HEADERS.items():
+    for k, v in admin_headers(json_body=True).items():
         req.add_header(k, v)
     req.add_header("Prefer", "return=representation")
     with urllib.request.urlopen(req, timeout=30) as r:
@@ -60,9 +55,8 @@ def inserir(tabela, dados):
 def listar(tabela):
     url = f"{SUPABASE_URL}/rest/v1/{tabela}?select=*&deleted=eq.false&order=id.asc"
     req = urllib.request.Request(url)
-    for k, v in HEADERS.items():
-        if k != "Content-Type":
-            req.add_header(k, v)
+    for k, v in admin_headers().items():
+        req.add_header(k, v)
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.loads(r.read().decode())
 
@@ -78,8 +72,18 @@ def main():
         ap.add_argument(f"--{campo}", default=None)
     ap.add_argument("--ordem", type=int, default=0)
     ap.add_argument("--destaque", action="store_true", help="aparece nos cards da home")
+    ap.add_argument("--testar-chave", action="store_true", help="confere se a service_role esta configurada")
 
     a = ap.parse_args()
+
+    if a.testar_chave:
+        if admin_disponivel():
+            print(f"  ✅ service_role configurada ({len(SERVICE_KEY)} caracteres) — admin liberado")
+            print(f"     {SUPABASE_URL}")
+            print("     scripts de admin: scripts/cadastrar.py · scripts/excluir.py")
+        else:
+            print("  ❌ " + INSTRUCOES)
+        return
 
     try:
         if a.listar:
