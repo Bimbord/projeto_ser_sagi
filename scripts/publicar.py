@@ -44,6 +44,7 @@ CATEGORIAS = {
     "eventos": "Eventos",
     "home": "Home",
     "depoimentos": "Depoimentos",
+    "joia-da-coroa": "Jóia da Coroa",
     "institucional": "Institucional",
     "acervo": "Acervo",
     "acoes": "Ações",
