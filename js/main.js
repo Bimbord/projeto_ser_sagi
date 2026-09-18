@@ -20,7 +20,7 @@ function setupMobileMenu() {
 function setupActiveLinks() {
   const current = window.location.pathname.split('/').pop() || 'index.html';
   // Sub-páginas de "Nossas Ações" (pages individuais de cada ação)
-  const acoesSub = ['saude.html', 'estudio-musculacao.html', 'escola-jiu-jitsu.html', 'arena-futevolei-volei.html', 'acoes-solidarias.html', 'preservacao-ambiental.html', 'esporte.html', 'educacao.html', 'cultura.html', 'volei.html', 'futevolei.html', 'natacao.html', 'danca.html', 'ingles.html', 'espanhol.html', 'informatica.html', 'sustentabilidade.html'];
+  const acoesSub = ['saude.html', 'consultorio-odontologico.html', 'estudio-musculacao.html', 'escola-jiu-jitsu.html', 'arena-futevolei-volei.html', 'acoes-solidarias.html', 'preservacao-ambiental.html', 'esporte.html', 'educacao.html', 'cultura.html', 'volei.html', 'futevolei.html', 'natacao.html', 'danca.html', 'ingles.html', 'espanhol.html', 'informatica.html', 'sustentabilidade.html'];
   // Sub-páginas de "Acervo" (páginas por categoria)
   const acervoSub = ['acervo-esporte.html', 'acervo-saude.html', 'acervo-educacao.html', 'acervo-cultura.html', 'acervo-preservacao.html', 'acervo-eventos.html'];
   // Sub-páginas de "Quem Somos" (instalações)
