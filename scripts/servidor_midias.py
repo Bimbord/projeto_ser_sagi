@@ -178,11 +178,17 @@ def mover_para_publicados(caminho, categoria, nome):
 
 
 def varrer(manifesto, categoria_filtro=None, max_mb=MAX_MB_PADRAO):
-    """Varre as SUBPASTAS DE SECAO dentro de cada categoria.
+    """Varre as PASTAS DE SECAO (recursivo) dentro de cada categoria.
+
+    Uma pasta de secao e qualquer subpasta - em QUALQUER nivel - que contenha
+    arquivos de midia. O caminho relativo dela vira a coluna `secao`:
+
+        esporte/hero/foto.jpg          -> secao "hero"        (pagina do hub)
+        esporte/volei/hero/foto.jpg    -> secao "volei/hero"  (pagina da area)
+        esporte/volei/foto.jpg         -> secao "volei"
+        esporte/foto.jpg               -> IGNORADO (solto na raiz)
 
     Retorna (pendentes, ja_publicados, ignorados).
-    Regra: so entram arquivos DENTRO de uma pasta de secao. Arquivo solto na
-    raiz da categoria vai para `ignorados` (nao sobe).
     """
     pendentes, ja_publicados, ignorados = [], [], []
     for cat in CATEGORIAS:
@@ -193,26 +199,28 @@ def varrer(manifesto, categoria_filtro=None, max_mb=MAX_MB_PADRAO):
             continue
         info_cat = ler_info(pasta_cat)
 
-        for entrada in sorted(os.listdir(pasta_cat)):
-            caminho_entrada = os.path.join(pasta_cat, entrada)
+        for raiz, dirs, arqs in os.walk(pasta_cat):
+            # nao desce em pastas internas (_rascunho) nem ocultas
+            dirs[:] = [d for d in dirs if not d.startswith((".", "_"))]
 
-            # ---- arquivo solto na raiz da categoria: NAO sobe ----
-            if os.path.isfile(caminho_entrada):
-                if entrada != INFO_FILENAME:
-                    ignorados.append((cat, entrada,
-                                      "solta na raiz - so sobe o que esta em pasta de secao"))
+            na_raiz = os.path.abspath(raiz) == os.path.abspath(pasta_cat)
+            if na_raiz:
+                # arquivo solto na raiz da categoria: NAO sobe
+                for nome in sorted(arqs):
+                    if nome != INFO_FILENAME:
+                        ignorados.append((cat, nome,
+                                          "solta na raiz - so sobe o que esta em pasta de secao"))
                 continue
 
-            # ---- subpasta = SECAO ----
-            secao = entrada
-            info_secao = ler_info(caminho_entrada)
+            secao = os.path.relpath(raiz, pasta_cat).replace(os.sep, "/")
+            info_secao = ler_info(raiz)
             info = info_secao if info_secao else info_cat
             rotulo = f"{cat}/{secao}"
 
-            for nome in sorted(os.listdir(caminho_entrada)):
-                caminho = os.path.join(caminho_entrada, nome)
-                if not os.path.isfile(caminho) or nome == INFO_FILENAME:
+            for nome in sorted(arqs):
+                if nome == INFO_FILENAME:
                     continue
+                caminho = os.path.join(raiz, nome)
                 ext = os.path.splitext(nome)[1].lower()
                 if ext not in EXT_SUPORTADAS:
                     ignorados.append((rotulo, nome, "extensao nao suportada"))

@@ -381,6 +381,7 @@ function renderHighlights(items) {
 // SECOES ALIMENTADAS POR PASTA DO DRIVE (categoria + secao)
 // Cada subpasta de secao no Drive vira uma `secao` na tabela
 // `arquivo`. O bloco marcado com [data-secao="x"] e preenchido
+// (com [data-pagina] opcional, a secao vira "pagina/secao")
 // com as imagens daquela secao; [data-secao-img="x"] recebe a
 // primeira imagem (usado no hero e na imagem principal).
 // ============================================================
@@ -507,7 +508,9 @@ async function loadSecoes() {
   // Blocos com varias imagens (carrossel / galeria)
   const blocos = document.querySelectorAll('[data-secao]');
   for (const el of blocos) {
-    const secao = el.getAttribute('data-secao');
+    // data-pagina opcional: secao da PAGINA DA AREA (ex.: volei/carrossel)
+    const pagina = el.getAttribute('data-pagina');
+    const secao = pagina ? `${pagina}/${el.getAttribute('data-secao')}` : el.getAttribute('data-secao');
     const categoria = el.getAttribute('data-categoria') || '';
     try {
       const itens = (await fetchSecao(categoria, secao)).filter((i) => i.imagem_url);
@@ -530,7 +533,8 @@ async function loadSecoes() {
   // Imagens unicas (hero / imagem principal)
   const imagens = document.querySelectorAll('[data-secao-img]');
   for (const img of imagens) {
-    const secao = img.getAttribute('data-secao-img');
+    const pagina = img.getAttribute('data-pagina');
+    const secao = pagina ? `${pagina}/${img.getAttribute('data-secao-img')}` : img.getAttribute('data-secao-img');
     const categoria = img.getAttribute('data-categoria') || '';
     try {
       const itens = (await fetchSecao(categoria, secao)).filter((i) => i.imagem_url);
