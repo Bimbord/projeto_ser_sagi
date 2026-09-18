@@ -644,3 +644,74 @@ a.home-card:hover .home-card__cta { gap: .65rem; }
   margin-bottom: 0.75rem;
 }
 .home-stat__foto[hidden] { display: none; }
+
+
+/* ============================================================
+   DEPOIMENTOS COM MÍDIA — mensagem + imagem/vídeo + legenda
+   (pasta home/depoimentos do Drive, casada pelo nome)
+   ============================================================ */
+.home-quote__midia {
+  position: relative;
+  margin: -1.5rem -1.5rem 0;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  overflow: hidden;
+  background: var(--mist);
+}
+.home-quote__midia img,
+.home-quote__midia video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+.home-quote__midia--vazia { width: 100%; aspect-ratio: 16 / 10; background: linear-gradient(135deg, var(--ocean-deep), var(--ocean)); }
+.home-quote__selo {
+  position: absolute;
+  top: 0.625rem;
+  left: 0.625rem;
+  z-index: 2;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(8, 59, 76, 0.86);
+  color: #fff;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.home-quote__play {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(0deg, rgba(8, 59, 76, 0.38), rgba(8, 59, 76, 0.05));
+  text-decoration: none;
+}
+.home-quote__play span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ocean);
+  font-size: 1.15rem;
+  box-shadow: 0 6px 16px rgba(8, 59, 76, 0.28);
+}
+.home-quote__legenda {
+  margin: 0.75rem 0 0;
+  font-size: 0.72rem;
+  font-style: italic;
+  line-height: 1.5;
+  color: #64748b;
+}
+.home-quote__corpo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  margin-top: 1rem;
+}
+.home-quote__avatar--foto { object-fit: cover; }

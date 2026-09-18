@@ -204,7 +204,65 @@ function setupNewsletterForms() {
   });
 }
 
-function renderTestimonials(items) {
+function escaparHtml(texto) {
+  return (texto || '').toString()
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// Monta UM depoimento: mídia (foto/vídeo) + legenda + mensagem + autor.
+// `midia` vem da pasta home/depoimentos, casada pelo nome.
+function markupDepoimento(item, midia) {
+  const m = midia || {};
+  const imagem = item.imagem_url || m.imagem || '';
+  const video = item.video_url || m.video || '';
+  const legenda = item.legenda || m.legenda || '';
+  const ehArquivoVideo = /\.(mp4|webm|mov|m4v)(\?|$)/i.test(video);
+  const nome = escaparHtml(item.nome || '');
+  const inicial = (item.nome || 'S').trim().charAt(0).toUpperCase();
+  const papel = escaparHtml([item.perfil, item.local || 'Comunidade Sagi'].filter(Boolean).join(' · '));
+
+  let midiaHtml = '';
+  if (imagem || video) {
+    let dentro = '';
+    if (imagem) {
+      dentro += '<img src="' + escaparHtml(imagem) + '" alt="' + escaparHtml(legenda || item.nome || 'Depoimento') + '" loading="lazy">';
+      if (video) {
+        dentro += '<a class="home-quote__play" href="' + escaparHtml(video) + '" target="_blank" rel="noopener" aria-label="Assistir ao depoimento"><span><i class="fa-solid fa-play"></i></span></a>';
+      }
+    } else if (ehArquivoVideo) {
+      dentro += '<video src="' + escaparHtml(video) + '" controls preload="metadata" playsinline></video>';
+    } else {
+      dentro += '<div class="home-quote__midia--vazia"></div>'
+        + '<a class="home-quote__play" href="' + escaparHtml(video) + '" target="_blank" rel="noopener" aria-label="Assistir ao depoimento"><span><i class="fa-solid fa-play"></i></span></a>';
+    }
+    midiaHtml = '<div class="home-quote__midia">' + dentro
+      + '<span class="home-quote__selo">' + (video ? 'Vídeo' : 'Foto') + '</span></div>'
+      + (legenda ? '<p class="home-quote__legenda">' + escaparHtml(legenda) + '</p>' : '');
+  }
+
+  return `
+    <article class="home-card home-quote">
+      ${midiaHtml}
+      <div class="home-quote__corpo">
+        <span class="home-quote__mark" aria-hidden="true">&ldquo;</span>
+        <p class="home-card__text">${escaparHtml(item.texto)}</p>
+        <footer class="home-quote__footer">
+          <span class="home-quote__avatar">${escaparHtml(inicial)}</span>
+          <span>
+            <strong class="home-quote__name">${nome}</strong>
+            <span class="home-quote__role">${papel}</span>
+          </span>
+        </footer>
+      </div>
+    </article>
+  `;
+}
+
+function renderTestimonials(items, midias) {
   const container = document.querySelector('[data-render="testimonials"]');
   if (!container) return;
 
@@ -214,20 +272,27 @@ function renderTestimonials(items) {
     { nome: 'Carlos Henrique', perfil: 'Pai', titulo: 'A comunidade sente a diferença', texto: 'O Instituto trouxe oportunidade de verdade para as crianças e mais esperança para as famílias.', local: 'Baía Formosa/RN' }
   ];
 
-  const data = items.length ? items : fallback;
-  container.innerHTML = data.map((item) => `
-    <article class="home-card home-quote">
-      <span class="home-quote__mark" aria-hidden="true">&ldquo;</span>
-      <p class="home-card__text">${item.texto || ''}</p>
-      <footer class="home-quote__footer">
-        <span class="home-quote__avatar">${(item.nome || 'S').charAt(0)}</span>
-        <span>
-          <strong class="home-quote__name">${item.nome || ''}</strong>
-          <span class="home-quote__role">${item.perfil || ''} · ${item.local || 'Comunidade Sagi'}</span>
-        </span>
-      </footer>
-    </article>
-  `).join('');
+  // [data-limite="3"] mostra so os 3 em destaque (home); sem limite, mostra todos
+  const limite = parseInt(container.getAttribute('data-limite') || '0', 10);
+  let data = (items || []).slice().sort((a, b) => (a.ordem || 0) - (b.ordem || 0));
+
+  if (limite > 0) {
+    const destaques = data.filter((i) => i.destaque);
+    data = (destaques.length ? destaques : data).slice(0, limite);
+  }
+  const usandoFallback = !data.length;
+  if (usandoFallback) data = fallback;
+
+  container.innerHTML = data.map((item) => {
+    const chave = normalizarChave(item.nome);
+    const midia = (midias || {})[chave];
+    return markupDepoimento(item, midia);
+  }).join('');
+
+  container.setAttribute('data-ilustrativo', usandoFallback ? 'true' : 'false');
+  document.querySelectorAll('[data-badge-depoimentos]').forEach((el) => {
+    el.hidden = !usandoFallback;
+  });
 }
 
 function renderPartners(items) {
@@ -285,17 +350,18 @@ function renderGallery(items) {
 
 async function loadDynamicSections() {
   try {
-    const [depoimentos, parceiros, galeria] = await Promise.all([
+    const [depoimentos, parceiros, galeria, midiasDep] = await Promise.all([
       fetchTableData('depoimentos').catch(() => ({ data: [] })),
       fetchTableData('parceiros').catch(() => ({ data: [] })),
-      fetchTableData('galeria').catch(() => ({ data: [] }))
+      fetchTableData('galeria').catch(() => ({ data: [] })),
+      fetchMidiasDepoimentos().catch(() => ({}))
     ]);
 
-    renderTestimonials((depoimentos.data || []).filter((item) => !item.deleted));
+    renderTestimonials((depoimentos.data || []).filter((item) => !item.deleted), midiasDep);
     renderPartners((parceiros.data || []).filter((item) => !item.deleted));
     renderGallery((galeria.data || []).filter((item) => !item.deleted));
   } catch (error) {
-    renderTestimonials([]);
+    renderTestimonials([], {});
     renderPartners([]);
     renderGallery([]);
   }
@@ -392,6 +458,26 @@ function normalizarChave(texto) {
     .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '');
+}
+
+// Mídia dos depoimentos publicada da pasta home/depoimentos do Drive.
+// Devolve { "ana-paula": { imagem: url, video: url, legenda: titulo } }.
+// O casamento é pelo NOME do arquivo (mesma regra dos blocos da home).
+async function fetchMidiasDepoimentos() {
+  const itens = await fetchSecao('Home', 'depoimentos');
+  const mapa = {};
+  for (const i of itens) {
+    const k = normalizarChave(i.titulo);
+    if (!k) continue;
+    if (!mapa[k]) mapa[k] = {};
+    if (i.tipo === 'video' || (i.video_url && !i.imagem_url)) {
+      mapa[k].video = i.video_url || i.imagem_url;
+    } else {
+      mapa[k].imagem = i.imagem_url || i.video_url;
+    }
+    if (!mapa[k].legenda && i.descricao) mapa[k].legenda = i.descricao;
+  }
+  return mapa;
 }
 
 async function fetchSecao(categoria, secao) {
