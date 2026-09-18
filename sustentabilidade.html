@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config={theme:{extend:{colors:{ocean:'#0f5c73',oceanDeep:'#083b4c',sand:'#f5efe3',sun:'#f4b400',coral:'#e77b5f',leaf:'#2e7d4f',mist:'#e7f4f7'},fontFamily:{sans:['Inter','sans-serif']},boxShadow:{soft:'0 20px 60px rgba(8, 59, 76, 0.12)'}}}};</script>
-  <link rel="stylesheet" href="css/style.css?v=15" />
+  <link rel="stylesheet" href="css/style.css?v=16" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -36,7 +36,13 @@
       <button id="menu-toggle" class="inline-flex items-center rounded-lg border border-slate-300 px-3 py-2 text-ocean lg:hidden" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menu"><i class="fa-solid fa-bars"></i></button>
       <nav class="hidden items-center gap-1 lg:flex xl:gap-2" aria-label="Menu principal">
         <a href="./" data-page-link class="nav-link">Início</a>
-        <a href="quem-somos.html" data-page-link class="nav-link">Quem Somos</a>
+        <div class="nav-drop">
+          <button type="button" class="nav-link nav-drop__botao" aria-expanded="false" aria-haspopup="true">Quem Somos <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+          <div class="nav-drop__menu">
+            <a href="quem-somos.html" data-page-link>Quem Somos</a>
+            <a href="depoimentos.html" data-page-link>Depoimentos</a>
+          </div>
+        </div>
         <a href="joia-da-coroa.html" data-page-link class="nav-link nav-link--destaque">Jóia da Coroa</a>
         <div class="nav-drop">
           <button type="button" class="nav-link nav-drop__botao" aria-expanded="false" aria-haspopup="true">Nossas Ações <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
@@ -62,7 +68,6 @@
             <a href="acervo-eventos.html" data-page-link>Eventos</a>
           </div>
         </div>
-        <a href="depoimentos.html" data-page-link class="nav-link">Depoimentos</a>
         <a href="como-ajudar.html" data-page-link class="nav-link">Como Ajudar</a>
         <div class="nav-drop">
           <button type="button" class="nav-link nav-drop__botao" aria-expanded="false" aria-haspopup="true">Institucional <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
@@ -70,15 +75,21 @@
             <a href="lei-incentivo.html" data-page-link>Lei de Incentivo</a>
             <a href="transparencia.html" data-page-link>Transparência</a>
             <a href="instalacoes.html" data-page-link>Instalações</a>
+            <a href="contato.html" data-page-link>Contato</a>
           </div>
         </div>
-        <a href="contato.html" data-page-link class="nav-link">Contato</a>
       </nav>
       <div class="hidden items-center gap-3 xl:flex"><a href="lei-incentivo.html" class="cta-lift rounded-full border border-ocean px-4 py-2 text-sm font-semibold text-ocean transition hover:bg-ocean hover:text-white">Seja Parceiro</a><a href="como-ajudar.html#doacao" class="cta-lift rounded-full bg-sun px-4 py-2 text-sm font-semibold text-oceanDeep transition hover:brightness-95">Doe Agora</a></div>
     </div>
     <div id="mobile-menu" class="hidden border-t border-slate-200 bg-white lg:hidden"><nav class="mx-auto flex max-w-7xl flex-col px-4 py-4" aria-label="Menu mobile">
         <a href="./" data-page-link class="py-2 text-sm font-medium">Início</a>
-        <a href="quem-somos.html" data-page-link class="py-2 text-sm font-medium">Quem Somos</a>
+        <div class="nav-acc">
+          <button type="button" class="nav-acc__botao" aria-expanded="false">Quem Somos <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
+          <div class="nav-acc__menu">
+            <a href="quem-somos.html" data-page-link class="block py-2 text-sm">Quem Somos</a>
+            <a href="depoimentos.html" data-page-link class="block py-2 text-sm">Depoimentos</a>
+          </div>
+        </div>
         <a href="joia-da-coroa.html" data-page-link class="py-2 text-sm font-semibold text-ocean">Jóia da Coroa</a>
         <div class="nav-acc">
           <button type="button" class="nav-acc__botao" aria-expanded="false">Nossas Ações <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
@@ -104,7 +115,6 @@
             <a href="acervo-eventos.html" data-page-link class="block py-2 text-sm">Eventos</a>
           </div>
         </div>
-        <a href="depoimentos.html" data-page-link class="py-2 text-sm font-medium">Depoimentos</a>
         <a href="como-ajudar.html" data-page-link class="py-2 text-sm font-medium">Como Ajudar</a>
         <div class="nav-acc">
           <button type="button" class="nav-acc__botao" aria-expanded="false">Institucional <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></button>
@@ -112,9 +122,9 @@
             <a href="lei-incentivo.html" data-page-link class="block py-2 text-sm">Lei de Incentivo</a>
             <a href="transparencia.html" data-page-link class="block py-2 text-sm">Transparência</a>
             <a href="instalacoes.html" data-page-link class="block py-2 text-sm">Instalações</a>
+            <a href="contato.html" data-page-link class="block py-2 text-sm">Contato</a>
           </div>
         </div>
-        <a href="contato.html" data-page-link class="py-2 text-sm font-medium">Contato</a>
       </nav></div>
   </header>
   <main id="conteudo-principal">
@@ -268,6 +278,6 @@
       </div>
     </div>
   </footer>
-  <script src="js/main.js?v=15"></script>
+  <script src="js/main.js?v=16"></script>
 </body>
 </html>

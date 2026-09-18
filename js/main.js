@@ -62,7 +62,7 @@ function setupActiveLinks() {
   // Sub-páginas de "Acervo" (páginas por categoria)
   const acervoSub = ['acervo-esporte.html', 'acervo-saude.html', 'acervo-educacao.html', 'acervo-cultura.html', 'acervo-preservacao.html', 'acervo-eventos.html'];
   // Sub-páginas de "Quem Somos" (instalações)
-  const quemSomosSub = ['instalacoes.html'];
+  const quemSomosSub = [];   // instalacoes.html passou para o menu Institucional
   let target = current;
   if (acoesSub.includes(current)) target = 'acoes.html';
   else if (acervoSub.includes(current)) target = 'acervo.html';
