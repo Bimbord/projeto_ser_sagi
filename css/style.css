@@ -823,3 +823,20 @@ a.home-stat:hover .home-stat__value { color: var(--ocean); }
 .nav-acc.aberto .nav-acc__botao .fa-chevron-down { transform: rotate(180deg); }
 .nav-acc__menu { display: none; padding: 0 0 0.5rem 0.75rem; }
 .nav-acc.aberto .nav-acc__menu { display: block; }
+
+
+/* Item que fecha a lista do dropdown ("Ver todas as ações" / "Acervo completo") */
+.nav-drop__menu a.nav-drop__todos {
+  margin-top: 0.3rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(15, 92, 115, 0.12);
+  font-weight: 700;
+  color: var(--ocean-deep);
+}
+.nav-acc__menu a.nav-drop__todos {
+  margin-top: 0.3rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(15, 92, 115, 0.12);
+  font-weight: 700;
+  color: var(--ocean-deep);
+}
