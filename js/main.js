@@ -610,7 +610,7 @@ async function loadSecoes() {
     try {
       const itens = (await fetchSecao(categoria, secao)).filter((i) => i.imagem_url);
       if (!itens.length) {
-        el.innerHTML = `<p class="secao-vazio">Nenhuma imagem publicada nesta secao ainda.</p>`;
+        el.innerHTML = `<p class="secao-vazio"><i class="fa-solid fa-images" aria-hidden="true"></i> Ainda não há imagens publicadas nesta seção. Elas aparecem aqui assim que forem enviadas.</p>`;
         continue;
       }
       if (secao.toLowerCase().includes('carrossel')) {
