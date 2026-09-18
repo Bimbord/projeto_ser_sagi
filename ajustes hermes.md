@@ -428,6 +428,13 @@ Decisão de método: **fases, uma por vez, com aprovação a cada fim**.
 - **Parte C** — depoimentos com **mensagem + imagem/vídeo + legenda**; página nova `depoimentos.html`; botão na home; link no menu e no rodapé das **33 páginas**; `scripts/cadastrar.py`.
 - Card de depoimento tem fallback em tudo: sem mídia, sem legenda ou sem registro, ele não quebra.
 
+### Fases 4b e 6 — fechando o padrão em todo o site
+- **4b:** carrossel + galeria nas **11 páginas de área** (decisão do Bimbord: *"já deixar tudo de pé, as fotos virão depois só para alimentar"*). Nascem vazias, com aviso amigável. O aviso antigo (`"Nenhuma imagem publicada nesta secao ainda."`) foi reescrito, com acento correto.
+- **6:** hero com imagem nas **15 páginas restantes** (6 institucional + 2 ações + 7 acervo), incluindo `lei-incentivo.html`, que usa `hero-pattern` em vez de `page-banner` e precisou de tratamento próprio.
+- **Resultado: 32 das 33 páginas com hero + imagem** (a home tem o hero próprio, com slideshow) · 32 com breadcrumb · 33 com seções do Drive · **0 páginas vazias**.
+- Pastas novas: `institucional/<página>/hero`, `acoes/hero` + `acoes/acoes-solidarias/hero`, `acervo/hero` + `acervo/<página>/hero`. Categorias `institucional`, `acervo` e `acoes` adicionadas ao `publicar.py`.
+- QA: `scripts/_teste_fase4b.py` varre o HTML e confere **as 57 seções** (blocos + imagens únicas) contra o banco — 57 OK, 0 erro.
+
 ### Scripts de admin criados (service_role local)
 - `scripts/supabase_admin.py` — lê a chave de `C:/Users/PRE-IMPRESSOR/R2/.supabase-sagi.env` (fora do repo).
 - `scripts/cadastrar.py` — cadastra depoimentos/parceiros (`--testar-chave`, `--listar`).
