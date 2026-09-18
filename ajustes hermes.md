@@ -453,3 +453,35 @@ Decisão de método: **fases, uma por vez, com aprovação a cada fim**.
 ### Arquivos mexidos nesta sessão
 33 páginas `.html` (inclui **`depoimentos.html`** nova) · `css/style.css` · `js/main.js` · `js/hero.js` · `scripts/servidor_midias.py` · `scripts/publicar.py` · `scripts/supabase_admin.py` (novo) · `scripts/cadastrar.py` (novo) · `scripts/excluir.py` (novo) · `docs/pendencias.md` · `docs/supabase-add-depoimentos.sql` (novo) · `docs/sql-limpar-teste-home.sql`
 
+
+---
+
+## Sessão 12 — 18/09 · Menu com dropdown, página da Jóia da Coroa e prontidão para upload
+
+### Menu com dropdown (34 páginas)
+- 7 itens no topo: `Início · Quem Somos ▾ · Nossas Ações ▾ · Acervo ▾ · Jóia da Coroa · Como Ajudar · Institucional ▾`
+- Desktop: abre no **hover** e no **clique**; `Esc` e clique-fora fecham; o agrupador fica azul quando uma página filha está ativa
+- Mobile: **acordeão**; os botões **Seja Parceiro** e **Doe Agora** passaram a existir no menu do celular (antes só existiam em telas largas)
+- "Ver todas as ações" e "Acervo completo" **fecham as listas**, com traço de separação
+
+### Página nova: `joia-da-coroa.html`
+- Conteúdo **100% do PDF oficial** (páginas 4, 7, 10, 13, 16, 23, 24, 26): citação oficial, números, 10 cards de modalidade (linkam para as páginas), estruturas, carrossel/galeria e CTA de captação
+- Ligada na home (card de número + título do card) e no rodapé das 34 páginas
+
+### Topo em telas médias — **medido no navegador**
+- Em 1024px faltavam ~153px para os botões CTA caberem; compactado (menu, botões e logo) na faixa 1024–1279px → cabem de 1024 a 1600
+- **Bug antigo achado ao medir:** o e-mail do rodapé estourava 38px em 1024px (corrigido com `overflow-wrap: anywhere`)
+
+### Ajustes de texto na home (pedido do Bimbord)
+- Card de número: "Projeto principal" → **Jóia da Coroa** / "crianças tendo suas vidas transformadas"
+- Removidos: selo "Conteúdo ilustrativo" (depoimentos e parceiros) e o rótulo "Chamada para ação"
+- Legendas novas em depoimentos, parceiros e chamada para ação
+- ⚠️ **Decisão do Bimbord:** o conteúdo ilustrativo (3 depoimentos e 4 parceiros fictícios) fica no ar até o cliente mandar o material real. Quando o primeiro registro real for cadastrado, os fictícios saem sozinhos.
+
+### Prontidão para upload
+- `scripts/_prontidao_upload.py` compara **os slots do site** com **as pastas do Drive**: **64 de 64** ✅ (cobre também os cards com chave da home)
+- Guia para o cliente: **`COMO SUBIR AS MIDIAS - passo a passo.txt`** (raiz da pasta de mídia) + cópia em `docs/como-subir-midias.md`
+- Teste da esteira: scanner sem pendências ✅ · cadastro vazio ✅ · chave de admin ✅
+
+### Lição da sessão
+- **Medir no navegador antes de estimar layout.** Em 1024px a conta só fechou depois de medir elemento por elemento (`getBoundingClientRect`) — e foi medindo que apareceu o transbordo antigo do rodapé.
