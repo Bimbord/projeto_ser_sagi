@@ -715,3 +715,21 @@ a.home-card:hover .home-card__cta { gap: .65rem; }
   margin-top: 1rem;
 }
 .home-quote__avatar--foto { object-fit: cover; }
+
+
+/* ============================================================
+   LOGOMARCA DE PARCEIRO (pasta home/parceiros, casada pelo nome)
+   Sem logo publicada, o card mostra as iniciais (logo_texto).
+   ============================================================ */
+.home-partner__logo img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: .75;
+  transition: filter .25s ease, opacity .25s ease;
+}
+.home-partner:hover .home-partner__logo img { filter: grayscale(0); opacity: 1; }

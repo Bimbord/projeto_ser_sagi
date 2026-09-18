@@ -295,7 +295,7 @@ function renderTestimonials(items, midias) {
   });
 }
 
-function renderPartners(items) {
+function renderPartners(items, midias) {
   const container = document.querySelector('[data-render="partners"]');
   if (!container) return;
 
@@ -306,14 +306,22 @@ function renderPartners(items) {
     { nome: 'Rede Potiguar', categoria: 'Apoiador local', logo_texto: 'RP', descricao: 'Apoiador local com foco em impacto territorial.' }
   ];
 
-  const data = items.length ? items : fallback;
-  container.innerHTML = data.map((item) => `
-    <article class="home-card home-partner" title="${item.descricao || ''}">
-      <span class="home-partner__logo" aria-hidden="true">${item.logo_texto || 'MK'}</span>
-      <span class="home-partner__name">${item.nome || ''}</span>
-      <span class="home-partner__cat">${item.categoria || ''}</span>
+  const data = (items || []).length ? items : fallback;
+  container.innerHTML = data.map((item) => {
+    // logo: URL do banco > pasta home/parceiros (casada pelo nome) > iniciais
+    const pelaPasta = (midias || {})[normalizarChave(item.nome)];
+    const logo = item.logo_url || (pelaPasta && pelaPasta.imagem) || '';
+    const dentro = logo
+      ? `<img src="${escaparHtml(logo)}" alt="${escaparHtml(item.nome || 'Parceiro')}" loading="lazy">`
+      : escaparHtml(item.logo_texto || 'MK');
+    return `
+    <article class="home-card home-partner" title="${escaparHtml(item.descricao || '')}">
+      <span class="home-partner__logo" aria-hidden="true">${dentro}</span>
+      <span class="home-partner__name">${escaparHtml(item.nome || '')}</span>
+      <span class="home-partner__cat">${escaparHtml(item.categoria || '')}</span>
     </article>
-  `).join('');
+  `;
+  }).join('');
 }
 
 function renderGallery(items) {
@@ -350,19 +358,20 @@ function renderGallery(items) {
 
 async function loadDynamicSections() {
   try {
-    const [depoimentos, parceiros, galeria, midiasDep] = await Promise.all([
+    const [depoimentos, parceiros, galeria, midiasDep, midiasPar] = await Promise.all([
       fetchTableData('depoimentos').catch(() => ({ data: [] })),
       fetchTableData('parceiros').catch(() => ({ data: [] })),
       fetchTableData('galeria').catch(() => ({ data: [] })),
-      fetchMidiasDepoimentos().catch(() => ({}))
+      fetchMidiasDepoimentos().catch(() => ({})),
+      fetchMidiasParceiros().catch(() => ({}))
     ]);
 
     renderTestimonials((depoimentos.data || []).filter((item) => !item.deleted), midiasDep);
-    renderPartners((parceiros.data || []).filter((item) => !item.deleted));
+    renderPartners((parceiros.data || []).filter((item) => !item.deleted), midiasPar);
     renderGallery((galeria.data || []).filter((item) => !item.deleted));
   } catch (error) {
     renderTestimonials([], {});
-    renderPartners([]);
+    renderPartners([], {});
     renderGallery([]);
   }
 }
@@ -463,6 +472,18 @@ function normalizarChave(texto) {
 // Mídia dos depoimentos publicada da pasta home/depoimentos do Drive.
 // Devolve { "ana-paula": { imagem: url, video: url, legenda: titulo } }.
 // O casamento é pelo NOME do arquivo (mesma regra dos blocos da home).
+// Logomarcas de parceiros publicadas da pasta home/parceiros do Drive.
+// Mesma regra dos depoimentos: o NOME do arquivo casa com o campo `nome`.
+async function fetchMidiasParceiros() {
+  const itens = await fetchSecao('Home', 'parceiros');
+  const mapa = {};
+  for (const i of itens) {
+    const k = normalizarChave(i.titulo);
+    if (k && !mapa[k]) mapa[k] = { imagem: i.imagem_url || i.video_url, legenda: i.descricao || '' };
+  }
+  return mapa;
+}
+
 async function fetchMidiasDepoimentos() {
   const itens = await fetchSecao('Home', 'depoimentos');
   const mapa = {};
