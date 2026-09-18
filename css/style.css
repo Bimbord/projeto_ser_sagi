@@ -733,3 +733,20 @@ a.home-card:hover .home-card__cta { gap: .65rem; }
   transition: filter .25s ease, opacity .25s ease;
 }
 .home-partner:hover .home-partner__logo img { filter: grayscale(0); opacity: 1; }
+
+
+/* ============================================================
+   CARDS DE IMPACTO EM NÚMEROS — clicáveis
+   (viraram <a>; <dt>/<dd> viraram <span>, precisam de display:block)
+   ============================================================ */
+.home-stat__label,
+.home-stat__value { display: block; }
+a.home-stat {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: background .25s ease;
+}
+a.home-stat:hover { background: var(--mist); }
+a.home-stat:focus-visible { outline: 2px solid var(--ocean); outline-offset: -2px; }
+a.home-stat:hover .home-stat__value { color: var(--ocean); }
