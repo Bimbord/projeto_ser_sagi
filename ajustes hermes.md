@@ -394,3 +394,55 @@ Os 5 cards da seção **"Nossos pilares"** deixaram de ser estáticos e passaram
 ### Arquivos mexidos nesta sessão (para não conflitar com o Kilo Code)
 `index.html` · `scripts/_check_site.py` · `scripts/servidor_midias.py` (novo) · `docs/servidor-midias.md` (novo) · `docs/infraestrutura-midias.md` · `docs/pendencias.md`
 
+---
+
+## Sessão 11 — 17 e 18/09 · Padrão replicado + Home em pastas + Depoimentos
+
+Pedido que abriu a sessão: *"analise as outras páginas para que possamos replicar esse trabalho"* — o padrão da página **Saúde** (hero com imagem, seções do Drive, breadcrumb).
+Decisão de método: **fases, uma por vez, com aprovação a cada fim**.
+
+### Fase 1 — Breadcrumb em 31 páginas
+- Faixa **fora do hero** (`.breadcrumb--claro`), formato `Início › Nossas Ações › Saúde`.
+- Cada página recebeu também **dados estruturados `BreadcrumbList`** (SEO).
+- `lei-incentivo.html` usa banner `hero-pattern` (não `page-banner`) — precisou de script próprio.
+
+### Fase 2 — Seções em caminho (`categoria/pagina/secao`)
+- `servidor_midias.py` passou a fazer **varredura recursiva**: qualquer subpasta com mídia é uma seção, e o caminho relativo vira a coluna `secao` (`esporte/volei/hero`).
+- `js/main.js` ganhou **`data-pagina`** (junto de `data-secao`) — o JS monta `pagina/secao`.
+- Testado: scanner achou `[esporte/volei/hero]`; consultas `Esporte/volei/hero` e `Saúde/carrossel` responderam HTTP 200.
+
+### Fases 3 e 4a — Hero com imagem
+- **4 categorias** (esporte, educacao, cultura, preservação) e **11 áreas** (7 de esporte + 4 de educação).
+- Estrutura: banner mais alto + `<img>` de fundo + `.banner-scrim` + conteúdo com `relative z-10`.
+- Imagem de reserva ilustrativa até existir foto real na pasta correspondente.
+
+### Estrutura do Drive padronizada (decisão do Bimbord: "nomes técnicos" + "meu estilo")
+- Pastas em **minúsculo, sem acento, com hífen** = nome da página.
+- **Uma pasta por componente** da página (`hero`, `numeros`, `pilares`, `cards-modalidades`, `galeria`).
+- Removidas 11 pastas antigas (vazias) com nomes naturais (`Vôlei`, `Dança`…) e criada a estrutura-alvo.
+- Guia para o cliente na raiz da pasta de mídia: **`LEIA-ME - estrutura de pastas.txt`**.
+
+### Fase 5 — Home alimentada por pastas
+- **Parte A** — `home/hero` (0 fotos = slides locais · 1 = imagem única · 2+ = slideshow) e `home/joia-da-coroa`.
+- **Parte B** — `home/pilares` (5), `home/numeros` (6) e `home/como-ajudar` (3): o **nome do arquivo é a chave** do card (`data-secao-chave` + `normalizarChave()`, que ignora acento/maiúscula).
+- **Parte C** — depoimentos com **mensagem + imagem/vídeo + legenda**; página nova `depoimentos.html`; botão na home; link no menu e no rodapé das **33 páginas**; `scripts/cadastrar.py`.
+- Card de depoimento tem fallback em tudo: sem mídia, sem legenda ou sem registro, ele não quebra.
+
+### Scripts de admin criados (service_role local)
+- `scripts/supabase_admin.py` — lê a chave de `C:/Users/PRE-IMPRESSOR/R2/.supabase-sagi.env` (fora do repo).
+- `scripts/cadastrar.py` — cadastra depoimentos/parceiros (`--testar-chave`, `--listar`).
+- `scripts/excluir.py` — apaga registros com **conferência depois** (`--listar`, `--ids`, `--definitivo`).
+
+### ⚠️ Lições desta sessão (não repetir)
+- **RLS devolve 204 mesmo bloqueando.** `PATCH`, `DELETE` (e `INSERT` bloqueado) respondem **HTTP 204/201 sem erro**, com 0 linhas afetadas. **Sempre reler o registro** depois de gravar.
+- **Mapa de permissões da anon key:** `arquivo` e `contatos` **inserem**; `depoimentos` e `parceiros` **não** (`42501`). Por isso os scripts de cadastro usam a `service_role` local.
+- **`contatos` permite INSERT e não permite SELECT** — o registro existe mas não aparece na consulta (privacidade correta).
+- **Teste que publica/insere suja o banco.** Validar a lógica **fora do site** antes: Python repetindo a consulta + o casamento de chaves (`scripts/_teste_parteB.py`) e **Node rodando a própria função do `main.js`** (`scripts/_teste_card_depoimento.js`).
+- **Windows não distingue maiúscula de minúscula** no caminho: `home/Depoimentos` e `home/depoimentos` são a mesma pasta — ao "remover a antiga" a nova também sai.
+
+### Ferramentas de QA que ficaram
+`scripts/_checar_links.py` (links internos) · `scripts/_auditoria.py` (raio-X do padrão por página) · `scripts/bump_versao.py` (cache-busting) · `scripts/_teste_parteB.py` · `scripts/_teste_card_depoimento.js` · `scripts/_teste_fase5C_completo.py`
+
+### Arquivos mexidos nesta sessão
+33 páginas `.html` (inclui **`depoimentos.html`** nova) · `css/style.css` · `js/main.js` · `js/hero.js` · `scripts/servidor_midias.py` · `scripts/publicar.py` · `scripts/supabase_admin.py` (novo) · `scripts/cadastrar.py` (novo) · `scripts/excluir.py` (novo) · `docs/pendencias.md` · `docs/supabase-add-depoimentos.sql` (novo) · `docs/sql-limpar-teste-home.sql`
+
