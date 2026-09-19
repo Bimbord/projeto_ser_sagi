@@ -463,18 +463,20 @@ function renderHighlights(items) {
   if (!container) return;
   const destaques = items.filter((i) => i.destaque).slice(0, 3);
   if (!destaques.length) {
-    const ilustra = [
-      { url: 'https://loremflickr.com/800/500/kids,sport,playing?lock=711', cat: 'Esporte', titulo: 'Aula de jiu-jitsu', desc: 'Imagem ilustrativa de uma atividade esportiva do Instituto.' },
-      { url: 'https://loremflickr.com/800/500/beach,volleyball,fun?lock=712', cat: 'Comunidade', titulo: 'Arena em atividade', desc: 'Imagem ilustrativa de um dia de esporte e lazer na arena.' },
-      { url: 'https://loremflickr.com/800/500/children,party,celebration?lock=713', cat: 'Eventos', titulo: 'Comemoração comunitária', desc: 'Imagem ilustrativa de um evento comemorativo do Instituto.' }
+    // Sem destaque real: cartão NEUTRO. Nada de foto aleatória de banco de
+    // imagens (já apareceu beisebol num card de jiu-jitsu por causa disso).
+    const reservados = [
+      { cat: 'Esporte', titulo: 'Espaço reservado', desc: 'O registro do mês desta frente aparece aqui.' },
+      { cat: 'Comunidade', titulo: 'Espaço reservado', desc: 'O registro do mês desta frente aparece aqui.' },
+      { cat: 'Eventos', titulo: 'Espaço reservado', desc: 'O registro do mês desta frente aparece aqui.' }
     ];
-    container.innerHTML = ilustra.map((i) => `
+    container.innerHTML = reservados.map((i) => `
     <a href="acervo.html" class="home-card block">
-      <div class="relative overflow-hidden rounded-2xl"><img src="${i.url}" alt="${i.titulo}" class="h-48 w-full object-cover" loading="lazy" /></div>
+      <div class="relative overflow-hidden rounded-2xl"><div class="flex h-48 w-full items-center justify-center bg-gradient-to-br from-mist to-sand"><i class="fa-solid fa-camera text-3xl text-ocean/40"></i></div></div>
       <div class="p-2 pt-4">
         <div class="flex items-center justify-between gap-2">
           <p class="text-xs font-semibold uppercase tracking-[0.2em] text-ocean">${i.cat}</p>
-          <span class="inline-flex items-center gap-1 rounded-full bg-sand px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-500"><i class="fa-solid fa-wand-magic-sparkles text-[8px]"></i>Ilustrativo</span>
+          <span class="inline-flex items-center gap-1 rounded-full bg-sand px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-slate-500"><i class="fa-solid fa-camera text-[8px]"></i>Em breve</span>
         </div>
         <h3 class="mt-2 text-lg font-bold text-oceanDeep">${i.titulo}</h3>
         <p class="mt-2 text-sm leading-7 text-slate-600">${i.desc}</p>
