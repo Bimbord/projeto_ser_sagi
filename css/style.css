@@ -510,6 +510,43 @@ a.home-card:hover .home-card__cta { gap: .65rem; }
   .carrossel-arrow--next { right: 0.15rem; }
 }
 
+/* --- Frentes em ação: uma chamada por pilar, em carrossel --- */
+.carrossel--frentes { padding-bottom: 1rem; }
+.frente__item {
+  flex: 0 0 auto;
+  width: min(84vw, 22rem);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #fff;
+  border: var(--border-card);
+  box-shadow: var(--shadow-card);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.frente__item:hover { transform: translateY(-4px); box-shadow: var(--shadow-card-hover, var(--shadow-card)); }
+.frente__item:focus-visible { outline: 3px solid var(--ocean); outline-offset: 3px; }
+.frente__midia {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--mist), var(--sand));
+  overflow: hidden;
+}
+.frente__midia img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.frente__vazio { color: rgba(15, 92, 115, .35); font-size: 2.25rem; }
+.frente__corpo { display: flex; flex-direction: column; gap: .5rem; flex: 1; padding: 1.25rem 1.4rem 1.4rem; }
+.frente__nome { font-size: 1.15rem; font-weight: 800; color: var(--ocean-deep); }
+.frente__texto { font-size: .9rem; line-height: 1.7; color: #475569; }
+.frente__link { margin-top: auto; padding-top: .5rem; font-size: .85rem; font-weight: 700; color: var(--ocean); }
+@media (max-width: 639px) {
+  .frente__item { width: min(88vw, 20rem); }
+  .frente__corpo { padding: 1rem 1.1rem 1.2rem; }
+}
+
 /* --- Galeria clicavel --- */
 .secao-figura {
   display: block;

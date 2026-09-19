@@ -581,13 +581,74 @@ function ligarSetasCarrossel(el) {
   const faixa = el.querySelector('.carrossel');
   if (!faixa) return;
   const passo = () => {
-    const item = faixa.querySelector('.carrossel__item');
+    const item = faixa.querySelector('.carrossel__item, .frente__item');
     return item ? item.getBoundingClientRect().width + 16 : Math.round(faixa.clientWidth * 0.8);
   };
   const prev = el.querySelector('[data-carrossel-prev]');
   const next = el.querySelector('[data-carrossel-next]');
   if (prev) prev.addEventListener('click', () => faixa.scrollBy({ left: -passo(), behavior: 'smooth' }));
   if (next) next.addEventListener('click', () => faixa.scrollBy({ left: passo(), behavior: 'smooth' }));
+}
+
+// ============================================================
+// FRENTES EM AÇÃO — carrossel com uma chamada por pilar
+// (as fotos vêm da pasta home/pilares; o texto é fixo)
+// Fontes: rolagem lateral com setas + arrastar (nativo) — sem
+// rotação automática, que atrapalha quem lê devagar.
+// ============================================================
+const FRENTES = [
+  { chave: 'saude', nome: 'Saúde', texto: 'Consultório odontológico e promoção de bem-estar para as famílias.', href: 'saude.html' },
+  { chave: 'esporte', nome: 'Esporte', texto: 'Jiu-jitsu, futevôlei, vôlei, musculação e natação.', href: 'esporte.html' },
+  { chave: 'educacao', nome: 'Educação', texto: 'Idiomas, informática e sustentabilidade para as crianças.', href: 'educacao.html' },
+  { chave: 'cultura', nome: 'Cultura', texto: 'Origens indígenas, convivência comunitária e ações solidárias.', href: 'cultura.html' },
+  { chave: 'preservacao', nome: 'Preservação', texto: 'Proteção de tartarugas e educação socioambiental.', href: 'preservacao-ambiental.html' }
+];
+
+async function fetchMidiasPilares() {
+  const itens = await fetchSecao('Home', 'pilares');
+  const mapa = {};
+  for (const i of itens) {
+    const k = normalizarChave(i.titulo);
+    if (k) mapa[k] = { imagem: i.imagem_url || i.video_url || '' };
+  }
+  return mapa;
+}
+
+function markupFrentes(midias) {
+  const cards = FRENTES.map((f) => {
+    const m = (midias || {})[normalizarChave(f.chave)] || {};
+    const foto = m.imagem || '';
+    return `
+      <a class="frente__item" href="${escaparHtml(f.href)}">
+        <div class="frente__midia">${foto
+          ? '<img src="' + escaparHtml(foto) + '" alt="' + escaparHtml(f.nome) + '" loading="lazy">'
+          : '<span class="frente__vazio"><i class="fa-solid fa-camera"></i></span>'}</div>
+        <div class="frente__corpo">
+          <h3 class="frente__nome">${escaparHtml(f.nome)}</h3>
+          <p class="frente__texto">${escaparHtml(f.texto)}</p>
+          <span class="frente__link">Conheça <span aria-hidden="true">&rarr;</span></span>
+        </div>
+      </a>`;
+  }).join('');
+  return `
+  <div class="carrossel-wrap">
+    <button type="button" class="carrossel-arrow carrossel-arrow--prev" data-carrossel-prev aria-label="Frente anterior"><i class="fa-solid fa-chevron-left"></i></button>
+    <div class="carrossel carrossel--frentes">${cards}</div>
+    <button type="button" class="carrossel-arrow carrossel-arrow--next" data-carrossel-next aria-label="Próxima frente"><i class="fa-solid fa-chevron-right"></i></button>
+  </div>`;
+}
+
+async function renderFrentes() {
+  const container = document.querySelector('[data-render="frentes"]');
+  if (!container) return;
+  let midias = {};
+  try {
+    midias = await fetchMidiasPilares();
+  } catch (error) {
+    midias = {};
+  }
+  container.innerHTML = markupFrentes(midias);
+  ligarSetasCarrossel(container);
 }
 
 function markupGrade(itens) {
@@ -759,4 +820,5 @@ document.addEventListener('DOMContentLoaded', () => {
   setupArchiveFilters();
   loadArchive();
   loadSecoes();
+  renderFrentes();
 });
