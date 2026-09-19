@@ -127,15 +127,19 @@ def ler_ficha(caminho):
 
 
 def mapa_de_fotos(url_base, chave, categoria, secao):
-    """titulo normalizado -> URL pública da foto (vem da tabela 'arquivo')."""
-    url = (f"{url_base}/rest/v1/arquivo?select=titulo,imagem_url,video_url,descricao"
+    """titulo normalizado -> URL pública da foto (vem da tabela 'arquivo').
+
+    Quando a mesma chave tem mais de uma linha (foto substituída), vale a
+    MAIS NOVA (maior id) — senão a foto antiga continua ganhando.
+    """
+    url = (f"{url_base}/rest/v1/arquivo?select=id,titulo,imagem_url,video_url,descricao"
            f"&categoria=eq.{urllib.parse.quote(categoria)}"
-           f"&secao=eq.{urllib.parse.quote(secao)}&deleted=eq.false")
+           f"&secao=eq.{urllib.parse.quote(secao)}&deleted=eq.false&order=id.asc")
     itens = requisitar(url, chave)
     mapa = {}
     for i in itens:
         k = normalizar_chave(i.get("titulo"))
-        if k and k not in mapa:
+        if k:
             mapa[k] = {"foto": i.get("imagem_url") or i.get("video_url") or "",
                        "video": i.get("video_url") or "",
                        "legenda": i.get("descricao") or ""}
