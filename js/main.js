@@ -284,8 +284,7 @@ function markupDepoimento(item, midia) {
       dentro += '<div class="home-quote__midia--vazia"></div>'
         + '<a class="home-quote__play" href="' + escaparHtml(video) + '" target="_blank" rel="noopener" aria-label="Assistir ao depoimento"><span><i class="fa-solid fa-play"></i></span></a>';
     }
-    midiaHtml = '<div class="home-quote__midia">' + dentro
-      + '<span class="home-quote__selo">' + (video ? 'Vídeo' : 'Foto') + '</span></div>'
+    midiaHtml = '<div class="home-quote__midia">' + dentro + '</div>'
       + (legenda ? '<p class="home-quote__legenda">' + escaparHtml(legenda) + '</p>' : '');
   }
 
@@ -296,7 +295,7 @@ function markupDepoimento(item, midia) {
         <span class="home-quote__mark" aria-hidden="true">&ldquo;</span>
         <p class="home-card__text">${escaparHtml(item.texto)}</p>
         <footer class="home-quote__footer">
-          <span class="home-quote__avatar">${escaparHtml(inicial)}</span>
+          ${imagem || video ? '' : '<span class="home-quote__avatar">' + escaparHtml(inicial) + '</span>'}
           <span>
             <strong class="home-quote__name">${nome}</strong>
             <span class="home-quote__role">${papel}</span>
