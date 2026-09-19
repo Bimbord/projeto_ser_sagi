@@ -151,11 +151,13 @@ def montar_registro(tabela, bloco, origem, fotos, indice=0):
     reg, foto_nome, problemas = {}, bloco.get("foto") or bloco.get("logo") or "", []
 
     for campo, valor in bloco.items():
-        if not valor or campo in ("foto", "logo"):
+        if campo in ("foto", "logo"):
             continue
         if campo not in CAMPOS_VALIDOS[tabela]:
             problemas.append(f"campo desconhecido '{campo}' (ignorado)")
             continue
+        # campo presente na ficha MANDA no site — inclusive vazio
+        # (ex.: "categoria:" vazio limpa a categoria que estava lá)
         reg[campo] = valor
     if tabela == "parceiros" and "texto" in reg and "descricao" not in reg:
         reg["descricao"] = reg.pop("texto")
