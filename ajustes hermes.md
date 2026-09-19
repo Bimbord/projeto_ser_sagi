@@ -485,3 +485,37 @@ Decisão de método: **fases, uma por vez, com aprovação a cada fim**.
 
 ### Lição da sessão
 - **Medir no navegador antes de estimar layout.** Em 1024px a conta só fechou depois de medir elemento por elemento (`getBoundingClientRect`) — e foi medindo que apareceu o transbordo antigo do rodapé.
+
+---
+
+## Sessão 13 — 18/09 · Ficha dos cards (fim do "texto num lugar, foto noutro")
+
+### O problema que o Bimbord apontou
+A foto morava na pasta do Drive, mas nome/perfil/texto moravam no código
+(`js/main.js`). Trocar a foto não trocava o nome, e o site ligava imagem e card
+"adivinhando" pelo nome do arquivo. Ele resumiu bem: *"a imagem se trabalha de
+um lado, mas a legenda é em outro lado"*.
+
+### A solução: ficha.txt na pasta
+- `scripts/fichas.py` — lê o `ficha.txt` de cada pasta e sincroniza com o banco
+  - nome que existe -> atualiza | nome novo -> insere | nome que sumiu -> soft delete
+  - resolve `foto: arquivo.jpg` para a URL do R2 e grava em `imagem_url`/`logo_url`
+    (ligação EXPLÍCITA: o site não adivinha mais nada)
+  - a ordem dos blocos na ficha vira a ordem dos cards no site (`ordem`)
+- `home/depoimentos/ficha.txt` e `home/parceiros/ficha.txt` criadas já preenchidas
+- Guia reescrito: "COMO SUBIR AS MIDIAS - passo a passo.txt" (Drive + docs/)
+
+### Ajustes visuais pedidos
+- Removida a etiqueta "Foto"/"Vídeo" sobre a imagem (`home-quote__selo`) — artificial
+- O avatar de inicial ("A" ao lado de "Ana Paula") agora só aparece quando o card
+  NÃO tem foto
+
+### Verificação
+- Teste real: mudei "Mãe" -> "Mãe do aluno" na ficha, rodei `--publicar` e o site
+  mostrou a mudança (`data-ilustrativo="false"`, ou seja, veio do banco). Depois desfiz.
+- 7 cards (3 depoimentos + 4 parceiros) renderizando com foto, sem avatar e sem selo
+
+### Lição
+- **Conteúdo de card não pode viver em dois lugares.** Se a foto está na pasta e o
+  texto no código, o usuário vai mexer num e estranhar que o outro não mudou.
+  Guarde os dois juntos e amarre a ligação explicitamente (não por nome "adivinhado").

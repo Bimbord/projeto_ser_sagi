@@ -142,7 +142,7 @@ def mapa_de_fotos(url_base, chave, categoria, secao):
     return mapa
 
 
-def montar_registro(tabela, bloco, origem, fotos):
+def montar_registro(tabela, bloco, origem, fotos, indice=0):
     """Converte um bloco da ficha no formato da tabela do banco."""
     reg, foto_nome, problemas = {}, bloco.get("foto") or bloco.get("logo") or "", []
 
@@ -158,7 +158,9 @@ def montar_registro(tabela, bloco, origem, fotos):
 
     reg.setdefault("nome", "Sem nome")
     if tabela == "depoimentos":
-        reg.setdefault("ordem", 0)
+        # a ordem na ficha é a ordem no site (1, 2, 3...)
+        if "ordem" not in reg:
+            reg["ordem"] = indice + 1
         if "destaque" in reg:
             reg["destaque"] = reg["destaque"].lower() in ("sim", "s", "true", "1", "x")
 
@@ -264,8 +266,8 @@ def comando_publicar():
             continue
         fotos = mapa_de_fotos(url_base, chave, categoria, secao)
         registros, avisos = [], []
-        for b in blocos:
-            reg, _, probs = montar_registro(tabela, b, f"{pasta}/ficha.txt", fotos)
+        for idx, b in enumerate(blocos):
+            reg, _, probs = montar_registro(tabela, b, f"{pasta}/ficha.txt", fotos, idx)
             registros.append(reg)
             for p in probs:
                 avisos.append(f"{reg.get('nome')}: {p}")

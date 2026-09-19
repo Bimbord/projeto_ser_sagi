@@ -1,116 +1,98 @@
-COMO COLOCAR AS MÍDIAS NO SITE — passo a passo
-===============================================
+COMO COLOCAR E EDITAR O CONTEÚDO DO SITE
+========================================
 Instituto S.E.R. Sagi · atualizado em 18/09/2026
 
-A ROTINA (só isso)
+
+A IDEIA (em uma frase)
+----------------------
+Cada bloco do site tem uma PASTA, e dentro dela ficam DUAS coisas:
+as FOTOS e um arquivo ficha.txt com os textos.
+
+    📁 home/depoimentos/
+    ├── 🖼️ ana-paula.jpg          <- a foto
+    ├── 📄 ficha.txt               <- o nome, o perfil e o texto
+    └── 📁 _originais/             <- as fotos originais (não sobem)
+
+Foto e texto sempre juntos. Não tem mais texto escondido no código.
+
+
+A ROTINA (3 passos)
 -------------------
-  1. Joga a foto/vídeo na PASTA CERTA (aqui no Drive)
-  2. Avisa o Bimbord: "subi as fotos de <onde>"
-  3. Ele roda o upload → o site atualiza sozinho, na hora ✅
+  1. Coloque a foto na pasta  E  edite o ficha.txt
+  2. Avise o Hermes: "publiquei os depoimentos"
+  3. Aparece no site
 
-  Você NUNCA precisa mexer no site, em código ou em nada técnico.
 
-============================================================
-PASSO 1 — ONDE COLOCAR CADA FOTO
-============================================================
-Regra geral: a pasta tem o MESMO nome da página do site.
+COMO É UMA FICHA
+----------------
+Abra o ficha.txt. É assim (cada bloco = um card):
 
-  home/         → a página inicial (topo, números, pilares...)
-  saude/        → página Saúde (consultório)
-  esporte/      → página Esporte e a de cada modalidade
-  educacao/     → página Educação e a de cada matéria
-  cultura/      → página Cultura
-  preservacao/  → página Preservação Ambiental
-  joia-da-coroa/→ página do projeto principal 👑
-  depoimentos/  → página Depoimentos
-  eventos/      → eventos
-  institucional/→ quem somos, contato, transparência...
-  acervo/       → as páginas do acervo
+    foto: ana-paula.jpg
+    nome: Ana Paula
+    perfil: Mãe
+    local: Praia do Sagi
+    destaque: sim
+    texto: Desde que começou nas atividades, meu filho está mais motivado.
 
-Dentro de cada pasta, escolha o BLOCO onde a foto aparece:
+  • separe os blocos com UMA LINHA EM BRANCO
+  • "foto:" é o nome do arquivo que está na mesma pasta
+  • "destaque: sim" = aparece na home
+  • a ORDEM dos blocos é a ordem no site (o primeiro vem primeiro)
+  • linhas começando com # são comentários (ignoradas)
+  • o "texto" é a frase que aparece entre aspas no card
 
-  hero/               → a imagem grande do topo
-  imagem principal/   → a imagem ao lado do texto
-  carrossel/          → a faixa que desliza para o lado
-  galeria/            → a grade de fotos (clique amplia)
 
-Exemplo: uma foto do treino de vôlei para a galeria da página Vôlei
-  →  esporte/volei/galeria/
+ONDE FICA CADA COISA
+--------------------
+  home/hero/              foto grande do topo da home
+  home/numeros/           fotos dos cards de números (120, 300, 11...)
+  home/pilares/           fotos dos 5 pilares
+  home/depoimentos/       depoimentos + ficha   <- TEM FICHA
+  home/parceiros/         logos + ficha        <- TEM FICHA
+  home/como-ajudar/       fotos da chamada final
+  home/joia-da-coroa/     foto do card da Jóia da Coroa
+  <categoria>/<pagina>/   hero, imagem principal, galeria, carrossel...
 
-============================================================
-⭐ CASOS ESPECIAIS — o NOME DO ARQUIVO tem que ser exato
-============================================================
-Nestes blocos o site JÁ TEM o card pronto; a foto entra dentro dele.
-O nome do arquivo é a "chave" que liga a foto ao card certo.
 
-home/pilares/        (aparece no topo do card)
-    saude.jpg · esporte.jpg · educacao.jpg · cultura.jpg · preservacao.jpg
+SITUAÇÕES ESPECIAIS (cards onde o nome do arquivo importa)
+----------------------------------------------------------
+Algumas fotos não são casadas por nome comum, e sim por uma CHAVE.
+Nesses casos o arquivo precisa ter o nome exato:
 
-home/numeros/        (vira a bolinha acima do número)
-    projeto-principal.jpg · saude.jpg · consultorio.jpg
-    esporte.jpg · jiu-jitsu.jpg · musculacao.jpg
+  home/numeros/      projeto-principal.jpg  criancas.jpg  pessoas.jpg
+                     aulas.jpg  modalidades.jpg  parceiros.jpg
+                     voluntarios.jpg  bairros.jpg  criancas-hj.jpg
+  home/pilares/      esporte.jpg  saude.jpg  educacao.jpg
+                     cultura.jpg  preservacao.jpg
+  home/como-ajudar/  doe.jpg  seja-parceiro.jpg  voluntario.jpg
+  home/joia-da-coroa/ joia-da-coroa.jpg
 
-home/como-ajudar/    (aparece no topo do card)
-    doe.jpg · seja-voluntario.jpg · seja-parceiro.jpg
+Os demais (depoimentos, parceiros, galerias, heros) usam o nome normal.
 
-home/joia-da-coroa/  (o card principal) — nome livre
-home/hero/           1 foto = imagem de fundo · 2+ = apresentação automática
 
-home/parceiros/      logomarca, PNG quadrado, fundo transparente
-    o nome do arquivo casa com o parceiro cadastrado
-    ex.:   grupo-atlantico.png
+TAMANHOS RECOMENDADOS (px)
+--------------------------
+  Foto do topo (hero) .......... 1920 x 700   (proporção 2,7:1)
+  Card / imagem principal ...... 1000 x 500   (2:1)
+  Card de depoimento ........... 1200 x 750   (16:10)
+  Logo de parceiro ............. 600 x 600    (quadrado)
+  Foto de galeria .............. 800 x 600    (4:3)
 
-home/depoimentos/    foto ou vídeo do depoimento
-    o nome do arquivo casa com o NOME do depoimento cadastrado
-    ex.:   ana-paula.jpg
+Peso: até ~500 KB por foto. Se vier mais pesada, o Hermes otimiza
+(a última leva caiu de 16,9 MB para 0,5 MB).
 
->>> Pode escrever com ou sem acento, maiúscula ou hífen.
-    "Jiu Jitsu.jpg", "jiu-jitsu.jpg" e "Jiu-jitsu.jpg" todos funcionam.
-    O que NÃO pode é o nome ser outro (ex.: "preseravacao.jpg").
 
-============================================================
-PASSO 2 — TAMANHO E FORMATO
-============================================================
-  Hero (topo) ................ 1920 × 700     (~500 KB)
-  Card de página ............. 1000 × 500
-  Carrossel .................. 800 × 533
-  Galeria .................... 800 × 600  (mantenha a mesma proporção)
-  Bolinha dos números ........ 300 × 300  (quadrada)
-  Logo de parceiro ........... 400 × 400  (PNG transparente)
+ANTES DE PUBLICAR (checklist)
+-----------------------------
+  [ ] As fotos têm autorização de uso de imagem?
+  [ ] Os nomes estão escritos do jeito certo (acentos ok)?
+  [ ] A ordem dos blocos na ficha é a ordem que você quer no site?
+  [ ] Fotos pesadas? O Hermes otimiza na publicação.
 
-  • Sempre JPG para foto · PNG só para logo
-  • Deixe o assunto no CENTRO (o site corta as bordas)
-  • O site NÃO redimensiona — exporte já no tamanho
 
-============================================================
-PASSO 3 — COMO FICA A LEGENDA
-============================================================
-O NOME DO ARQUIVO vira a LEGENDA embaixo da foto.
-
-  "treino de terça com a turma nova.jpg"  →  legenda: "Treino De Terça Com A Turma Nova"
-
-Nomeie o arquivo já pensando na legenda final. Renomear DEPOIS de
-publicar NÃO muda o que está no site — é preciso publicar de novo.
-
-Para uma sequência do mesmo assunto, crie um arquivo chamado
-._info.txt dentro da pasta com:
-    titulo_base=Entrega de uniformes
-E as legendas saem numeradas: "Entrega De Uniformes — 01", "— 02"...
-
-============================================================
-DEPOIMENTOS E PARCEIROS (o texto é cadastrado, a foto é da pasta)
-============================================================
-Não basta a foto: o TEXTO do depoimento (nome, perfil, mensagem) e o
-nome do parceiro são cadastrados pelo Bimbord. Você só precisa passar
-o que cada um diz — ele cadastra e a mídia entra pela pasta.
-
-============================================================
-ANTES DE PUBLICAR — CONFIRA
-============================================================
-  [ ] As fotos estão nas pastas certas?
-  [ ] Os nomes batem com os cards (nos blocos de chave)?
-  [ ] As fotos têm autorização de imagem? (obrigatório para crianças
-      e adolescentes — ECA e LGPD)
-  [ ] Tamanho e formato conferem?
-
-Depois é só avisar: "pode publicar". O resto é com o Bimbord. 🚀
+COMANDOS (o Hermes roda; você só me avisa)
+------------------------------------------
+  python scripts/servidor_midias.py --status      o que chegou de novo
+  python scripts/servidor_midias.py --publicar    sobe as fotos
+  python scripts/fichas.py --status               confere as fichas
+  python scripts/fichas.py --publicar             aplica as fichas no site
