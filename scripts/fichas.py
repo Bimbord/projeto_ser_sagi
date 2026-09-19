@@ -225,20 +225,35 @@ def comando_status():
                 print("        ⚠️  esta foto ainda não foi publicada no site")
 
 
+def chave_registro(reg, tabela):
+    """
+    Chave de identidade de um registro da ficha.
+
+    Normalmente é o NOME. Quando o card é só imagem (sem nome — caso de
+    logos/selos), usa o nome do arquivo da mídia, que é único e estável.
+    """
+    base = (reg.get("nome") or "").strip()
+    if not base:
+        url = reg.get("logo_url") or reg.get("imagem_url") or ""
+        base = os.path.splitext(os.path.basename(url))[0]
+    return normalizar_chave(base) or "sem-identidade"
+
+
 def sincronizar(url_base, chave, tabela, registros):
     """
     Faz a ficha virar a verdade no banco, SEM depender de campo único:
-      - nome que já existe  -> atualiza
-      - nome novo           -> insere
-      - nome que sumiu      -> marca como removido (soft delete)
+      - chave que já existe -> atualiza
+      - chave nova          -> insere
+      - chave que sumiu     -> marca como removido (soft delete)
     """
+    colunas = "id,nome,logo_url" if tabela == "parceiros" else "id,nome,imagem_url"
     existentes = requisitar(
-        f"{url_base}/rest/v1/{tabela}?select=id,nome&deleted=eq.false", chave)
-    por_chave = {normalizar_chave(e.get("nome")): e for e in existentes}
+        f"{url_base}/rest/v1/{tabela}?select={colunas}&deleted=eq.false", chave)
+    por_chave = {chave_registro(e, tabela): e for e in existentes}
 
     atualizados, inseridos = [], []
     for reg in registros:
-        k = normalizar_chave(reg["nome"])
+        k = chave_registro(reg, tabela)
         if k in por_chave:
             alvo = por_chave.pop(k)["id"]
             salvo = requisitar(f"{url_base}/rest/v1/{tabela}?id=eq.{alvo}", chave,
