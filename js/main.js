@@ -820,5 +820,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupArchiveFilters();
   loadArchive();
   loadSecoes();
-  renderFrentes();
+  // renderFrentes() desativado — o bloco 6 voltou a ser "Momentos que marcaram o mês".
+  // O carrossel de frentes ficou no código (funções FRENTES/markupFrentes/renderFrentes)
+  // caso volte a ser usado em outra seção.
 });
