@@ -873,3 +873,12 @@ footer a,
 footer li,
 footer p,
 footer span { overflow-wrap: anywhere; }
+
+
+/* ============================================================
+   Textos corridos justificados em todo o site.
+   Vale para <p> — inclusive os criados por JS nos cards — e não
+   toca em títulos, rótulos em <span>, menus, listas nem botões.
+   Utilitários de classe (ex.: text-center) continuam vencendo.
+   ============================================================ */
+p { text-align: justify; }
