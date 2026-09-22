@@ -293,7 +293,7 @@ function markupDepoimento(item, midia) {
       ${midiaHtml}
       <div class="home-quote__corpo">
         <span class="home-quote__mark" aria-hidden="true">&ldquo;</span>
-        <p class="home-card__text">${escaparHtml(item.texto)}</p>
+        <p class="home-card__text text-justify">${escaparHtml(item.texto)}</p>
         <footer class="home-quote__footer">
           ${imagem || video ? '' : '<span class="home-quote__avatar">' + escaparHtml(inicial) + '</span>'}
           <span>
