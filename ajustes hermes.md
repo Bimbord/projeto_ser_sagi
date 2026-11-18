@@ -519,3 +519,40 @@ um lado, mas a legenda é em outro lado"*.
 - **Conteúdo de card não pode viver em dois lugares.** Se a foto está na pasta e o
   texto no código, o usuário vai mexer num e estranhar que o outro não mudou.
   Guarde os dois juntos e amarre a ligação explicitamente (não por nome "adivinhado").
+
+## Sessão 14 — 17/11 · Mapa de localização na página de Contato
+
+### O que foi feito
+- `contato.html` ganhou a seção **"Onde estamos"** (logo abaixo do formulário):
+  mapa do Google incorporado em `<iframe>` + card com endereço, observação sobre
+  visitas e dois botões — **Abrir no Google Maps** e **Traçar rota**.
+- **Sem chave de API:** usa `https://maps.google.com/maps?q=<endereço>&output=embed`,
+  o embed clássico. Nada de `maps/embed/v1` (esse exige chave e faturamento).
+- Consulta usada: `Praia do Sagi, 121 - Sagi, Baía Formosa - RN` (mesmo endereço
+  que já estava no card de canais). `z=16`, `hl=pt-BR`, `loading="lazy"` e
+  `title` descritivo (acessibilidade).
+- Removida a **imagem falsa** que ficava no card "Canais institucionais"
+  (`loremflickr/map,beach,location` + selo "Imagem ilustrativa") — fazia um
+  mapa fictício conviver com o mapa real.
+- Corrigido o JSON-LD `BreadcrumbList`: o item "Contato" apontava para a home.
+- Adicionado JSON-LD `NGO` com nome, e-mail, telefone, endereço e `hasMap`.
+
+### Limite conhecido (importante)
+- O Google **não tem o prédio do Instituto geocodificado**: a consulta por
+  endereço cai no centro da vila de Sagi (aparecem "Praia do Sagi",
+  "R. da Praia" etc.) e não num pin exato do número 121.
+- **Para o pin exato:** mandar o ponto no mapa (latitude/longitude) ou o link do
+  local no Google Maps. Troca em 1 linha — basta substituir o `q=` do iframe por
+  `loc:LAT,LON` e replicar no `hasMap` e no botão "Traçar rota".
+
+### Verificação
+- Testado no servidor local (`python -m http.server 8765`) em 764px e 1440px:
+  mapa carrega, pin e ruas visíveis, duas colunas equilibradas no desktop e
+  empilhado no mobile, texto sem sobreposição.
+- JSON-LD validado com `json.loads` (2 blocos OK).
+
+### Lição
+- Embed de mapa **não precisa de chave**: `output=embed` resolve. A variante
+  `google.com/maps/embed?pb=` redirecionada na barra de endereço **só funciona
+  dentro de `<iframe>`** — se você abrir a URL direto no navegador aparece
+  "The Google Maps Embed API must be used in an iframe" e parece erro.
